@@ -14,3 +14,12 @@ Suggests:
 Config/testthat/edition: 3
 URL: https://github.com/LMJL-Alea/rgeomstats
 BugReports: https://github.com/LMJL-Alea/rgeomstats/issues
+Config/reticulate:
+  list(
+    packages = list(
+      list(package = "geomstats")
+    )
+  )
+Imports: 
+    R6,
+    reticulate
