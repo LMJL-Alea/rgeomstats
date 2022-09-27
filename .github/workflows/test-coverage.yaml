@@ -28,6 +28,7 @@ jobs:
 
       - name: Install Miniconda
         run: |
+          Rscript -e 'reticulate::install_python()'
           Rscript -e 'reticulate::install_miniconda()'
 
       - name: Setup Python dependencies
