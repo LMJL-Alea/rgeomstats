@@ -26,13 +26,12 @@ jobs:
           extra-packages: any::covr
           needs: coverage
 
-      - name: Install Miniconda
-        run: |
-          Rscript -e 'reticulate::install_miniconda()'
-
       - name: Setup Python dependencies
         run: |
-          Rscript -e 'reticulate::py_install("geomstats")'
+          library(reticulate)
+          use_condaenv("r-reticulate")
+          py_install("geomstats", envname = "r-reticulate")
+        shell: Rscript {0}
 
       - name: Test coverage
         run: covr::codecov(quiet = FALSE)
