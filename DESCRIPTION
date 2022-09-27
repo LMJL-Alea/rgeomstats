@@ -12,7 +12,8 @@ RoxygenNote: 7.2.1
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/LMJL-Alea/rgeomstats
+URL: https://github.com/LMJL-Alea/rgeomstats,
+    https://lmjl-alea.github.io/rgeomstats/
 BugReports: https://github.com/LMJL-Alea/rgeomstats/issues
 Config/reticulate:
   list(

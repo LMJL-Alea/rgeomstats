@@ -12,6 +12,7 @@ Provides an R interface to the Python package Geomstats.
 Useful links:
 \itemize{
   \item \url{https://github.com/LMJL-Alea/rgeomstats}
+  \item \url{https://lmjl-alea.github.io/rgeomstats/}
   \item Report bugs at \url{https://github.com/LMJL-Alea/rgeomstats/issues}
 }
 
