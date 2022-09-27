@@ -26,9 +26,13 @@ jobs:
           extra-packages: any::covr
           needs: coverage
 
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+
       - name: Install Miniconda
         run: |
-          Rscript -e 'reticulate::install_python()'
           Rscript -e 'reticulate::install_miniconda()'
 
       - name: Setup Python dependencies
