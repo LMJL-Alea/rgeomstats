@@ -54,7 +54,6 @@ jobs:
         run: |
           Rscript -e 'reticulate::conda_create("r-reticulate")'
           Rscript -e 'reticulate::conda_install("geomstats", envname = "r-reticulate")'
-          Rscript -e 'reticulate::use_condaenv("r-reticulate")'
 
       - uses: r-lib/actions/check-r-package@v2
         with:

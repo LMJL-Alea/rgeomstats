@@ -2,7 +2,7 @@
 gs <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  reticulate::configure_environment(pkgname)
+  reticulate::configure_environment(pkgname, force = TRUE)
   # use superassignment to update global reference to geomstats
   gs <<- reticulate::import("geomstats", delay_load = TRUE, convert = TRUE)
 }

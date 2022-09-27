@@ -41,7 +41,6 @@ jobs:
         run: |
           Rscript -e 'reticulate::conda_create("r-reticulate")'
           Rscript -e 'reticulate::conda_install("geomstats", envname = "r-reticulate")'
-          Rscript -e 'reticulate::use_condaenv("r-reticulate")'
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
