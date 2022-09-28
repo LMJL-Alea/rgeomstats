@@ -31,8 +31,9 @@ jobs:
       - name: Setup r-reticulate venv
         shell: Rscript {0}
         run: |
-          Sys.setenv(RETICULATE_PYTHON = Sys.which("python3"))
           library(reticulate)
+          python <- install_miniconda()
+          Sys.setenv(RETICULATE_PYTHON = python)
           conda_create("r-reticulate")
           conda_install("r-reticulate", "geomstats")
           python <- conda_python("r-reticulate")
