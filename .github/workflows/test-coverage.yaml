@@ -27,13 +27,12 @@ jobs:
           needs: coverage
 
       - name: Install Miniconda
-        run: |
-          Rscript -e 'reticulate::install_miniconda()'
+        run: reticulate::install_miniconda()
+        shell: Rscript {0}
 
       - name: Setup Python dependencies
-        run: |
-          Rscript -e 'reticulate::conda_create("r-reticulate")'
-          Rscript -e 'reticulate::conda_install("geomstats")'
+        run: reticulate::conda_create("r-reticulate", "geomstats")
+        shell: Rscript {0}
 
       - name: Test coverage
         run: covr::codecov(quiet = FALSE)
