@@ -25,14 +25,13 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr any::remotes
+          extra-packages: any::covr
           needs: coverage
 
       - name: Setup r-reticulate venv
         shell: Rscript {0}
         run: |
-          remotes::install_local()
-          reticulate::conda_create("r-reticulate", Sys.which("python"))
+          reticulate::conda_create("r-reticulate")
           reticulate::conda_install("r-reticulate", "geomstats")
           python <- reticulate::conda_python("r-reticulate")
           writeLines(sprintf("RETICULATE_PYTHON=%s", python),
