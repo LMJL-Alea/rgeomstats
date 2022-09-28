@@ -31,9 +31,11 @@ jobs:
       - name: Setup r-reticulate venv
         shell: Rscript {0}
         run: |
-          reticulate::conda_create("r-reticulate")
-          reticulate::conda_install("r-reticulate", "geomstats")
-          python <- reticulate::conda_python("r-reticulate")
+          Sys.setenv(RETICULATE_PYTHON = Sys.which("python3"))
+          library(reticulate)
+          conda_create("r-reticulate")
+          conda_install("r-reticulate", "geomstats")
+          python <- conda_python("r-reticulate")
           writeLines(sprintf("RETICULATE_PYTHON=%s", python),
                      Sys.getenv("GITHUB_ENV"))
 
