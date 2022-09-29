@@ -28,7 +28,7 @@ jobs:
           extra-packages: any::covr any::remotes
           needs: coverage
 
-      - name: setup r-reticulate venv
+      - name: Setup r-reticulate venv
         shell: Rscript {0}
         run: |
           remotes::install_local()
