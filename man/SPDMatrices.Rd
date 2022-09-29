@@ -43,7 +43,66 @@ if (reticulate::py_module_available("geomstats")) {
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
   spdm$cholesky_factor(A)
+}
 
+## ------------------------------------------------
+## Method `SPDMatrices$differential_cholesky_factor`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_cholesky_factor(diag(1, 3), A)
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$differential_exp`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_exp(diag(1, 3), A)
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$differential_log`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_log(diag(1, 3), A)
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$differential_power`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_power(2, diag(1, 3), A)
 }
 }
 \author{
@@ -56,6 +115,10 @@ Yann Thanwerdas
 \item \href{#method-SPDMatrices-new}{\code{SPDMatrices$new()}}
 \item \href{#method-SPDMatrices-belongs}{\code{SPDMatrices$belongs()}}
 \item \href{#method-SPDMatrices-cholesky_factor}{\code{SPDMatrices$cholesky_factor()}}
+\item \href{#method-SPDMatrices-differential_cholesky_factor}{\code{SPDMatrices$differential_cholesky_factor()}}
+\item \href{#method-SPDMatrices-differential_exp}{\code{SPDMatrices$differential_exp()}}
+\item \href{#method-SPDMatrices-differential_log}{\code{SPDMatrices$differential_log()}}
+\item \href{#method-SPDMatrices-differential_power}{\code{SPDMatrices$differential_power()}}
 \item \href{#method-SPDMatrices-clone}{\code{SPDMatrices$clone()}}
 }
 }
@@ -131,7 +194,7 @@ A boolean that tells whether the input matrix is SPD.
 \if{html}{\out{<a id="method-SPDMatrices-cholesky_factor"></a>}}
 \if{latex}{\out{\hypertarget{method-SPDMatrices-cholesky_factor}{}}}
 \subsection{Method \code{cholesky_factor()}}{
-Compute cholesky factor for a symmetric positive definite
+Computes Cholesky factor for a symmetric positive definite
 matrix.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$cholesky_factor(mat)}\if{html}{\out{</div>}}
@@ -160,7 +223,174 @@ column-major fashion.
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
   spdm$cholesky_factor(A)
+}
+}
+\if{html}{\out{</div>}}
 
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-differential_cholesky_factor"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-differential_cholesky_factor}{}}}
+\subsection{Method \code{differential_cholesky_factor()}}{
+Computes the differential of the Cholesky factor map.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$differential_cholesky_factor(tangent_vec, base_point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
+base point.}
+
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+The differential of the Cholesky factor map represented as a
+numeric vector which stores its lower triangular matrix including the
+diagonal elements in a column-major fashion.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_cholesky_factor(diag(1, 3), A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-differential_exp"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-differential_exp}{}}}
+\subsection{Method \code{differential_exp()}}{
+Computes the differential of the matrix exponential.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$differential_exp(tangent_vec, base_point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
+base point.}
+
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A matrix storing the differential of the matrix exponential on
+SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_exp(diag(1, 3), A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-differential_log"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-differential_log}{}}}
+\subsection{Method \code{differential_log()}}{
+Computes the differential of the matrix logarithm.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$differential_log(tangent_vec, base_point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
+base point.}
+
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A matrix storing the differential of the matrix logarithm on
+SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_log(diag(1, 3), A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-differential_power"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-differential_power}{}}}
+\subsection{Method \code{differential_power()}}{
+Computes the differential of the matrix power function.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$differential_power(power, tangent_vec, base_point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{power}}{An integer scalar specifying the desired power.}
+
+\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
+base point.}
+
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A matrix storing the differential of the power function on
+\eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at \code{base_point}
+applied to \code{tangent_vec}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$differential_power(2, diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}
