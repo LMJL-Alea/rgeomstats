@@ -69,9 +69,13 @@ matrices.</p>
 <li><p><a href="#method-SPDMatrices-differential_power"><code>SPDMatrices$differential_power()</code></a></p></li>
 <li><p><a href="#method-SPDMatrices-expm"><code>SPDMatrices$expm()</code></a></p></li>
 <li><p><a href="#method-SPDMatrices-logm"><code>SPDMatrices$logm()</code></a></p></li>
+<li><p><a href="#method-SPDMatrices-powerm"><code>SPDMatrices$powerm()</code></a></p></li>
 <li><p><a href="#method-SPDMatrices-inverse_differential_exp"><code>SPDMatrices$inverse_differential_exp()</code></a></p></li>
 <li><p><a href="#method-SPDMatrices-inverse_differential_log"><code>SPDMatrices$inverse_differential_log()</code></a></p></li>
 <li><p><a href="#method-SPDMatrices-inverse_differential_power"><code>SPDMatrices$inverse_differential_power()</code></a></p></li>
+<li><p><a href="#method-SPDMatrices-projection"><code>SPDMatrices$projection()</code></a></p></li>
+<li><p><a href="#method-SPDMatrices-random_point"><code>SPDMatrices$random_point()</code></a></p></li>
+<li><p><a href="#method-SPDMatrices-random_tangent_vec"><code>SPDMatrices$random_tangent_vec()</code></a></p></li>
 <li><p><a href="#method-SPDMatrices-clone"><code>SPDMatrices$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-SPDMatrices-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -398,31 +402,30 @@ matrix <code>mat</code>.</p>
 </div>
 
 
-</div><p></p><hr><a id="method-SPDMatrices-inverse_differential_exp"></a><div class="section">
-<h3 id="method-inverse-differential-exp-">Method <code>inverse_differential_exp()</code><a class="anchor" aria-label="anchor" href="#method-inverse-differential-exp-"></a></h3>
-<p>Computes the inverse of the differential of the matrix
-exponential.</p><div class="section">
+</div><p></p><hr><a id="method-SPDMatrices-powerm"></a><div class="section">
+<h3 id="method-powerm-">Method <code>powerm()</code><a class="anchor" aria-label="anchor" href="#method-powerm-"></a></h3>
+<p>Computes the matrix power of an SPD matrix.</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">inverse_differential_exp</span><span class="op">(</span><span class="va">tangent_vec</span>, <span class="va">base_point</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">powerm</span><span class="op">(</span><span class="va">mat</span>, <span class="va">power</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>tangent_vec</code></dt>
-<dd><p>A symmetric matrix specifying the tangent vector at
-base point.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>mat</code></dt>
+<dd><p>An SPD matrix.</p></dd>
 
 
-<dt><code>base_point</code></dt>
-<dd><p>An SPD matrix specifying the base point.</p></dd>
+<dt><code>power</code></dt>
+<dd><p>A numeric scalar or vector specifying the desired power(s).</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
-<p>A matrix storing the inverse of the differential of the matrix
-exponential on SPD matrices at <code>base_point</code> applied to <code>tangent_vec</code>.</p>
+<p>An SPD matrix representing the matrix power of the input matrix
+as: $$A^p = \exp(p \log(A)).$$ If <code>power</code> is a vector, a list of
+such matrices elevated at the corresponding powers.</p>
 </div>
 <div class="section">
 <h4 id="examples-9">Examples<a class="anchor" aria-label="anchor" href="#examples-9"></a></h4>
@@ -434,17 +437,17 @@ exponential on SPD matrices at <code>base_point</code> applied to <code>tangent_
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="va">V</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">V</span><span class="op">)</span></span>
-<span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">inverse_differential_exp</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">A</span><span class="op">)</span></span>
+<span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">powerm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-SPDMatrices-inverse_differential_log"></a><div class="section">
-<h3 id="method-inverse-differential-log-">Method <code>inverse_differential_log()</code><a class="anchor" aria-label="anchor" href="#method-inverse-differential-log-"></a></h3>
+</div><p></p><hr><a id="method-SPDMatrices-inverse_differential_exp"></a><div class="section">
+<h3 id="method-inverse-differential-exp-">Method <code>inverse_differential_exp()</code><a class="anchor" aria-label="anchor" href="#method-inverse-differential-exp-"></a></h3>
 <p>Computes the inverse of the differential of the matrix
-logarithm.</p><div class="section">
+exponential.</p><div class="section">
 <h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">inverse_differential_log</span><span class="op">(</span><span class="va">tangent_vec</span>, <span class="va">base_point</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">inverse_differential_exp</span><span class="op">(</span><span class="va">tangent_vec</span>, <span class="va">base_point</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -463,10 +466,51 @@ base point.</p></dd>
 <div class="section">
 <h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
 <p>A matrix storing the inverse of the differential of the matrix
-logarithm on SPD matrices at <code>base_point</code> applied to <code>tangent_vec</code>.</p>
+exponential on SPD matrices at <code>base_point</code> applied to <code>tangent_vec</code>.</p>
 </div>
 <div class="section">
 <h4 id="examples-10">Examples<a class="anchor" aria-label="anchor" href="#examples-10"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="va">V</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">V</span><span class="op">)</span></span>
+<span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">inverse_differential_exp</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">A</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-SPDMatrices-inverse_differential_log"></a><div class="section">
+<h3 id="method-inverse-differential-log-">Method <code>inverse_differential_log()</code><a class="anchor" aria-label="anchor" href="#method-inverse-differential-log-"></a></h3>
+<p>Computes the inverse of the differential of the matrix
+logarithm.</p><div class="section">
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">inverse_differential_log</span><span class="op">(</span><span class="va">tangent_vec</span>, <span class="va">base_point</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>tangent_vec</code></dt>
+<dd><p>A symmetric matrix specifying the tangent vector at
+base point.</p></dd>
+
+
+<dt><code>base_point</code></dt>
+<dd><p>An SPD matrix specifying the base point.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
+<p>A matrix storing the inverse of the differential of the matrix
+logarithm on SPD matrices at <code>base_point</code> applied to <code>tangent_vec</code>.</p>
+</div>
+<div class="section">
+<h4 id="examples-11">Examples<a class="anchor" aria-label="anchor" href="#examples-11"></a></h4>
 <p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
@@ -484,12 +528,12 @@ logarithm on SPD matrices at <code>base_point</code> applied to <code>tangent_ve
 <h3 id="method-inverse-differential-power-">Method <code>inverse_differential_power()</code><a class="anchor" aria-label="anchor" href="#method-inverse-differential-power-"></a></h3>
 <p>Computes the inverse of the differential of the matrix power
 function.</p><div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">inverse_differential_power</span><span class="op">(</span><span class="va">power</span>, <span class="va">tangent_vec</span>, <span class="va">base_point</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
+<h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>power</code></dt>
 <dd><p>An integer scalar specifying the desired power.</p></dd>
 
@@ -506,13 +550,13 @@ base point.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
-<p>A matrix storing the inversde of the differential of the power
+<h4 id="returns-12">Returns<a class="anchor" aria-label="anchor" href="#returns-12"></a></h4>
+<p>A matrix storing the inverse of the differential of the power
 function on \(\mathrm{SPD}(n)\): $$A^p = \exp(p \log(A))$$ at
 <code>base_point</code> applied to <code>tangent_vec</code>.</p>
 </div>
 <div class="section">
-<h4 id="examples-11">Examples<a class="anchor" aria-label="anchor" href="#examples-11"></a></h4>
+<h4 id="examples-12">Examples<a class="anchor" aria-label="anchor" href="#examples-12"></a></h4>
 <p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
@@ -526,15 +570,121 @@ function on \(\mathrm{SPD}(n)\): $$A^p = \exp(p \log(A))$$ at
 </div>
 
 
+</div><p></p><hr><a id="method-SPDMatrices-projection"></a><div class="section">
+<h3 id="method-projection-">Method <code>projection()</code><a class="anchor" aria-label="anchor" href="#method-projection-"></a></h3>
+<p>Projects any square matrix to the space of SPD matrices.</p><div class="section">
+<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">projection</span><span class="op">(</span><span class="va">point</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>point</code></dt>
+<dd><p>A square matrix.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h4>
+<p>First the symmetric part of point is computed, then the
+eigenvalues are floored to <code>gs.atol</code>.</p>
+</div>
+
+<div class="section">
+<h4 id="returns-13">Returns<a class="anchor" aria-label="anchor" href="#returns-13"></a></h4>
+<p>An SPD matrix obtained by projecting the input square matrix onto
+the space of SPD matrices.</p>
+</div>
+<div class="section">
+<h4 id="examples-13">Examples<a class="anchor" aria-label="anchor" href="#examples-13"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">projection</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-SPDMatrices-random_point"></a><div class="section">
+<h3 id="method-random-point-">Method <code>random_point()</code><a class="anchor" aria-label="anchor" href="#method-random-point-"></a></h3>
+<p>Samples in \(\mathrm{SPD}(n)\) from the log-uniform
+distribution.</p><div class="section">
+<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">random_point</span><span class="op">(</span>n_samples <span class="op">=</span> <span class="fl">1</span>, bound <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>n_samples</code></dt>
+<dd><p>An integer value specifying the sample size. Defaults to
+<code>1L</code>.</p></dd>
+
+
+<dt><code>bound</code></dt>
+<dd><p>A numeric value specifying the bound of the interval in
+which to sample in the tangent space. Defaults to <code>1.0</code>.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-14">Returns<a class="anchor" aria-label="anchor" href="#returns-14"></a></h4>
+<p>A list of SPD matrices sampled in \(\mathrm{SPD}(n)\).</p>
+</div>
+<div class="section">
+<h4 id="examples-14">Examples<a class="anchor" aria-label="anchor" href="#examples-14"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="co"># spdm$random_point(10) # TO DO: uncomment when bug fixed in gs</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-SPDMatrices-random_tangent_vec"></a><div class="section">
+<h3 id="method-random-tangent-vec-">Method <code>random_tangent_vec()</code><a class="anchor" aria-label="anchor" href="#method-random-tangent-vec-"></a></h3>
+<p>Samples on the tangent space of \(\mathrm{SPD}(n)\) from
+the uniform distribution.</p><div class="section">
+<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">random_tangent_vec</span><span class="op">(</span><span class="va">base_point</span>, n_samples <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>base_point</code></dt>
+<dd><p>An SPD matrix specifying the base point.</p></dd>
+
+
+<dt><code>n_samples</code></dt>
+<dd><p>An integer value specifying the sample size. Defaults to
+<code>1L</code>.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-15">Returns<a class="anchor" aria-label="anchor" href="#returns-15"></a></h4>
+<p>A list of symmetric matrices sampled on the tangent space of
+\(\mathrm{SPD}(n)\) at <code>base_point</code>.</p>
+</div>
+<div class="section">
+<h4 id="examples-15">Examples<a class="anchor" aria-label="anchor" href="#examples-15"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">random_tangent_vec</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
+
 </div><p></p><hr><a id="method-SPDMatrices-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
+<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
@@ -664,6 +814,21 @@ function on \(\mathrm{SPD}(n)\): $$A^p = \exp(p \log(A))$$ at
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SPDMatrices$powerm`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="va">V</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">V</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">powerm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co">## Method `SPDMatrices$inverse_differential_exp`</span></span></span>
 <span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
@@ -706,6 +871,34 @@ function on \(\mathrm{SPD}(n)\): $$A^p = \exp(p \log(A))$$ at
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="va">V</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">V</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">inverse_differential_power</span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">A</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SPDMatrices$projection`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">projection</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SPDMatrices$random_point`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># spdm$random_point(10) # TO DO: uncomment when bug fixed in gs</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SPDMatrices$random_tangent_vec`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">spdm</span> <span class="op">&lt;-</span> <span class="va">SPDMatrices</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spdm</span><span class="op">$</span><span class="fu">random_tangent_vec</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
