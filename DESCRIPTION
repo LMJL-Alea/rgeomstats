@@ -22,5 +22,6 @@ Config/reticulate:
     )
   )
 Imports: 
+    purrr,
     R6,
     reticulate

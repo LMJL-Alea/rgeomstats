@@ -124,6 +124,21 @@ if (reticulate::py_module_available("geomstats")) {
 }
 
 ## ------------------------------------------------
+## Method `SPDMatrices$powerm`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$powerm(diag(1, 3), 2)
+}
+
+## ------------------------------------------------
 ## Method `SPDMatrices$inverse_differential_exp`
 ## ------------------------------------------------
 
@@ -167,6 +182,34 @@ if (reticulate::py_module_available("geomstats")) {
   A <- V \%*\% diag(1:3) \%*\% t(V)
   spdm$inverse_differential_power(2, diag(1, 3), A)
 }
+
+## ------------------------------------------------
+## Method `SPDMatrices$projection`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  A <- matrix(1:9, 3, 3)
+  spdm$projection(A)
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$random_point`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  # spdm$random_point(10) # TO DO: uncomment when bug fixed in gs
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$random_tangent_vec`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  spdm$random_tangent_vec(diag(1, 3), 10)
+}
 }
 \author{
 Yann Thanwerdas
@@ -184,9 +227,13 @@ Yann Thanwerdas
 \item \href{#method-SPDMatrices-differential_power}{\code{SPDMatrices$differential_power()}}
 \item \href{#method-SPDMatrices-expm}{\code{SPDMatrices$expm()}}
 \item \href{#method-SPDMatrices-logm}{\code{SPDMatrices$logm()}}
+\item \href{#method-SPDMatrices-powerm}{\code{SPDMatrices$powerm()}}
 \item \href{#method-SPDMatrices-inverse_differential_exp}{\code{SPDMatrices$inverse_differential_exp()}}
 \item \href{#method-SPDMatrices-inverse_differential_log}{\code{SPDMatrices$inverse_differential_log()}}
 \item \href{#method-SPDMatrices-inverse_differential_power}{\code{SPDMatrices$inverse_differential_power()}}
+\item \href{#method-SPDMatrices-projection}{\code{SPDMatrices$projection()}}
+\item \href{#method-SPDMatrices-random_point}{\code{SPDMatrices$random_point()}}
+\item \href{#method-SPDMatrices-random_tangent_vec}{\code{SPDMatrices$random_tangent_vec()}}
 \item \href{#method-SPDMatrices-clone}{\code{SPDMatrices$clone()}}
 }
 }
@@ -531,6 +578,47 @@ matrix \code{mat}.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-powerm"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-powerm}{}}}
+\subsection{Method \code{powerm()}}{
+Computes the matrix power of an SPD matrix.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$powerm(mat, power)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{mat}}{An SPD matrix.}
+
+\item{\code{power}}{A numeric scalar or vector specifying the desired power(s).}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+An SPD matrix representing the matrix power of the input matrix
+as: \deqn{A^p = \exp(p \log(A)).} If \code{power} is a vector, a list of
+such matrices elevated at the corresponding powers.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$powerm(diag(1, 3), 2)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SPDMatrices-inverse_differential_exp"></a>}}
 \if{latex}{\out{\hypertarget{method-SPDMatrices-inverse_differential_exp}{}}}
 \subsection{Method \code{inverse_differential_exp()}}{
@@ -637,7 +725,7 @@ base point.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A matrix storing the inversde of the differential of the power
+A matrix storing the inverse of the differential of the power
 function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
 \code{base_point} applied to \code{tangent_vec}.
 }
@@ -652,6 +740,116 @@ function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
   spdm$inverse_differential_power(2, diag(1, 3), A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-projection"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-projection}{}}}
+\subsection{Method \code{projection()}}{
+Projects any square matrix to the space of SPD matrices.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$projection(point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{point}}{A square matrix.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+First the symmetric part of point is computed, then the
+eigenvalues are floored to \code{gs.atol}.
+}
+
+\subsection{Returns}{
+An SPD matrix obtained by projecting the input square matrix onto
+the space of SPD matrices.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  A <- matrix(1:9, 3, 3)
+  spdm$projection(A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-random_point"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-random_point}{}}}
+\subsection{Method \code{random_point()}}{
+Samples in \eqn{\mathrm{SPD}(n)} from the log-uniform
+distribution.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$random_point(n_samples = 1, bound = 1)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{n_samples}}{An integer value specifying the sample size. Defaults to
+\code{1L}.}
+
+\item{\code{bound}}{A numeric value specifying the bound of the interval in
+which to sample in the tangent space. Defaults to \code{1.0}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list of SPD matrices sampled in \eqn{\mathrm{SPD}(n)}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  # spdm$random_point(10) # TO DO: uncomment when bug fixed in gs
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-random_tangent_vec"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-random_tangent_vec}{}}}
+\subsection{Method \code{random_tangent_vec()}}{
+Samples on the tangent space of \eqn{\mathrm{SPD}(n)} from
+the uniform distribution.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$random_tangent_vec(base_point, n_samples = 1)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+
+\item{\code{n_samples}}{An integer value specifying the sample size. Defaults to
+\code{1L}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list of symmetric matrices sampled on the tangent space of
+\eqn{\mathrm{SPD}(n)} at \code{base_point}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  spdm$random_tangent_vec(diag(1, 3), 10)
 }
 }
 \if{html}{\out{</div>}}

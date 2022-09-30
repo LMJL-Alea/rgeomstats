@@ -2,3 +2,4 @@
 
 export(SPDMatrices)
 importFrom(R6,R6Class)
+importFrom(purrr,array_tree)

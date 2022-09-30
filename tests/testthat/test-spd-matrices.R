@@ -68,12 +68,17 @@ test_that("SPDMatrices method differential_power() works", {
 
 test_that("SPDMatrices method expm() works", {
   spdm <- SPDMatrices$new(n = 3)
-  expect_snapshot(spdm$expm(diag(0, 3)))
+  expect_equal(spdm$expm(diag(0, 3)), diag(1, 3))
 })
 
 test_that("SPDMatrices method logm() works", {
   spdm <- SPDMatrices$new(n = 3)
-  expect_snapshot(spdm$logm(diag(1, 3)))
+  expect_equal(spdm$logm(diag(1, 3)), diag(0, 3))
+})
+
+test_that("SPDMatrices method powerm() works", {
+  spdm <- SPDMatrices$new(n = 3)
+  expect_equal(spdm$powerm(diag(1, 3), 2), diag(1, 3))
 })
 
 test_that("SPDMatrices method inverse_differential_exp() works", {
@@ -98,7 +103,7 @@ test_that("SPDMatrices method inverse_differential_log() works", {
   expect_snapshot(spdm$inverse_differential_log(diag(1, 3), A))
 })
 
-test_that("SPDMatrices method expm() works", {
+test_that("SPDMatrices method inverse_differential_power() works", {
   spdm <- SPDMatrices$new(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
@@ -107,4 +112,25 @@ test_that("SPDMatrices method expm() works", {
   )
   A <- V %*% diag(1:3) %*% t(V)
   expect_snapshot(spdm$inverse_differential_power(2, diag(1, 3), A))
+})
+
+test_that("SPDMatrices method projection() works", {
+  spdm <- SPDMatrices$new(n = 3)
+  A <- matrix(1:9, 3, 3)
+  expect_snapshot(spdm$projection(A))
+})
+
+test_that("SPDMatrices method random_point() works", {
+  skip("Needs bug fix in gs")
+  reticulate::py_set_seed(1234)
+  spdm <- SPDMatrices$new(n = 3)
+  spl <- spdm$random_point(10)
+  expect_snapshot(spl)
+})
+
+test_that("SPDMatrices method random_tangent_vec() works", {
+  reticulate::py_set_seed(1234)
+  spdm <- SPDMatrices$new(n = 3)
+  spl <- spdm$random_tangent_vec(diag(1, 3), 10)
+  expect_snapshot(spl)
 })

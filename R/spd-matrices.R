@@ -71,6 +71,8 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$cholesky_factor(A)
     #' }
     cholesky_factor = function(mat) {
+      if (!self$belongs(mat))
+        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
       M <- private$m_PythonClass$cholesky_factor(mat = mat)
       M[lower.tri(M, diag = TRUE)]
     },
@@ -93,6 +95,8 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$differential_cholesky_factor(diag(1, 3), A)
     #' }
     differential_cholesky_factor = function(tangent_vec, base_point) {
+      if (!self$belongs(base_point))
+        cli::cli_abort("The input matrix {.arg base_point} should be SPD.")
       private$m_PythonClass$differential_cholesky_factor(
         tangent_vec = tangent_vec,
         base_point = base_point
@@ -206,6 +210,35 @@ SPDMatrices <- R6::R6Class(
       private$m_PythonClass$logm(mat = mat)
     },
 
+    #' @description Computes the matrix power of an SPD matrix.
+    #'
+    #' @param mat An SPD matrix.
+    #' @param power A numeric scalar or vector specifying the desired power(s).
+    #'
+    #' @return An SPD matrix representing the matrix power of the input matrix
+    #'   as: \deqn{A^p = \exp(p \log(A)).} If `power` is a vector, a list of
+    #'   such matrices elevated at the corresponding powers.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   V <- cbind(
+    #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    #'     c(0, 0, 1)
+    #'   )
+    #'   A <- V %*% diag(1:3) %*% t(V)
+    #'   spdm$powerm(diag(1, 3), 2)
+    #' }
+    powerm = function(mat, power) {
+      if (!self$belongs(mat))
+        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
+      private$m_PythonClass$powerm(
+        mat = mat,
+        power = power
+      )
+    },
+
     #' @description Computes the inverse of the differential of the matrix
     #'   exponential.
     #'
@@ -259,7 +292,7 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @param power An integer scalar specifying the desired power.
     #'
-    #' @return A matrix storing the inversde of the differential of the power
+    #' @return A matrix storing the inverse of the differential of the power
     #'   function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
     #'   `base_point` applied to `tangent_vec`.
     #'
@@ -280,6 +313,72 @@ SPDMatrices <- R6::R6Class(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
+    },
+
+    #' @description Projects any square matrix to the space of SPD matrices.
+    #'
+    #' @details First the symmetric part of point is computed, then the
+    #'   eigenvalues are floored to `gs.atol`.
+    #'
+    #' @param point A square matrix.
+    #'
+    #' @return An SPD matrix obtained by projecting the input square matrix onto
+    #'   the space of SPD matrices.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   A <- matrix(1:9, 3, 3)
+    #'   spdm$projection(A)
+    #' }
+    projection = function(point) {
+      private$m_PythonClass$projection(point = point)
+    },
+
+    #' @description Samples in \eqn{\mathrm{SPD}(n)} from the log-uniform
+    #'   distribution.
+    #'
+    #' @param n_samples An integer value specifying the sample size. Defaults to
+    #'   `1L`.
+    #' @param bound A numeric value specifying the bound of the interval in
+    #'   which to sample in the tangent space. Defaults to `1.0`.
+    #'
+    #' @return A list of SPD matrices sampled in \eqn{\mathrm{SPD}(n)}.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   # spdm$random_point(10) # TO DO: uncomment when bug fixed in gs
+    #' }
+    random_point = function(n_samples = 1, bound = 1.0) {
+      private$m_PythonClass$random_point(
+        n_samples = as.integer(n_samples),
+        bound = bound
+      )
+    },
+
+    #' @description Samples on the tangent space of \eqn{\mathrm{SPD}(n)} from
+    #'   the uniform distribution.
+    #'
+    #' @param n_samples An integer value specifying the sample size. Defaults to
+    #'   `1L`.
+    #'
+    #' @return A list of symmetric matrices sampled on the tangent space of
+    #'   \eqn{\mathrm{SPD}(n)} at `base_point`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spdm$random_tangent_vec(diag(1, 3), 10)
+    #' }
+    random_tangent_vec = function(base_point, n_samples = 1) {
+      if (!self$belongs(base_point))
+        cli::cli_abort("The input matrix {.arg base_point} should be SPD.")
+      array_res <- private$m_PythonClass$random_tangent_vec(
+        base_point = base_point,
+        n_samples = as.integer(n_samples)
+      )
+      purrr::array_tree(array_res, margin = 1)
     }
   ),
   private = list(
