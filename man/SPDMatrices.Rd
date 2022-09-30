@@ -215,6 +215,9 @@ if (reticulate::py_module_available("geomstats")) {
 Yann Thanwerdas
 }
 \concept{discretized curves space}
+\section{Super class}{
+\code{rgeomstats::PythonClass} -> \code{SPDMatrices}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -237,6 +240,14 @@ Yann Thanwerdas
 \item \href{#method-SPDMatrices-clone}{\code{SPDMatrices$clone()}}
 }
 }
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="PythonClass" data-id="get_python_class"><a href='../../rgeomstats/html/PythonClass.html#method-PythonClass-get_python_class'><code>rgeomstats::PythonClass$get_python_class()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="PythonClass" data-id="set_python_class"><a href='../../rgeomstats/html/PythonClass.html#method-PythonClass-set_python_class'><code>rgeomstats::PythonClass$set_python_class()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SPDMatrices-new"></a>}}
 \if{latex}{\out{\hypertarget{method-SPDMatrices-new}{}}}

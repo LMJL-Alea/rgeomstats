@@ -13,6 +13,7 @@
 #' @export
 SPDMatrices <- R6::R6Class(
   classname = "SPDMatrices",
+  inherit = PythonClass,
   public = list(
     #' @description The [`SPDMatrices`] class constructor.
     #'
@@ -27,7 +28,7 @@ SPDMatrices <- R6::R6Class(
     #' }
     initialize = function(n) {
       n <- as.integer(n)
-      private$m_PythonClass <- gs$geometry$spd_matrices$SPDMatrices(n = n)
+      super$set_python_class(gs$geometry$spd_matrices$SPDMatrices(n = n))
     },
 
     #' @description Check if a matrix is symmetric with positive eigenvalues.
@@ -47,7 +48,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$belongs(B)
     #' }
     belongs = function(mat, atol = 1e-12) {
-      private$m_PythonClass$belongs(mat = mat, atol = atol)
+      super$get_python_class()$belongs(mat = mat, atol = atol)
     },
 
     #' @description Computes Cholesky factor for a symmetric positive definite
@@ -73,7 +74,7 @@ SPDMatrices <- R6::R6Class(
     cholesky_factor = function(mat) {
       if (!self$belongs(mat))
         cli::cli_abort("The input matrix {.arg mat} should be SPD.")
-      M <- private$m_PythonClass$cholesky_factor(mat = mat)
+      M <- super$get_python_class()$cholesky_factor(mat = mat)
       M[lower.tri(M, diag = TRUE)]
     },
 
@@ -97,7 +98,7 @@ SPDMatrices <- R6::R6Class(
     differential_cholesky_factor = function(tangent_vec, base_point) {
       if (!self$belongs(base_point))
         cli::cli_abort("The input matrix {.arg base_point} should be SPD.")
-      private$m_PythonClass$differential_cholesky_factor(
+      super$get_python_class()$differential_cholesky_factor(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
@@ -120,7 +121,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$differential_exp(diag(1, 3), A)
     #' }
     differential_exp = function(tangent_vec, base_point) {
-      private$m_PythonClass$differential_exp(
+      super$get_python_class()$differential_exp(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
@@ -143,7 +144,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$differential_log(diag(1, 3), A)
     #' }
     differential_log = function(tangent_vec, base_point) {
-      private$m_PythonClass$differential_log(
+      super$get_python_class()$differential_log(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
@@ -169,7 +170,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$differential_power(2, diag(1, 3), A)
     #' }
     differential_power = function(power, tangent_vec, base_point) {
-      private$m_PythonClass$differential_power(
+      super$get_python_class()$differential_power(
         power = as.integer(power),
         tangent_vec = tangent_vec,
         base_point = base_point
@@ -189,7 +190,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$expm(diag(-1, 3))
     #' }
     expm = function(mat) {
-      private$m_PythonClass$expm(mat = mat)
+      super$get_python_class()$expm(mat = mat)
     },
 
     #' @description Computes the matrix logarithm of an SPD matrix.
@@ -207,7 +208,7 @@ SPDMatrices <- R6::R6Class(
     logm = function(mat) {
       if (!self$belongs(mat))
         cli::cli_abort("The input matrix {.arg mat} should be SPD.")
-      private$m_PythonClass$logm(mat = mat)
+      super$get_python_class()$logm(mat = mat)
     },
 
     #' @description Computes the matrix power of an SPD matrix.
@@ -233,7 +234,7 @@ SPDMatrices <- R6::R6Class(
     powerm = function(mat, power) {
       if (!self$belongs(mat))
         cli::cli_abort("The input matrix {.arg mat} should be SPD.")
-      private$m_PythonClass$powerm(
+      super$get_python_class()$powerm(
         mat = mat,
         power = power
       )
@@ -257,7 +258,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$inverse_differential_exp(diag(1, 3), A)
     #' }
     inverse_differential_exp = function(tangent_vec, base_point) {
-      private$m_PythonClass$inverse_differential_exp(
+      super$get_python_class()$inverse_differential_exp(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
@@ -281,7 +282,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$inverse_differential_log(diag(1, 3), A)
     #' }
     inverse_differential_log = function(tangent_vec, base_point) {
-      private$m_PythonClass$inverse_differential_log(
+      super$get_python_class()$inverse_differential_log(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
@@ -308,7 +309,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$inverse_differential_power(2, diag(1, 3), A)
     #' }
     inverse_differential_power = function(power, tangent_vec, base_point) {
-      private$m_PythonClass$inverse_differential_power(
+      super$get_python_class()$inverse_differential_power(
         power = as.integer(power),
         tangent_vec = tangent_vec,
         base_point = base_point
@@ -332,7 +333,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm$projection(A)
     #' }
     projection = function(point) {
-      private$m_PythonClass$projection(point = point)
+      super$get_python_class()$projection(point = point)
     },
 
     #' @description Samples in \eqn{\mathrm{SPD}(n)} from the log-uniform
@@ -351,7 +352,7 @@ SPDMatrices <- R6::R6Class(
     #'   # spdm$random_point(10) # TO DO: uncomment when bug fixed in gs
     #' }
     random_point = function(n_samples = 1, bound = 1.0) {
-      private$m_PythonClass$random_point(
+      super$get_python_class()$random_point(
         n_samples = as.integer(n_samples),
         bound = bound
       )
@@ -374,14 +375,11 @@ SPDMatrices <- R6::R6Class(
     random_tangent_vec = function(base_point, n_samples = 1) {
       if (!self$belongs(base_point))
         cli::cli_abort("The input matrix {.arg base_point} should be SPD.")
-      array_res <- private$m_PythonClass$random_tangent_vec(
+      array_res <- super$get_python_class()$random_tangent_vec(
         base_point = base_point,
         n_samples = as.integer(n_samples)
       )
       purrr::array_tree(array_res, margin = 1)
     }
-  ),
-  private = list(
-    m_PythonClass = NULL
   )
 )
