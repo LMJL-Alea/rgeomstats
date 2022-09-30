@@ -104,6 +104,69 @@ if (reticulate::py_module_available("geomstats")) {
   A <- V \%*\% diag(1:3) \%*\% t(V)
   spdm$differential_power(2, diag(1, 3), A)
 }
+
+## ------------------------------------------------
+## Method `SPDMatrices$expm`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  spdm$expm(diag(-1, 3))
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$logm`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  spdm$logm(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$inverse_differential_exp`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$inverse_differential_exp(diag(1, 3), A)
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$inverse_differential_log`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$inverse_differential_log(diag(1, 3), A)
+}
+
+## ------------------------------------------------
+## Method `SPDMatrices$inverse_differential_power`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$inverse_differential_power(2, diag(1, 3), A)
+}
 }
 \author{
 Yann Thanwerdas
@@ -119,6 +182,11 @@ Yann Thanwerdas
 \item \href{#method-SPDMatrices-differential_exp}{\code{SPDMatrices$differential_exp()}}
 \item \href{#method-SPDMatrices-differential_log}{\code{SPDMatrices$differential_log()}}
 \item \href{#method-SPDMatrices-differential_power}{\code{SPDMatrices$differential_power()}}
+\item \href{#method-SPDMatrices-expm}{\code{SPDMatrices$expm()}}
+\item \href{#method-SPDMatrices-logm}{\code{SPDMatrices$logm()}}
+\item \href{#method-SPDMatrices-inverse_differential_exp}{\code{SPDMatrices$inverse_differential_exp()}}
+\item \href{#method-SPDMatrices-inverse_differential_log}{\code{SPDMatrices$inverse_differential_log()}}
+\item \href{#method-SPDMatrices-inverse_differential_power}{\code{SPDMatrices$inverse_differential_power()}}
 \item \href{#method-SPDMatrices-clone}{\code{SPDMatrices$clone()}}
 }
 }
@@ -391,6 +459,199 @@ applied to \code{tangent_vec}.
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
   spdm$differential_power(2, diag(1, 3), A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-expm"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-expm}{}}}
+\subsection{Method \code{expm()}}{
+Computes the matrix exponential for a symmetric matrix.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$expm(mat)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{mat}}{A symmetric matrix.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+An SPD matrix storing the exponential of the input symmetric
+matrix \code{mat}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  spdm$expm(diag(-1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-logm"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-logm}{}}}
+\subsection{Method \code{logm()}}{
+Computes the matrix logarithm of an SPD matrix.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$logm(mat)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{mat}}{An SPD matrix.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A symmetric matrix storing the logarithm of the input symmetric
+matrix \code{mat}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  spdm$logm(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-inverse_differential_exp"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-inverse_differential_exp}{}}}
+\subsection{Method \code{inverse_differential_exp()}}{
+Computes the inverse of the differential of the matrix
+exponential.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$inverse_differential_exp(tangent_vec, base_point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
+base point.}
+
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A matrix storing the inverse of the differential of the matrix
+exponential on SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$inverse_differential_exp(diag(1, 3), A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-inverse_differential_log"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-inverse_differential_log}{}}}
+\subsection{Method \code{inverse_differential_log()}}{
+Computes the inverse of the differential of the matrix
+logarithm.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$inverse_differential_log(tangent_vec, base_point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
+base point.}
+
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A matrix storing the inverse of the differential of the matrix
+logarithm on SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$inverse_differential_log(diag(1, 3), A)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SPDMatrices-inverse_differential_power"></a>}}
+\if{latex}{\out{\hypertarget{method-SPDMatrices-inverse_differential_power}{}}}
+\subsection{Method \code{inverse_differential_power()}}{
+Computes the inverse of the differential of the matrix power
+function.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$inverse_differential_power(power, tangent_vec, base_point)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{power}}{An integer scalar specifying the desired power.}
+
+\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
+base point.}
+
+\item{\code{base_point}}{An SPD matrix specifying the base point.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A matrix storing the inversde of the differential of the power
+function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
+\code{base_point} applied to \code{tangent_vec}.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V \%*\% diag(1:3) \%*\% t(V)
+  spdm$inverse_differential_power(2, diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}

@@ -170,6 +170,116 @@ SPDMatrices <- R6::R6Class(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
+    },
+
+    #' @description Computes the matrix exponential for a symmetric matrix.
+    #'
+    #' @param mat A symmetric matrix.
+    #'
+    #' @return An SPD matrix storing the exponential of the input symmetric
+    #'   matrix `mat`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spdm$expm(diag(-1, 3))
+    #' }
+    expm = function(mat) {
+      private$m_PythonClass$expm(mat = mat)
+    },
+
+    #' @description Computes the matrix logarithm of an SPD matrix.
+    #'
+    #' @param mat An SPD matrix.
+    #'
+    #' @return A symmetric matrix storing the logarithm of the input symmetric
+    #'   matrix `mat`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spdm$logm(diag(1, 3))
+    #' }
+    logm = function(mat) {
+      if (!self$belongs(mat))
+        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
+      private$m_PythonClass$logm(mat = mat)
+    },
+
+    #' @description Computes the inverse of the differential of the matrix
+    #'   exponential.
+    #'
+    #' @return A matrix storing the inverse of the differential of the matrix
+    #'   exponential on SPD matrices at `base_point` applied to `tangent_vec`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   V <- cbind(
+    #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    #'     c(0, 0, 1)
+    #'   )
+    #'   A <- V %*% diag(1:3) %*% t(V)
+    #'   spdm$inverse_differential_exp(diag(1, 3), A)
+    #' }
+    inverse_differential_exp = function(tangent_vec, base_point) {
+      private$m_PythonClass$inverse_differential_exp(
+        tangent_vec = tangent_vec,
+        base_point = base_point
+      )
+    },
+
+    #' @description Computes the inverse of the differential of the matrix
+    #'   logarithm.
+    #'
+    #' @return A matrix storing the inverse of the differential of the matrix
+    #'   logarithm on SPD matrices at `base_point` applied to `tangent_vec`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   V <- cbind(
+    #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    #'     c(0, 0, 1)
+    #'   )
+    #'   A <- V %*% diag(1:3) %*% t(V)
+    #'   spdm$inverse_differential_log(diag(1, 3), A)
+    #' }
+    inverse_differential_log = function(tangent_vec, base_point) {
+      private$m_PythonClass$inverse_differential_log(
+        tangent_vec = tangent_vec,
+        base_point = base_point
+      )
+    },
+
+    #' @description Computes the inverse of the differential of the matrix power
+    #'   function.
+    #'
+    #' @param power An integer scalar specifying the desired power.
+    #'
+    #' @return A matrix storing the inversde of the differential of the power
+    #'   function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
+    #'   `base_point` applied to `tangent_vec`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   V <- cbind(
+    #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    #'     c(0, 0, 1)
+    #'   )
+    #'   A <- V %*% diag(1:3) %*% t(V)
+    #'   spdm$inverse_differential_power(2, diag(1, 3), A)
+    #' }
+    inverse_differential_power = function(power, tangent_vec, base_point) {
+      private$m_PythonClass$inverse_differential_power(
+        power = as.integer(power),
+        tangent_vec = tangent_vec,
+        base_point = base_point
+      )
     }
   ),
   private = list(

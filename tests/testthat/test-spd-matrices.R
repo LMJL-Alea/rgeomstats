@@ -65,3 +65,46 @@ test_that("SPDMatrices method differential_power() works", {
   A <- V %*% diag(1:3) %*% t(V)
   expect_snapshot(spdm$differential_power(2, diag(1, 3), A))
 })
+
+test_that("SPDMatrices method expm() works", {
+  spdm <- SPDMatrices$new(n = 3)
+  expect_snapshot(spdm$expm(diag(0, 3)))
+})
+
+test_that("SPDMatrices method logm() works", {
+  spdm <- SPDMatrices$new(n = 3)
+  expect_snapshot(spdm$logm(diag(1, 3)))
+})
+
+test_that("SPDMatrices method inverse_differential_exp() works", {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V %*% diag(1:3) %*% t(V)
+  expect_snapshot(spdm$inverse_differential_exp(diag(1, 3), A))
+})
+
+test_that("SPDMatrices method inverse_differential_log() works", {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V %*% diag(1:3) %*% t(V)
+  expect_snapshot(spdm$inverse_differential_log(diag(1, 3), A))
+})
+
+test_that("SPDMatrices method expm() works", {
+  spdm <- SPDMatrices$new(n = 3)
+  V <- cbind(
+    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    c(0, 0, 1)
+  )
+  A <- V %*% diag(1:3) %*% t(V)
+  expect_snapshot(spdm$inverse_differential_power(2, diag(1, 3), A))
+})

@@ -45,3 +45,53 @@
       [2,]    1    3    0
       [3,]    0    0    6
 
+# SPDMatrices method expm() works
+
+    Code
+      spdm$expm(diag(0, 3))
+    Output
+           [,1] [,2] [,3]
+      [1,]    1    0    0
+      [2,]    0    1    0
+      [3,]    0    0    1
+
+---
+
+    Code
+      spdm$inverse_differential_power(2, diag(1, 3), A)
+    Output
+             [,1]   [,2]      [,3]
+      [1,]  0.375 -0.125 0.0000000
+      [2,] -0.125  0.375 0.0000000
+      [3,]  0.000  0.000 0.1666667
+
+# SPDMatrices method logm() works
+
+    Code
+      spdm$logm(diag(1, 3))
+    Output
+           [,1] [,2] [,3]
+      [1,]    0    0    0
+      [2,]    0    0    0
+      [3,]    0    0    0
+
+# SPDMatrices method inverse_differential_exp() works
+
+    Code
+      spdm$inverse_differential_exp(diag(1, 3), A)
+    Output
+                 [,1]       [,2]       [,3]
+      [1,]  0.2516074 -0.1162721 0.00000000
+      [2,] -0.1162721  0.2516074 0.00000000
+      [3,]  0.0000000  0.0000000 0.04978707
+
+# SPDMatrices method inverse_differential_log() works
+
+    Code
+      spdm$inverse_differential_log(diag(1, 3), A)
+    Output
+           [,1] [,2] [,3]
+      [1,]  1.5  0.5    0
+      [2,]  0.5  1.5    0
+      [3,]  0.0  0.0    3
+
