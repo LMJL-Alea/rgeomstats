@@ -91,6 +91,13 @@ metric.</p></dd>
 <li><p><a href="#method-RiemannianMetric-normalize"><code>RiemannianMetric$normalize()</code></a></p></li>
 <li><p><a href="#method-RiemannianMetric-random_unit_tangent_vec"><code>RiemannianMetric$random_unit_tangent_vec()</code></a></p></li>
 <li><p><a href="#method-RiemannianMetric-squared_dist"><code>RiemannianMetric$squared_dist()</code></a></p></li>
+<li><p><a href="#method-RiemannianMetric-dist"><code>RiemannianMetric$dist()</code></a></p></li>
+<li><p><a href="#method-RiemannianMetric-dist_broadcast"><code>RiemannianMetric$dist_broadcast()</code></a></p></li>
+<li><p><a href="#method-RiemannianMetric-dist_pairwise"><code>RiemannianMetric$dist_pairwise()</code></a></p></li>
+<li><p><a href="#method-RiemannianMetric-diameter"><code>RiemannianMetric$diameter()</code></a></p></li>
+<li><p><a href="#method-RiemannianMetric-closest_neighbor_index"><code>RiemannianMetric$closest_neighbor_index()</code></a></p></li>
+<li><p><a href="#method-RiemannianMetric-normal_basis"><code>RiemannianMetric$normal_basis()</code></a></p></li>
+<li><p><a href="#method-RiemannianMetric-sectional_curvature"><code>RiemannianMetric$sectional_curvature()</code></a></p></li>
 <li><p><a href="#method-RiemannianMetric-clone"><code>RiemannianMetric$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="rgeomstats" data-topic="PythonClass" data-id="get_python_class"><a href="PythonClass.html#method-get_python_class"><code>rgeomstats::PythonClass$get_python_class()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="rgeomstats" data-topic="PythonClass" data-id="set_python_class"><a href="PythonClass.html#method-set_python_class"><code>rgeomstats::PythonClass$set_python_class()</code></a></span></li>
@@ -455,15 +462,245 @@ parent <code><a href="Connection.html">Connection</a></code> class.</p></dd>
 two input points.</p>
 </div>
 
-</div><p></p><hr><a id="method-RiemannianMetric-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-RiemannianMetric-dist"></a><div class="section">
+<h3 id="method-dist-">Method <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist()</a></code><a class="anchor" aria-label="anchor" href="#method-dist-"></a></h3>
+<p>Geodesic distance between two points.</p><div class="section">
 <h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">dist</span><span class="op">(</span><span class="va">point_a</span>, <span class="va">point_b</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>point_a</code></dt>
+<dd><p>A numeric array of shape <code>dim</code> on the manifold.</p></dd>
+
+
+<dt><code>point_b</code></dt>
+<dd><p>A numeric array of shape <code>dim</code> on the manifold.</p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>Extra parameters to be passed to the <code>$log()</code> method of the
+parent <code><a href="Connection.html">Connection</a></code> class.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="details-1">Details<a class="anchor" aria-label="anchor" href="#details-1"></a></h4>
+<p>It only works for positive definite Riemannian metrics.</p>
+</div>
+
+<div class="section">
+<h4 id="returns-12">Returns<a class="anchor" aria-label="anchor" href="#returns-12"></a></h4>
+<p>A numeric value storing the geodesic distance between the two
+input points.</p>
+</div>
+
+</div><p></p><hr><a id="method-RiemannianMetric-dist_broadcast"></a><div class="section">
+<h3 id="method-dist-broadcast-">Method <code>dist_broadcast()</code><a class="anchor" aria-label="anchor" href="#method-dist-broadcast-"></a></h3>
+<p>Computes the geodesic distance between points.</p><div class="section">
+<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">dist_broadcast</span><span class="op">(</span><span class="va">points_a</span>, <span class="va">points_b</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>points_a</code></dt>
+<dd><p>A numeric array of shape <code>c(n_samples_a, dim)</code> specifying
+a set of points on the manifold.</p></dd>
+
+
+<dt><code>points_b</code></dt>
+<dd><p>A numeric array of shape <code>c(n_samples_b, dim)</code> specifying
+a set of points on the manifold.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="details-2">Details<a class="anchor" aria-label="anchor" href="#details-2"></a></h4>
+<p>If <code>n_samples_a == n_samples_b</code> then <code>dist</code> is the element-wise
+distance result of a point in <code>points_a</code> with the point from <code>points_b</code>
+of the same index. If <code>n_samples_a != n_samples_b</code> then <code>dist</code> is the
+result of applying geodesic distance for each point from <code>points_a</code> to
+all points from <code>points_b</code>.</p>
+</div>
+
+<div class="section">
+<h4 id="returns-13">Returns<a class="anchor" aria-label="anchor" href="#returns-13"></a></h4>
+<p>A numeric array of shape <code>c(n_samples_a, dim)</code> if <code>n_samples_a == n_samples_b</code> or of shape <code>c(n_samples_a, n_samples_b, dim)</code> if
+<code>n_samples_a != n_samples_b</code> storing the geodesic distance between
+points in set A and points in set B.</p>
+</div>
+
+</div><p></p><hr><a id="method-RiemannianMetric-dist_pairwise"></a><div class="section">
+<h3 id="method-dist-pairwise-">Method <code>dist_pairwise()</code><a class="anchor" aria-label="anchor" href="#method-dist-pairwise-"></a></h3>
+<p>Computes the pairwise distance between points.</p><div class="section">
+<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">dist_pairwise</span><span class="op">(</span><span class="va">points</span>, n_jobs <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>points</code></dt>
+<dd><p>A numeric array of shape <code>c(n_samples, dim)</code> specifying a
+set of points on the manifold.</p></dd>
+
+
+<dt><code>n_jobs</code></dt>
+<dd><p>An integer value specifying the number of cores for
+parallel computation. Defaults to <code>1L</code>.</p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>Extra parameters to be passed tothe  <code>joblib.Parallel</code> Python
+class. See <a href="https://joblib.readthedocs.io/en/latest/" class="external-link">joblib documentation</a> for details.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-14">Returns<a class="anchor" aria-label="anchor" href="#returns-14"></a></h4>
+<p>A numeric matrix of shape <code>c(n_samples, n_samples)</code> storing the
+pairwise geodesic distances between all the points.</p>
+</div>
+
+</div><p></p><hr><a id="method-RiemannianMetric-diameter"></a><div class="section">
+<h3 id="method-diameter-">Method <code>diameter()</code><a class="anchor" aria-label="anchor" href="#method-diameter-"></a></h3>
+<p>Computes the diameter of set of points on a manifold.</p><div class="section">
+<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">diameter</span><span class="op">(</span><span class="va">points</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>points</code></dt>
+<dd><p>A numeric array of shape <code>c(n_samples, dim)</code> specifying a
+set of points on the manifold.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="details-3">Details<a class="anchor" aria-label="anchor" href="#details-3"></a></h4>
+<p>The diameter is the maximum over all pairwise distances.</p>
+</div>
+
+<div class="section">
+<h4 id="returns-15">Returns<a class="anchor" aria-label="anchor" href="#returns-15"></a></h4>
+<p>A numeric value representing the largest distance between any two
+points in the input set.</p>
+</div>
+
+</div><p></p><hr><a id="method-RiemannianMetric-closest_neighbor_index"></a><div class="section">
+<h3 id="method-closest-neighbor-index-">Method <code>closest_neighbor_index()</code><a class="anchor" aria-label="anchor" href="#method-closest-neighbor-index-"></a></h3>
+<p>Finds the closest neighbor to a point among a set of
+neighbors.</p><div class="section">
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">closest_neighbor_index</span><span class="op">(</span><span class="va">point</span>, <span class="va">neighbors</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>point</code></dt>
+<dd><p>A numeric array of shape <code>dim</code> specifying a point on the
+manifold.</p></dd>
+
+
+<dt><code>neighbors</code></dt>
+<dd><p>A numeric array of shape <code>c(n_neighbors, dim)</code>
+specifying a set of neighboring points for the input <code>point</code>.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-16">Returns<a class="anchor" aria-label="anchor" href="#returns-16"></a></h4>
+<p>An integer value representing the index of the neighbor in
+<code>neighbors</code> that is closest to <code>point</code>.</p>
+</div>
+
+</div><p></p><hr><a id="method-RiemannianMetric-normal_basis"></a><div class="section">
+<h3 id="method-normal-basis-">Method <code>normal_basis()</code><a class="anchor" aria-label="anchor" href="#method-normal-basis-"></a></h3>
+<p>Normalizes the basis with respect to the metric. This
+corresponds to a renormalization of each basis vector.</p><div class="section">
+<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">normal_basis</span><span class="op">(</span><span class="va">basis</span>, base_point <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-17">Arguments<a class="anchor" aria-label="anchor" href="#arguments-17"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>basis</code></dt>
+<dd><p>A numeric array of shape <code>c(dim, dim)</code> specifying a basis.</p></dd>
+
+
+<dt><code>base_point</code></dt>
+<dd><p>A numeric array of shape <code>dim</code> specifying a point on
+the manifold. Defaults to <code>NULL</code>.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-17">Returns<a class="anchor" aria-label="anchor" href="#returns-17"></a></h4>
+<p>A numeric array of shape <code>c(dim, n, n)</code> storing the normal basis.</p>
+</div>
+
+</div><p></p><hr><a id="method-RiemannianMetric-sectional_curvature"></a><div class="section">
+<h3 id="method-sectional-curvature-">Method <code>sectional_curvature()</code><a class="anchor" aria-label="anchor" href="#method-sectional-curvature-"></a></h3>
+<p>Computes the sectional curvature.</p><div class="section">
+<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">sectional_curvature</span><span class="op">(</span></span>
+<span>  <span class="va">tangent_vec_a</span>,</span>
+<span>  <span class="va">tangent_vec_b</span>,</span>
+<span>  base_point <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-18">Arguments<a class="anchor" aria-label="anchor" href="#arguments-18"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>tangent_vec_a</code></dt>
+<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a
+tangent vector at <code>base_point</code>.</p></dd>
+
+
+<dt><code>tangent_vec_b</code></dt>
+<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a
+tangent vector at <code>base_point</code>.</p></dd>
+
+
+<dt><code>base_point</code></dt>
+<dd><p>A numeric array of shape <code>dim</code> specifying a point on
+the manifold. Defaults to <code>NULL</code>.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="details-4">Details<a class="anchor" aria-label="anchor" href="#details-4"></a></h4>
+<p>For two orthonormal tangent vectors \(x\) and \(y\) at a
+base point, the sectional curvature is defined by $$\langle R(x,
+  y)x, y \rangle = \langle R_x(y), y \rangle.$$ For non-orthonormal
+vectors, it is $$\langle R(x, y)x, y \rangle / \\|x \wedge y\\|^2.$$
+See also https://en.wikipedia.org/wiki/Sectional_curvature.</p>
+</div>
+
+<div class="section">
+<h4 id="returns-18">Returns<a class="anchor" aria-label="anchor" href="#returns-18"></a></h4>
+<p>A numeric value representing the sectional curvature at
+<code>base_point</code>.</p>
+</div>
+
+</div><p></p><hr><a id="method-RiemannianMetric-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-19">Arguments<a class="anchor" aria-label="anchor" href="#arguments-19"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
