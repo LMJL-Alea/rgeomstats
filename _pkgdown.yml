@@ -2,3 +2,21 @@ url: https://lmjl-alea.github.io/rgeomstats/
 template:
   bootstrap: 5
 
+reference:
+  - title: Manifolds
+  - subtitle: Parent classes
+    desc: Useful for defining new manifolds
+  - contents:
+    - Manifold
+    - OpenSet
+    - VectorSpace
+  - subtitle: Derived classes
+    desc: Useful for statistical data analysis
+    - NFoldManifold
+    - SPDMatrices
+  - title: Connections
+  - subtitle: Parent classes
+    desc: Useful for defining new metrics
+  - contents:
+    - Connection
+    - RiemannianMetric
