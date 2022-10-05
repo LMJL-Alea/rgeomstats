@@ -32,12 +32,12 @@ SPDMatrices <- R6::R6Class(
     #' }
     initialize = function(n, ...) {
       check_extra_params(...)
-      n <- as.integer(n)
+      dots <- list(...)
+      dots$n <- as.integer(n)
+      if ("metric" %in% names(dots))
+        dots$metric <- dots$metric$get_python_class()
       super$set_python_class(
-        gs$geometry$spd_matrices$SPDMatrices(
-          n = n,
-          ...
-        )
+        do.call(gs$geometry$spd_matrices$SPDMatrices, dots)
       )
       private$set_fields()
     },

@@ -3,21 +3,15 @@ template:
   bootstrap: 5
 
 reference:
-  - title: Manifolds
-  - subtitle: Parent classes
-    desc: Useful for defining new manifolds
+  - title: Symmetric Positive Definite Matrices
+  - contents:
+    - SPDMatrices
+    - SPDMetricAffine
+  - title: Abstract classes
   - contents:
     - Manifold
     - OpenSet
     - VectorSpace
-  - subtitle: Derived classes
-    desc: Useful for statistical data analysis
-  - contents:
     - NFoldManifold
-    - SPDMatrices
-  - title: Connections
-  - subtitle: Parent classes
-    desc: Useful for defining new metrics
-  - contents:
     - Connection
     - RiemannianMetric
