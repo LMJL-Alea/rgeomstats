@@ -193,6 +193,138 @@ RiemannianMetric <- R6::R6Class(
         point_b = point_b,
         ...
       )
+    },
+
+    #' @description Geodesic distance between two points.
+    #'
+    #' @details It only works for positive definite Riemannian metrics.
+    #'
+    #' @param point_a A numeric array of shape `dim` on the manifold.
+    #' @param point_b A numeric array of shape `dim` on the manifold.
+    #' @param ... Extra parameters to be passed to the `$log()` method of the
+    #'   parent [`Connection`] class.
+    #'
+    #' @return A numeric value storing the geodesic distance between the two
+    #'   input points.
+    dist = function(point_a, point_b, ...) {
+      check_extra_params(...)
+      super$get_python_class$dist(
+        point_a = point_a,
+        point_b = point_b,
+        ...
+      )
+    },
+
+    #' @description Computes the geodesic distance between points.
+    #'
+    #' @details If `n_samples_a == n_samples_b` then `dist` is the element-wise
+    #'   distance result of a point in `points_a` with the point from `points_b`
+    #'   of the same index. If `n_samples_a != n_samples_b` then `dist` is the
+    #'   result of applying geodesic distance for each point from `points_a` to
+    #'   all points from `points_b`.
+    #'
+    #' @param points_a A numeric array of shape `c(n_samples_a, dim)` specifying
+    #'   a set of points on the manifold.
+    #' @param points_b A numeric array of shape `c(n_samples_b, dim)` specifying
+    #'   a set of points on the manifold.
+    #'
+    #' @return A numeric array of shape `c(n_samples_a, dim)` if `n_samples_a ==
+    #'   n_samples_b` or of shape `c(n_samples_a, n_samples_b, dim)` if
+    #'   `n_samples_a != n_samples_b` storing the geodesic distance between
+    #'   points in set A and points in set B.
+    dist_broadcast = function(points_a, points_b) {
+      super$get_python_class$dist_broadcast(
+        point_a = points_a,
+        point_b = points_b
+      )
+    },
+
+    #' @description Computes the pairwise distance between points.
+    #'
+    #' @param points A numeric array of shape `c(n_samples, dim)` specifying a
+    #'   set of points on the manifold.
+    #' @param n_jobs An integer value specifying the number of cores for
+    #'   parallel computation. Defaults to `1L`.
+    #' @param ... Extra parameters to be passed tothe  `joblib.Parallel` Python
+    #'   class. See [joblib
+    #'   documentation](https://joblib.readthedocs.io/en/latest/) for details.
+    #'
+    #' @return A numeric matrix of shape `c(n_samples, n_samples)` storing the
+    #'   pairwise geodesic distances between all the points.
+    dist_pairwise = function(points, n_jobs = 1, ...) {
+      check_extra_params(...)
+      n_jobs <- as.integer(n_jobs)
+      super$get_python_class$dist_pairwise(
+        points = points,
+        n_jobs = n_jobs,
+        ...
+      )
+    },
+
+    #' @description Computes the diameter of set of points on a manifold.
+    #'
+    #' @details The diameter is the maximum over all pairwise distances.
+    #'
+    #' @param points A numeric array of shape `c(n_samples, dim)` specifying a
+    #'   set of points on the manifold.
+    #'
+    #' @return A numeric value representing the largest distance between any two
+    #'   points in the input set.
+    diameter = function(points) {
+      super$get_python_class$diameter(points)
+    },
+
+    #' @description Finds the closest neighbor to a point among a set of
+    #'   neighbors.
+    #'
+    #' @param point A numeric array of shape `dim` specifying a point on the
+    #'   manifold.
+    #' @param neighbors A numeric array of shape `c(n_neighbors, dim)`
+    #'   specifying a set of neighboring points for the input `point`.
+    #'
+    #' @return An integer value representing the index of the neighbor in
+    #'   `neighbors` that is closest to `point`.
+    closest_neighbor_index = function(point, neighbors) {
+      super$get_python_class$closest_neighbor_index(
+        point = point,
+        neighbors = neighbors
+      )
+    },
+
+    #' @description Normalizes the basis with respect to the metric. This
+    #'   corresponds to a renormalization of each basis vector.
+    #'
+    #' @param basis A numeric array of shape `c(dim, dim)` specifying a basis.
+    #'
+    #' @return A numeric array of shape `c(dim, n, n)` storing the normal basis.
+    normal_basis = function(basis, base_point = NULL) {
+      super$get_python_class$normal_basis(
+        basis = basis,
+        base_point = base_point
+      )
+    },
+
+    #' @description Computes the sectional curvature.
+    #'
+    #' @details For two orthonormal tangent vectors \eqn{x} and \eqn{y} at a
+    #'   base point, the sectional curvature is defined by \deqn{\langle R(x,
+    #'   y)x, y \rangle = \langle R_x(y), y \rangle.} For non-orthonormal
+    #'   vectors, it is \deqn{\langle R(x, y)x, y \rangle / \\|x \wedge y\\|^2.}
+    #'   See also https://en.wikipedia.org/wiki/Sectional_curvature.
+    #'
+    #' @param tangent_vec_a A numeric array of shape `c(n, n)` specifying a
+    #'   tangent vector at `base_point`.
+    #' @param tangent_vec_b A numeric array of shape `c(n, n)` specifying a
+    #'   tangent vector at `base_point`.
+    #'
+    #' @return A numeric value representing the sectional curvature at
+    #'   `base_point`.
+    sectional_curvature = function(tangent_vec_a, tangent_vec_b, base_point = NULL) {
+      super$get_python_class$sectional_curvature(
+        tangent_vec_a = tangent_vec_a,
+        tangent_vec_b = tangent_vec_b,
+        base_point = base_point
+      )
     }
   ),
   private = list(

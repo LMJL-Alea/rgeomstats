@@ -38,6 +38,13 @@ metric.}
 \item \href{#method-RiemannianMetric-normalize}{\code{RiemannianMetric$normalize()}}
 \item \href{#method-RiemannianMetric-random_unit_tangent_vec}{\code{RiemannianMetric$random_unit_tangent_vec()}}
 \item \href{#method-RiemannianMetric-squared_dist}{\code{RiemannianMetric$squared_dist()}}
+\item \href{#method-RiemannianMetric-dist}{\code{RiemannianMetric$dist()}}
+\item \href{#method-RiemannianMetric-dist_broadcast}{\code{RiemannianMetric$dist_broadcast()}}
+\item \href{#method-RiemannianMetric-dist_pairwise}{\code{RiemannianMetric$dist_pairwise()}}
+\item \href{#method-RiemannianMetric-diameter}{\code{RiemannianMetric$diameter()}}
+\item \href{#method-RiemannianMetric-closest_neighbor_index}{\code{RiemannianMetric$closest_neighbor_index()}}
+\item \href{#method-RiemannianMetric-normal_basis}{\code{RiemannianMetric$normal_basis()}}
+\item \href{#method-RiemannianMetric-sectional_curvature}{\code{RiemannianMetric$sectional_curvature()}}
 \item \href{#method-RiemannianMetric-clone}{\code{RiemannianMetric$clone()}}
 }
 }
@@ -381,6 +388,214 @@ parent \code{\link{Connection}} class.}
 \subsection{Returns}{
 A numeric value storing the squared geodesic distance between the
 two input points.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RiemannianMetric-dist"></a>}}
+\if{latex}{\out{\hypertarget{method-RiemannianMetric-dist}{}}}
+\subsection{Method \code{dist()}}{
+Geodesic distance between two points.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$dist(point_a, point_b, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{point_a}}{A numeric array of shape \code{dim} on the manifold.}
+
+\item{\code{point_b}}{A numeric array of shape \code{dim} on the manifold.}
+
+\item{\code{...}}{Extra parameters to be passed to the \verb{$log()} method of the
+parent \code{\link{Connection}} class.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+It only works for positive definite Riemannian metrics.
+}
+
+\subsection{Returns}{
+A numeric value storing the geodesic distance between the two
+input points.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RiemannianMetric-dist_broadcast"></a>}}
+\if{latex}{\out{\hypertarget{method-RiemannianMetric-dist_broadcast}{}}}
+\subsection{Method \code{dist_broadcast()}}{
+Computes the geodesic distance between points.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$dist_broadcast(points_a, points_b)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{points_a}}{A numeric array of shape \code{c(n_samples_a, dim)} specifying
+a set of points on the manifold.}
+
+\item{\code{points_b}}{A numeric array of shape \code{c(n_samples_b, dim)} specifying
+a set of points on the manifold.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+If \code{n_samples_a == n_samples_b} then \code{dist} is the element-wise
+distance result of a point in \code{points_a} with the point from \code{points_b}
+of the same index. If \code{n_samples_a != n_samples_b} then \code{dist} is the
+result of applying geodesic distance for each point from \code{points_a} to
+all points from \code{points_b}.
+}
+
+\subsection{Returns}{
+A numeric array of shape \code{c(n_samples_a, dim)} if \code{n_samples_a == n_samples_b} or of shape \code{c(n_samples_a, n_samples_b, dim)} if
+\code{n_samples_a != n_samples_b} storing the geodesic distance between
+points in set A and points in set B.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RiemannianMetric-dist_pairwise"></a>}}
+\if{latex}{\out{\hypertarget{method-RiemannianMetric-dist_pairwise}{}}}
+\subsection{Method \code{dist_pairwise()}}{
+Computes the pairwise distance between points.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$dist_pairwise(points, n_jobs = 1, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{points}}{A numeric array of shape \code{c(n_samples, dim)} specifying a
+set of points on the manifold.}
+
+\item{\code{n_jobs}}{An integer value specifying the number of cores for
+parallel computation. Defaults to \code{1L}.}
+
+\item{\code{...}}{Extra parameters to be passed tothe  \code{joblib.Parallel} Python
+class. See \href{https://joblib.readthedocs.io/en/latest/}{joblib documentation} for details.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A numeric matrix of shape \code{c(n_samples, n_samples)} storing the
+pairwise geodesic distances between all the points.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RiemannianMetric-diameter"></a>}}
+\if{latex}{\out{\hypertarget{method-RiemannianMetric-diameter}{}}}
+\subsection{Method \code{diameter()}}{
+Computes the diameter of set of points on a manifold.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$diameter(points)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{points}}{A numeric array of shape \code{c(n_samples, dim)} specifying a
+set of points on the manifold.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+The diameter is the maximum over all pairwise distances.
+}
+
+\subsection{Returns}{
+A numeric value representing the largest distance between any two
+points in the input set.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RiemannianMetric-closest_neighbor_index"></a>}}
+\if{latex}{\out{\hypertarget{method-RiemannianMetric-closest_neighbor_index}{}}}
+\subsection{Method \code{closest_neighbor_index()}}{
+Finds the closest neighbor to a point among a set of
+neighbors.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$closest_neighbor_index(point, neighbors)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{point}}{A numeric array of shape \code{dim} specifying a point on the
+manifold.}
+
+\item{\code{neighbors}}{A numeric array of shape \code{c(n_neighbors, dim)}
+specifying a set of neighboring points for the input \code{point}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+An integer value representing the index of the neighbor in
+\code{neighbors} that is closest to \code{point}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RiemannianMetric-normal_basis"></a>}}
+\if{latex}{\out{\hypertarget{method-RiemannianMetric-normal_basis}{}}}
+\subsection{Method \code{normal_basis()}}{
+Normalizes the basis with respect to the metric. This
+corresponds to a renormalization of each basis vector.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$normal_basis(basis, base_point = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{basis}}{A numeric array of shape \code{c(dim, dim)} specifying a basis.}
+
+\item{\code{base_point}}{A numeric array of shape \code{dim} specifying a point on
+the manifold. Defaults to \code{NULL}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A numeric array of shape \code{c(dim, n, n)} storing the normal basis.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RiemannianMetric-sectional_curvature"></a>}}
+\if{latex}{\out{\hypertarget{method-RiemannianMetric-sectional_curvature}{}}}
+\subsection{Method \code{sectional_curvature()}}{
+Computes the sectional curvature.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$sectional_curvature(
+  tangent_vec_a,
+  tangent_vec_b,
+  base_point = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{tangent_vec_a}}{A numeric array of shape \code{c(n, n)} specifying a
+tangent vector at \code{base_point}.}
+
+\item{\code{tangent_vec_b}}{A numeric array of shape \code{c(n, n)} specifying a
+tangent vector at \code{base_point}.}
+
+\item{\code{base_point}}{A numeric array of shape \code{dim} specifying a point on
+the manifold. Defaults to \code{NULL}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+For two orthonormal tangent vectors \eqn{x} and \eqn{y} at a
+base point, the sectional curvature is defined by \deqn{\langle R(x,
+  y)x, y \rangle = \langle R_x(y), y \rangle.} For non-orthonormal
+vectors, it is \deqn{\langle R(x, y)x, y \rangle / \\|x \wedge y\\|^2.}
+See also https://en.wikipedia.org/wiki/Sectional_curvature.
+}
+
+\subsection{Returns}{
+A numeric value representing the sectional curvature at
+\code{base_point}.
 }
 }
 \if{html}{\out{<hr>}}
