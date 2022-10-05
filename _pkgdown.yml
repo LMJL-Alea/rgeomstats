@@ -12,6 +12,7 @@ reference:
     - VectorSpace
   - subtitle: Derived classes
     desc: Useful for statistical data analysis
+  - contents:
     - NFoldManifold
     - SPDMatrices
   - title: Connections
