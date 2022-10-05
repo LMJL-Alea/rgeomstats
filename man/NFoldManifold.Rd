@@ -2,7 +2,7 @@
 % Please edit documentation in R/n-fold-manifold.R
 \name{NFoldManifold}
 \alias{NFoldManifold}
-\title{N-Fold Product Manifold}
+\title{Class for N-Fold Product Manifolds}
 \description{
 Class for an \eqn{n}-fold product manifold \eqn{M^n}. It defines
 a manifold as the product manifold of \eqn{n} copies of a given base

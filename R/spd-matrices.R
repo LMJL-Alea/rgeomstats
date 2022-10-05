@@ -1,4 +1,4 @@
-#' Manifold of Symmetric Positive Definite Matrices
+#' Class for the Manifold of Symmetric Positive Definite Matrices
 #'
 #' @description Class for the manifold of symmetric positive definite (SPD)
 #'   matrices.
@@ -8,47 +8,38 @@
 #' @param base_point An SPD matrix specifying the base point.
 #'
 #' @author Yann Thanwerdas
-#' @family discretized curves space
 #'
 #' @export
 SPDMatrices <- R6::R6Class(
   classname = "SPDMatrices",
-  inherit = PythonClass,
+  inherit = OpenSet,
   public = list(
+    #' @field n Integer value specifying the shape of the matrices: \eqn{n \times n}.
+    n = NULL,
+
     #' @description The [`SPDMatrices`] class constructor.
     #'
     #' @param n An integer value representing the shape of the `n x n` matrices.
+    #' @param ... Extra arguments to be passed to parent class constructors. See
+    #'   [`OpenSet`] and [`Manifold`] classes.
     #'
-    #' @return A [`SPDMatrices`] [R6::R6Class] object.
+    #' @return An object of class [`SPDMatrices`].
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
     #'   spdm <- SPDMatrices$new(n = 3)
     #'   spdm
     #' }
-    initialize = function(n) {
+    initialize = function(n, ...) {
+      check_extra_params(...)
       n <- as.integer(n)
-      super$set_python_class(gs$geometry$spd_matrices$SPDMatrices(n = n))
-    },
-
-    #' @description Check if a matrix is symmetric with positive eigenvalues.
-    #'
-    #' @param mat A numeric matrix to be checked.
-    #' @param atol A numeric value specifying the absolute tolerance for
-    #'   checking. Defaults to `1e-12`.
-    #'
-    #' @return A boolean that tells whether the input matrix is SPD.
-    #'
-    #' @examples
-    #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   A <- diag(1, 3)
-    #'   spdm$belongs(A)
-    #'   B <- diag(-1, 3)
-    #'   spdm$belongs(B)
-    #' }
-    belongs = function(mat, atol = 1e-12) {
-      super$get_python_class()$belongs(mat = mat, atol = atol)
+      super$set_python_class(
+        gs$geometry$spd_matrices$SPDMatrices(
+          n = n,
+          ...
+        )
+      )
+      private$set_fields()
     },
 
     #' @description Computes Cholesky factor for a symmetric positive definite
@@ -104,6 +95,22 @@ SPDMatrices <- R6::R6Class(
       )
     },
 
+    #' @description Computes the matrix exponential for a symmetric matrix.
+    #'
+    #' @param mat A symmetric matrix.
+    #'
+    #' @return An SPD matrix storing the exponential of the input symmetric
+    #'   matrix `mat`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spdm$expm(diag(-1, 3))
+    #' }
+    expm = function(mat) {
+      super$get_python_class()$expm(mat = mat)
+    },
+
     #' @description Computes the differential of the matrix exponential.
     #'
     #' @return A matrix storing the differential of the matrix exponential on
@@ -125,6 +132,48 @@ SPDMatrices <- R6::R6Class(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
+    },
+
+    #' @description Computes the inverse of the differential of the matrix
+    #'   exponential.
+    #'
+    #' @return A matrix storing the inverse of the differential of the matrix
+    #'   exponential on SPD matrices at `base_point` applied to `tangent_vec`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   V <- cbind(
+    #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
+    #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
+    #'     c(0, 0, 1)
+    #'   )
+    #'   A <- V %*% diag(1:3) %*% t(V)
+    #'   spdm$inverse_differential_exp(diag(1, 3), A)
+    #' }
+    inverse_differential_exp = function(tangent_vec, base_point) {
+      super$get_python_class()$inverse_differential_exp(
+        tangent_vec = tangent_vec,
+        base_point = base_point
+      )
+    },
+
+    #' @description Computes the matrix logarithm of an SPD matrix.
+    #'
+    #' @param mat An SPD matrix.
+    #'
+    #' @return A symmetric matrix storing the logarithm of the input symmetric
+    #'   matrix `mat`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spdm$logm(diag(1, 3))
+    #' }
+    logm = function(mat) {
+      if (!self$belongs(mat))
+        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
+      super$get_python_class()$logm(mat = mat)
     },
 
     #' @description Computes the differential of the matrix logarithm.
@@ -150,13 +199,11 @@ SPDMatrices <- R6::R6Class(
       )
     },
 
-    #' @description Computes the differential of the matrix power function.
+    #' @description Computes the inverse of the differential of the matrix
+    #'   logarithm.
     #'
-    #' @param power An integer scalar specifying the desired power.
-    #'
-    #' @return A matrix storing the differential of the power function on
-    #'   \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at `base_point`
-    #'   applied to `tangent_vec`.
+    #' @return A matrix storing the inverse of the differential of the matrix
+    #'   logarithm on SPD matrices at `base_point` applied to `tangent_vec`.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -167,48 +214,13 @@ SPDMatrices <- R6::R6Class(
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$differential_power(2, diag(1, 3), A)
+    #'   spdm$inverse_differential_log(diag(1, 3), A)
     #' }
-    differential_power = function(power, tangent_vec, base_point) {
-      super$get_python_class()$differential_power(
-        power = as.integer(power),
+    inverse_differential_log = function(tangent_vec, base_point) {
+      super$get_python_class()$inverse_differential_log(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
-    },
-
-    #' @description Computes the matrix exponential for a symmetric matrix.
-    #'
-    #' @param mat A symmetric matrix.
-    #'
-    #' @return An SPD matrix storing the exponential of the input symmetric
-    #'   matrix `mat`.
-    #'
-    #' @examples
-    #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   spdm$expm(diag(-1, 3))
-    #' }
-    expm = function(mat) {
-      super$get_python_class()$expm(mat = mat)
-    },
-
-    #' @description Computes the matrix logarithm of an SPD matrix.
-    #'
-    #' @param mat An SPD matrix.
-    #'
-    #' @return A symmetric matrix storing the logarithm of the input symmetric
-    #'   matrix `mat`.
-    #'
-    #' @examples
-    #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   spdm$logm(diag(1, 3))
-    #' }
-    logm = function(mat) {
-      if (!self$belongs(mat))
-        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
-      super$get_python_class()$logm(mat = mat)
     },
 
     #' @description Computes the matrix power of an SPD matrix.
@@ -240,35 +252,13 @@ SPDMatrices <- R6::R6Class(
       )
     },
 
-    #' @description Computes the inverse of the differential of the matrix
-    #'   exponential.
+    #' @description Computes the differential of the matrix power function.
     #'
-    #' @return A matrix storing the inverse of the differential of the matrix
-    #'   exponential on SPD matrices at `base_point` applied to `tangent_vec`.
+    #' @param power An integer scalar specifying the desired power.
     #'
-    #' @examples
-    #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   V <- cbind(
-    #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
-    #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
-    #'     c(0, 0, 1)
-    #'   )
-    #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$inverse_differential_exp(diag(1, 3), A)
-    #' }
-    inverse_differential_exp = function(tangent_vec, base_point) {
-      super$get_python_class()$inverse_differential_exp(
-        tangent_vec = tangent_vec,
-        base_point = base_point
-      )
-    },
-
-    #' @description Computes the inverse of the differential of the matrix
-    #'   logarithm.
-    #'
-    #' @return A matrix storing the inverse of the differential of the matrix
-    #'   logarithm on SPD matrices at `base_point` applied to `tangent_vec`.
+    #' @return A matrix storing the differential of the power function on
+    #'   \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at `base_point`
+    #'   applied to `tangent_vec`.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -279,10 +269,11 @@ SPDMatrices <- R6::R6Class(
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$inverse_differential_log(diag(1, 3), A)
+    #'   spdm$differential_power(2, diag(1, 3), A)
     #' }
-    inverse_differential_log = function(tangent_vec, base_point) {
-      super$get_python_class()$inverse_differential_log(
+    differential_power = function(power, tangent_vec, base_point) {
+      super$get_python_class()$differential_power(
+        power = as.integer(power),
         tangent_vec = tangent_vec,
         base_point = base_point
       )
@@ -314,72 +305,12 @@ SPDMatrices <- R6::R6Class(
         tangent_vec = tangent_vec,
         base_point = base_point
       )
-    },
-
-    #' @description Projects any square matrix to the space of SPD matrices.
-    #'
-    #' @details First the symmetric part of point is computed, then the
-    #'   eigenvalues are floored to `gs.atol`.
-    #'
-    #' @param point A square matrix.
-    #'
-    #' @return An SPD matrix obtained by projecting the input square matrix onto
-    #'   the space of SPD matrices.
-    #'
-    #' @examples
-    #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   A <- matrix(1:9, 3, 3)
-    #'   spdm$projection(A)
-    #' }
-    projection = function(point) {
-      super$get_python_class()$projection(point = point)
-    },
-
-    #' @description Samples in \eqn{\mathrm{SPD}(n)} from the log-uniform
-    #'   distribution.
-    #'
-    #' @param n_samples An integer value specifying the sample size. Defaults to
-    #'   `1L`.
-    #' @param bound A numeric value specifying the bound of the interval in
-    #'   which to sample in the tangent space. Defaults to `1.0`.
-    #'
-    #' @return A list of SPD matrices sampled in \eqn{\mathrm{SPD}(n)}.
-    #'
-    #' @examples
-    #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   # spdm$random_point(10) # TO DO: uncomment when bug fixed in gs
-    #' }
-    random_point = function(n_samples = 1, bound = 1.0) {
-      super$get_python_class()$random_point(
-        n_samples = as.integer(n_samples),
-        bound = bound
-      )
-    },
-
-    #' @description Samples on the tangent space of \eqn{\mathrm{SPD}(n)} from
-    #'   the uniform distribution.
-    #'
-    #' @param n_samples An integer value specifying the sample size. Defaults to
-    #'   `1L`.
-    #'
-    #' @return A list of symmetric matrices sampled on the tangent space of
-    #'   \eqn{\mathrm{SPD}(n)} at `base_point`.
-    #'
-    #' @examples
-    #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   spdm$random_tangent_vec(diag(1, 3), 10)
-    #' }
-    random_tangent_vec = function(base_point, n_samples = 1) {
-      if (!self$belongs(base_point))
-        cli::cli_abort("The input matrix {.arg base_point} should be SPD.")
-      array_res <- super$get_python_class()$random_tangent_vec(
-        base_point = base_point,
-        n_samples = as.integer(n_samples)
-      )
-      purrr::array_tree(array_res, margin = 1)
+    }
+  ),
+  private = list(
+    set_fields = function() {
+      super$set_fields()
+      self$n <- super$get_python_class()$n
     }
   )
 )

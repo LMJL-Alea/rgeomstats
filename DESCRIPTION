@@ -22,6 +22,10 @@ Config/reticulate:
     )
   )
 Imports: 
+    cli,
     purrr,
     R6,
-    reticulate
+    Rdpack,
+    reticulate,
+    rlang
+RdMacros: Rdpack
