@@ -10,6 +10,8 @@
 #' @param vector A numeric array of shape `dim` specifying a vector.
 #'
 #' @author Nina Miolane
+#'
+#' @keywords internal
 RiemannianMetric <- R6::R6Class(
   classname = "RiemannianMetric",
   inherit = Connection,

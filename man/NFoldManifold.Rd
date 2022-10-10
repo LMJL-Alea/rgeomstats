@@ -26,8 +26,8 @@ if (reticulate::py_module_available("geomstats")) {
 Nicolas Guigui
 }
 \concept{product manifold}
-\section{Super class}{
-\code{rgeomstats::PythonClass} -> \code{NFoldManifold}
+\section{Super classes}{
+\code{rgeomstats::PythonClass} -> \code{\link[rgeomstats:Manifold]{rgeomstats::Manifold}} -> \code{NFoldManifold}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -37,10 +37,17 @@ Nicolas Guigui
 }
 }
 \if{html}{\out{
-<details open><summary>Inherited methods</summary>
+<details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="rgeomstats" data-topic="PythonClass" data-id="get_python_class"><a href='../../rgeomstats/html/PythonClass.html#method-PythonClass-get_python_class'><code>rgeomstats::PythonClass$get_python_class()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="rgeomstats" data-topic="PythonClass" data-id="set_python_class"><a href='../../rgeomstats/html/PythonClass.html#method-PythonClass-set_python_class'><code>rgeomstats::PythonClass$set_python_class()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="Manifold" data-id="belongs"><a href='../../rgeomstats/html/Manifold.html#method-Manifold-belongs'><code>rgeomstats::Manifold$belongs()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="Manifold" data-id="is_tangent"><a href='../../rgeomstats/html/Manifold.html#method-Manifold-is_tangent'><code>rgeomstats::Manifold$is_tangent()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="Manifold" data-id="random_point"><a href='../../rgeomstats/html/Manifold.html#method-Manifold-random_point'><code>rgeomstats::Manifold$random_point()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="Manifold" data-id="random_tangent_vec"><a href='../../rgeomstats/html/Manifold.html#method-Manifold-random_tangent_vec'><code>rgeomstats::Manifold$random_tangent_vec()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="Manifold" data-id="regularize"><a href='../../rgeomstats/html/Manifold.html#method-Manifold-regularize'><code>rgeomstats::Manifold$regularize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="Manifold" data-id="set_metric"><a href='../../rgeomstats/html/Manifold.html#method-Manifold-set_metric'><code>rgeomstats::Manifold$set_metric()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="rgeomstats" data-topic="Manifold" data-id="to_tangent"><a href='../../rgeomstats/html/Manifold.html#method-Manifold-to_tangent'><code>rgeomstats::Manifold$to_tangent()</code></a></span></li>
 </ul>
 </details>
 }}

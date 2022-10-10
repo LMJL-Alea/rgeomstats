@@ -10,7 +10,7 @@
 #' @export
 NFoldManifold <- R6::R6Class(
   classname = "NFoldManifold",
-  inherit = PythonClass,
+  inherit = Manifold,
   public = list(
     #' @description The [`NFoldManifold`] class constructor.
     #'

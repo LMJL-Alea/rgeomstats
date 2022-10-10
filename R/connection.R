@@ -16,6 +16,8 @@
 #'   integration. Choices are `euler` or `rk4`. Defaults to `euler`.
 #'
 #' @author Nicolas Guigui
+#'
+#' @keywords internal
 Connection <- R6::R6Class(
   classname = "Connection",
   inherit = PythonClass,

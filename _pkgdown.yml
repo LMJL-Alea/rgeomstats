@@ -11,13 +11,9 @@ reference:
     - SPDMetricBuresWasserstein
     - SPDMetricEuclidean
     - SPDMetricLogEuclidean
-  - subtitle: Geometry abstract classes
+  - subtitle: N-Fold Product Manifold
   - contents:
-    - OpenSet
-    - VectorSpace
     - NFoldManifold
-    - Connection
-    - RiemannianMetric
   - title: Learning
   - title: Data sets
   - title: Visualisation

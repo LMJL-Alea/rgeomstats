@@ -104,6 +104,7 @@ if (reticulate::py_module_available("geomstats")) {
 \author{
 Nina Miolane
 }
+\keyword{internal}
 \section{Super classes}{
 \code{rgeomstats::PythonClass} -> \code{\link[rgeomstats:Connection]{rgeomstats::Connection}} -> \code{RiemannianMetric}
 }

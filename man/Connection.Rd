@@ -10,6 +10,7 @@ class for affine connections.
 \author{
 Nicolas Guigui
 }
+\keyword{internal}
 \section{Super class}{
 \code{rgeomstats::PythonClass} -> \code{Connection}
 }

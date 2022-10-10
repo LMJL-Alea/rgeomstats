@@ -23,8 +23,9 @@ if (reticulate::py_module_available("geomstats")) {
 \author{
 Nicolas Guigui and Nina Miolane
 }
+\keyword{internal}
 \section{Super classes}{
-\code{rgeomstats::PythonClass} -> \code{rgeomstats::Manifold} -> \code{OpenSet}
+\code{rgeomstats::PythonClass} -> \code{\link[rgeomstats:Manifold]{rgeomstats::Manifold}} -> \code{OpenSet}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

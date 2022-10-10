@@ -3,6 +3,8 @@
 #' @description Abstract class for vector spaces.
 #'
 #' @author Nicolas Guigui and Nina Miolane
+#'
+#' @keywords internal
 VectorSpace <- R6::R6Class(
   classname = "VectorSpace",
   inherit = Manifold,

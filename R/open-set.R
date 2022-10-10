@@ -5,6 +5,8 @@
 #'   space.
 #'
 #' @author Nicolas Guigui and Nina Miolane
+#'
+#' @keywords internal
 OpenSet <- R6::R6Class(
   classname = "OpenSet",
   inherit = Manifold,
