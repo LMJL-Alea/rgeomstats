@@ -3,14 +3,15 @@ template:
   bootstrap: 5
 
 reference:
-  - title: Symmetric Positive Definite Matrices
+  - title: Geometry
+  - subtitle: Symmetric Positive Definite Matrices
   - contents:
     - SPDMatrices
     - SPDMetricAffine
     - SPDMetricBuresWasserstein
     - SPDMetricEuclidean
     - SPDMetricLogEuclidean
-  - title: Abstract classes
+  - subtitle: Geometry abstract classes
   - contents:
     - Manifold
     - OpenSet
@@ -18,3 +19,6 @@ reference:
     - NFoldManifold
     - Connection
     - RiemannianMetric
+  - title: Learning
+  - title: Data sets
+  - title: Visualisation
