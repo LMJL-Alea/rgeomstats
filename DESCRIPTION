@@ -18,6 +18,7 @@ BugReports: https://github.com/LMJL-Alea/rgeomstats/issues
 Config/reticulate:
   list(
     packages = list(
+      list(package = "autograd"),
       list(package = "geomstats")
     )
   )

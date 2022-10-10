@@ -34,6 +34,11 @@ SPDMatrices <- R6::R6Class(
       check_extra_params(...)
       dots <- list(...)
       dots$n <- as.integer(n)
+      if ("shape" %in% names(dots)) {
+        dots$shape <- dots$shape |>
+          purrr::map(as.integer) |>
+          reticulate::tuple()
+      }
       if ("metric" %in% names(dots))
         dots$metric <- dots$metric$get_python_class()
       super$set_python_class(

@@ -9,6 +9,98 @@ An \link[R6:R6Class]{R6::R6Class} object implementing the base
 pseudo-Riemannian metrics which are the associated Levi-Civita connection
 on the tangent bundle.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `RiemannianMetric$metric_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$metric_matrix()
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$cometric_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$cometric_matrix()
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$inner_product_derivative_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$inner_product_derivative_matrix()
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$inner_product`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  mt <- SPDMetricLogEuclidean$new(n = 3)
+  mt$inner_product(diag(0, 3), diag(1, 3), base_point = diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$inner_coproduct`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$inner_coproduct(diag(0, 3), diag(1, 3), base_point = diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$hamiltonian`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$hamiltonian()
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$normalize`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$normalize(diag(2, 3), diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$random_unit_tangent_vec`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$random_unit_tangent_vec(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$dist`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  mt <- SPDMetricLogEuclidean$new(n = 3)
+  mt$dist(diag(1, 3), diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `RiemannianMetric$dist_broadcast`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  mt <- SPDMetricLogEuclidean$new(n = 3)
+  mt$dist(diag(1, 3), diag(1, 3))
+}
+}
 \author{
 Nina Miolane
 }
@@ -123,6 +215,17 @@ the manifold. Defaults to \code{NULL}.}
 A numeric array of shape \verb{dim x dim} storing the inner-product
 matrix.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$metric_matrix()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-cometric_matrix"></a>}}
@@ -147,6 +250,17 @@ the manifold. Defaults to \code{NULL}.}
 A numeric array of shape \verb{dim x dim} storing the inverse of the
 inner-product matrix.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$cometric_matrix()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-inner_product_derivative_matrix"></a>}}
@@ -154,7 +268,7 @@ inner-product matrix.
 \subsection{Method \code{inner_product_derivative_matrix()}}{
 Compute derivative of the inner prod matrix at base point.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$inner_product_derivative_matrix(base_point = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$inner_product_derivative_matrix(base_point)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -169,6 +283,17 @@ the manifold. Defaults to \code{NULL}.}
 A numeric array of shape \verb{dim x dim} storing the derivative of
 the inverse of the inner-product matrix.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$inner_product_derivative_matrix()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-inner_product"></a>}}
@@ -176,7 +301,7 @@ the inverse of the inner-product matrix.
 \subsection{Method \code{inner_product()}}{
 Inner product between two tangent vectors at a base point.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$inner_product(tangent_vec_a, tangent_vec_b, base_point = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RiemannianMetric$inner_product(tangent_vec_a, tangent_vec_b, base_point)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -197,6 +322,17 @@ the manifold. Defaults to \code{NULL}.}
 A scalar value representing the inner product between the two
 input tangent vectors at the input base point.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  mt <- SPDMetricLogEuclidean$new(n = 3)
+  mt$inner_product(diag(0, 3), diag(1, 3), base_point = diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-inner_coproduct"></a>}}
@@ -231,6 +367,17 @@ the manifold. Defaults to \code{NULL}.}
 A scalar value representing the inner coproduct between the two
 input cotangent vectors at the input base point.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$inner_coproduct(diag(0, 3), diag(1, 3), base_point = diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-hamiltonian"></a>}}
@@ -257,6 +404,17 @@ a cotangent vector.}
 \subsection{Returns}{
 A numeric value representing the Hamiltonian energy at \code{state}.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$hamiltonian()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-squared_norm"></a>}}
@@ -282,6 +440,11 @@ the manifold. Defaults to \code{NULL}.}
 \subsection{Returns}{
 A numeric value representing the squared norm of the input
 vector.
+
+if (reticulate::py_module_available("geomstats")) {
+mt <- SPDMetricLogEuclidean$new(n = 3)
+mt$squared_norm(diag(0, 3), diag(1, 3))
+}
 }
 }
 \if{html}{\out{<hr>}}
@@ -311,6 +474,11 @@ inner products.
 
 \subsection{Returns}{
 A numeric value representing the norm of the input vector.
+
+if (reticulate::py_module_available("geomstats")) {
+mt <- SPDMetricLogEuclidean$new(n = 3)
+mt$norm(diag(0, 3), diag(1, 3))
+}
 }
 }
 \if{html}{\out{<hr>}}
@@ -333,9 +501,20 @@ the manifold. Defaults to \code{NULL}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} storing the normalized versio of
+A numeric array of shape \code{dim} storing the normalized version of
 the input tangent vector.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$normalize(diag(2, 3), diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-random_unit_tangent_vec"></a>}}
@@ -363,6 +542,17 @@ Defaults to \code{1L}.}
 A numeric array of shape \code{c(n_vectors, dim)} storing random unit
 tangent vectors at \code{base_point}.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  # mt <- SPDMetricLogEuclidean$new(n = 3)
+  # mt$random_unit_tangent_vec(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-squared_dist"></a>}}
@@ -388,6 +578,11 @@ parent \code{\link{Connection}} class.}
 \subsection{Returns}{
 A numeric value storing the squared geodesic distance between the
 two input points.
+
+if (reticulate::py_module_available("geomstats")) {
+mt <- SPDMetricLogEuclidean$new(n = 3)
+mt$squared_dist(diag(1, 3), diag(1, 3))
+}
 }
 }
 \if{html}{\out{<hr>}}
@@ -419,6 +614,17 @@ It only works for positive definite Riemannian metrics.
 A numeric value storing the geodesic distance between the two
 input points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  mt <- SPDMetricLogEuclidean$new(n = 3)
+  mt$dist(diag(1, 3), diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-dist_broadcast"></a>}}
@@ -453,6 +659,17 @@ A numeric array of shape \code{c(n_samples_a, dim)} if \code{n_samples_a == n_sa
 \code{n_samples_a != n_samples_b} storing the geodesic distance between
 points in set A and points in set B.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  mt <- SPDMetricLogEuclidean$new(n = 3)
+  mt$dist(diag(1, 3), diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RiemannianMetric-dist_pairwise"></a>}}

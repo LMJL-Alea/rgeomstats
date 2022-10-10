@@ -49,8 +49,14 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A numeric array of shape `dim x dim` storing the inner-product
     #'   matrix.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   # mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   # mt$metric_matrix()
+    #' }
     metric_matrix = function(base_point = NULL) {
-      super$get_python_class$metric_matrix(base_point)
+      super$get_python_class()$metric_matrix(base_point)
     },
 
     #' @description Inner co-product matrix at the cotangent space at a base
@@ -59,16 +65,28 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A numeric array of shape `dim x dim` storing the inverse of the
     #'   inner-product matrix.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   # mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   # mt$cometric_matrix()
+    #' }
     cometric_matrix = function(base_point = NULL) {
-      super$get_python_class$cometric_matrix(base_point)
+      super$get_python_class()$cometric_matrix(base_point)
     },
 
     #' @description Compute derivative of the inner prod matrix at base point.
     #'
     #' @return A numeric array of shape `dim x dim` storing the derivative of
     #'   the inverse of the inner-product matrix.
-    inner_product_derivative_matrix = function(base_point = NULL) {
-      super$get_python_class$inner_product_derivative_matrix(base_point)
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   # mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   # mt$inner_product_derivative_matrix()
+    #' }
+    inner_product_derivative_matrix = function(base_point) {
+      super$get_python_class()$inner_product_derivative_matrix(base_point)
     },
 
     #' @description Inner product between two tangent vectors at a base point.
@@ -80,8 +98,14 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A scalar value representing the inner product between the two
     #'   input tangent vectors at the input base point.
-    inner_product = function(tangent_vec_a, tangent_vec_b, base_point = NULL) {
-      super$get_python_class$inner_product(
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   mt$inner_product(diag(0, 3), diag(1, 3), base_point = diag(1, 3))
+    #' }
+    inner_product = function(tangent_vec_a, tangent_vec_b, base_point) {
+      super$get_python_class()$inner_product(
         tangent_vec_a = tangent_vec_a,
         tangent_vec_b = tangent_vec_b,
         base_point = base_point
@@ -99,8 +123,14 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A scalar value representing the inner coproduct between the two
     #'   input cotangent vectors at the input base point.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   # mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   # mt$inner_coproduct(diag(0, 3), diag(1, 3), base_point = diag(1, 3))
+    #' }
     inner_coproduct = function(cotangent_vec_a, cotangent_vec_b, base_point = NULL) {
-      super$get_python_class$inner_coproduct(
+      super$get_python_class()$inner_coproduct(
         cotangent_vec_a = cotangent_vec_a,
         cotangent_vec_b = cotangent_vec_b,
         base_point = base_point
@@ -118,8 +148,14 @@ RiemannianMetric <- R6::R6Class(
     #'   a cotangent vector.
     #'
     #' @return A numeric value representing the Hamiltonian energy at `state`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   # mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   # mt$hamiltonian()
+    #' }
     hamiltonian = function(state) {
-      super$get_python_class$hamiltonian(state)
+      super$get_python_class()$hamiltonian(state)
     },
 
     #' @description Computes the square of the norm of a vector. Squared norm of
@@ -128,8 +164,13 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A numeric value representing the squared norm of the input
     #'   vector.
+    #'
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   mt$squared_norm(diag(0, 3), diag(1, 3))
+    #' }
     squared_norm = function(vector, base_point = NULL) {
-      super$get_python_class$squared_norm(
+      super$get_python_class()$squared_norm(
         vector = vector,
         base_point = base_point
       )
@@ -142,8 +183,13 @@ RiemannianMetric <- R6::R6Class(
     #'   inner products.
     #'
     #' @return A numeric value representing the norm of the input vector.
+    #'
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   mt$norm(diag(0, 3), diag(1, 3))
+    #' }
     norm = function(vector, base_point = NULL) {
-      super$get_python_class$norm(
+      super$get_python_class()$norm(
         vector = vector,
         base_point = base_point
       )
@@ -151,10 +197,16 @@ RiemannianMetric <- R6::R6Class(
 
     #' @description Normalizes a tangent vector at a given point.
     #'
-    #' @return A numeric array of shape `dim` storing the normalized versio of
+    #' @return A numeric array of shape `dim` storing the normalized version of
     #'   the input tangent vector.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   # mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   # mt$normalize(diag(2, 3), diag(1, 3))
+    #' }
     normalize = function(vector, base_point = NULL) {
-      super$get_python_class$normalize(
+      super$get_python_class()$normalize(
         vector = vector,
         base_point = base_point
       )
@@ -169,9 +221,15 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A numeric array of shape `c(n_vectors, dim)` storing random unit
     #'   tangent vectors at `base_point`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   # mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   # mt$random_unit_tangent_vec(diag(1, 3))
+    #' }
     random_unit_tangent_vec = function(base_point = NULL, n_vectors = 1) {
       n_vectors <- as.integer(n_vectors)
-      super$get_python_class$random_unit_tangent_vec(
+      super$get_python_class()$random_unit_tangent_vec(
         base_point = base_point,
         n_vectors = n_vectors
       )
@@ -186,9 +244,14 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A numeric value storing the squared geodesic distance between the
     #'   two input points.
+    #'
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   mt$squared_dist(diag(1, 3), diag(1, 3))
+    #' }
     squared_dist = function(point_a, point_b, ...) {
       check_extra_params(...)
-      super$get_python_class$squared_dist(
+      super$get_python_class()$squared_dist(
         point_a = point_a,
         point_b = point_b,
         ...
@@ -206,9 +269,15 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A numeric value storing the geodesic distance between the two
     #'   input points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   mt$dist(diag(1, 3), diag(1, 3))
+    #' }
     dist = function(point_a, point_b, ...) {
       check_extra_params(...)
-      super$get_python_class$dist(
+      super$get_python_class()$dist(
         point_a = point_a,
         point_b = point_b,
         ...
@@ -232,8 +301,14 @@ RiemannianMetric <- R6::R6Class(
     #'   n_samples_b` or of shape `c(n_samples_a, n_samples_b, dim)` if
     #'   `n_samples_a != n_samples_b` storing the geodesic distance between
     #'   points in set A and points in set B.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   mt <- SPDMetricLogEuclidean$new(n = 3)
+    #'   mt$dist(diag(1, 3), diag(1, 3))
+    #' }
     dist_broadcast = function(points_a, points_b) {
-      super$get_python_class$dist_broadcast(
+      super$get_python_class()$dist_broadcast(
         point_a = points_a,
         point_b = points_b
       )
@@ -254,7 +329,7 @@ RiemannianMetric <- R6::R6Class(
     dist_pairwise = function(points, n_jobs = 1, ...) {
       check_extra_params(...)
       n_jobs <- as.integer(n_jobs)
-      super$get_python_class$dist_pairwise(
+      super$get_python_class()$dist_pairwise(
         points = points,
         n_jobs = n_jobs,
         ...
@@ -271,7 +346,7 @@ RiemannianMetric <- R6::R6Class(
     #' @return A numeric value representing the largest distance between any two
     #'   points in the input set.
     diameter = function(points) {
-      super$get_python_class$diameter(points)
+      super$get_python_class()$diameter(points)
     },
 
     #' @description Finds the closest neighbor to a point among a set of
@@ -285,7 +360,7 @@ RiemannianMetric <- R6::R6Class(
     #' @return An integer value representing the index of the neighbor in
     #'   `neighbors` that is closest to `point`.
     closest_neighbor_index = function(point, neighbors) {
-      super$get_python_class$closest_neighbor_index(
+      super$get_python_class()$closest_neighbor_index(
         point = point,
         neighbors = neighbors
       )
@@ -298,7 +373,7 @@ RiemannianMetric <- R6::R6Class(
     #'
     #' @return A numeric array of shape `c(dim, n, n)` storing the normal basis.
     normal_basis = function(basis, base_point = NULL) {
-      super$get_python_class$normal_basis(
+      super$get_python_class()$normal_basis(
         basis = basis,
         base_point = base_point
       )
@@ -320,7 +395,7 @@ RiemannianMetric <- R6::R6Class(
     #' @return A numeric value representing the sectional curvature at
     #'   `base_point`.
     sectional_curvature = function(tangent_vec_a, tangent_vec_b, base_point = NULL) {
-      super$get_python_class$sectional_curvature(
+      super$get_python_class()$sectional_curvature(
         tangent_vec_a = tangent_vec_a,
         tangent_vec_b = tangent_vec_b,
         base_point = base_point

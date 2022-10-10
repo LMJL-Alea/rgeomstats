@@ -24,13 +24,18 @@ OpenSet <- R6::R6Class(
     #' @return An object of class [`OpenSet`].
     initialize = function(dim, ambient_space, ...) {
       check_extra_params(...)
-      dim <- as.integer(dim)
+      dots <- list(...)
+      dots$dim <- as.integer(dim)
+      if ("shape" %in% names(dots)) {
+        dots$shape <- dots$shape |>
+          purrr::map(as.integer) |>
+          reticulate::tuple()
+      }
+      if ("metric" %in% names(dots))
+        dots$metric <- dots$metric$get_python_class()
+      dots$ambient_space <- ambient_space$get_python_class()
       super$set_python_class(
-        gs$geometry$manifold$OpenSet(
-          dim = dim,
-          ambient_space = ambient_space,
-          ...
-        )
+        do.call(gs$geometry$spd_matrices$OpenSet, dots)
       )
       private$set_fields()
     },

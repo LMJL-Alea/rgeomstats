@@ -1,4 +1,4 @@
-#' Class for Affine Metric on the Manifold of Symmetric Positive Definite
+#' Class for the Affine Metric on the Manifold of Symmetric Positive Definite
 #' Matrices
 #'
 #' @description An [R6::R6Class] object implementing the [`SPDMetricAffine`]

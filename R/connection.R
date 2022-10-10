@@ -275,7 +275,7 @@ Connection <- R6::R6Class(
       )
     },
 
-    #' @description Generates parameterized function for the geodesic curve.
+    #' @description Generates parametrized function for the geodesic curve.
     #'
     #' @details Geodesic curve defined by either:
     #' - an initial point and an initial tangent vector,
@@ -290,17 +290,34 @@ Connection <- R6::R6Class(
     #'   initial speed of the geodesics. Defaults to `NULL`, in which case an
     #'   end point must be given and a logarithm is computed.
     #'
-    #' @return A Python callable representing the time-parametrized geodesic
-    #'   curve. If a batch of initial conditions is passed, the output array's
-    #'   first dimension represents the different initial conditions, and the
-    #'   second corresponds to time.
+    #' @return A function representing the time-parametrized geodesic curve. If
+    #'   a list of initial conditions is passed, the output list will contain,
+    #'   for each time point, a list with the geodesic values each initial
+    #'   condition.
     geodesic = function(initial_point, end_point = NULL,
                         initial_tangent_vec = NULL) {
-      super$get_python_class()$geodesic(
+      multiple_init <- is.list(initial_point)
+      if (multiple_init) {
+        initial_point <- simplify2array(initial_point)
+        n_dim <- length(dim(initial_point))
+        initial_point <- aperm(initial_point, c(n_dim, 1:(n_dim - 1)))
+      }
+      gd <- super$get_python_class()$geodesic(
         initial_point = initial_point,
         end_point = end_point,
         initial_tangent_vec = initial_tangent_vec
       )
+      function(time_points) {
+        res <- reticulate::py_call(gd, time_points) |>
+          reticulate::py_to_r() |>
+          purrr::array_tree(margin = 1)
+        if (multiple_init) {
+          res <- res |>
+            purrr::map(purrr::array_tree, margin = 1) |>
+            purrr::transpose()
+        }
+        res
+      }
     },
 
     #' @description Computes the parallel transport of a tangent vector.

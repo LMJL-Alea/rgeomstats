@@ -42,7 +42,14 @@ Manifold <- R6::R6Class(
     #' @return An object of class [`Manifold`].
     initialize = function(dim, shape = NULL, metric = NULL, default_coords_type = "intrinsic") {
       dim <- as.integer(dim)
-      if (!is.null(shape)) shape <- as.integer(shape)
+      if (!is.null(shape)) {
+        shape <- shape |>
+          purrr::map(as.integer) |>
+          reticulate::tuple()
+      }
+      if (!is.null(metric))
+        metric <- metric$get_python_class()
+      default_coords_type <- match.arg(default_coords_type, c("intrinsic", "extrinsic"))
       super$set_python_class(
         gs$geometry$manifold$Manifold(
           dim = dim,

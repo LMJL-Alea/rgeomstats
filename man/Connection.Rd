@@ -461,7 +461,7 @@ Tangent vector at \code{base_point}.
 \if{html}{\out{<a id="method-Connection-geodesic"></a>}}
 \if{latex}{\out{\hypertarget{method-Connection-geodesic}{}}}
 \subsection{Method \code{geodesic()}}{
-Generates parameterized function for the geodesic curve.
+Generates parametrized function for the geodesic curve.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Connection$geodesic(
   initial_point,
@@ -495,10 +495,10 @@ Geodesic curve defined by either:
 }
 
 \subsection{Returns}{
-A Python callable representing the time-parametrized geodesic
-curve. If a batch of initial conditions is passed, the output array's
-first dimension represents the different initial conditions, and the
-second corresponds to time.
+A function representing the time-parametrized geodesic curve. If
+a list of initial conditions is passed, the output list will contain,
+for each time point, a list with the geodesic values each initial
+condition.
 }
 }
 \if{html}{\out{<hr>}}
