@@ -584,7 +584,7 @@ the moments of the empirical Fréchet mean
 
 </div><p></p><hr><a id="method-Connection-geodesic"></a><div class="section">
 <h3 id="method-geodesic-">Method <code>geodesic()</code><a class="anchor" aria-label="anchor" href="#method-geodesic-"></a></h3>
-<p>Generates parameterized function for the geodesic curve.</p><div class="section">
+<p>Generates parametrized function for the geodesic curve.</p><div class="section">
 <h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Connection</span><span class="op">$</span><span class="fu">geodesic</span><span class="op">(</span></span>
 <span>  <span class="va">initial_point</span>,</span>
@@ -622,10 +622,10 @@ end point must be given and a logarithm is computed.</p></dd>
 
 <div class="section">
 <h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
-<p>A Python callable representing the time-parametrized geodesic
-curve. If a batch of initial conditions is passed, the output array's
-first dimension represents the different initial conditions, and the
-second corresponds to time.</p>
+<p>A function representing the time-parametrized geodesic curve. If
+a list of initial conditions is passed, the output list will contain,
+for each time point, a list with the geodesic values each initial
+condition.</p>
 </div>
 
 </div><p></p><hr><a id="method-Connection-parallel_transport"></a><div class="section">

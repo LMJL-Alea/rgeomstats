@@ -174,6 +174,14 @@ the manifold. Defaults to <code>NULL</code>.</p></dd>
 <p>A numeric array of shape <code>dim x dim</code> storing the inner-product
 matrix.</p>
 </div>
+<div class="section">
+<h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span>
+<span>  <span class="co"># mt$metric_matrix()</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-cometric_matrix"></a><div class="section">
 <h3 id="method-cometric-matrix-">Method <code>cometric_matrix()</code><a class="anchor" aria-label="anchor" href="#method-cometric-matrix-"></a></h3>
@@ -198,12 +206,20 @@ the manifold. Defaults to <code>NULL</code>.</p></dd>
 <p>A numeric array of shape <code>dim x dim</code> storing the inverse of the
 inner-product matrix.</p>
 </div>
+<div class="section">
+<h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span>
+<span>  <span class="co"># mt$cometric_matrix()</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-inner_product_derivative_matrix"></a><div class="section">
 <h3 id="method-inner-product-derivative-matrix-">Method <code>inner_product_derivative_matrix()</code><a class="anchor" aria-label="anchor" href="#method-inner-product-derivative-matrix-"></a></h3>
 <p>Compute derivative of the inner prod matrix at base point.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">inner_product_derivative_matrix</span><span class="op">(</span>base_point <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">inner_product_derivative_matrix</span><span class="op">(</span><span class="va">base_point</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -220,12 +236,20 @@ the manifold. Defaults to <code>NULL</code>.</p></dd>
 <p>A numeric array of shape <code>dim x dim</code> storing the derivative of
 the inverse of the inner-product matrix.</p>
 </div>
+<div class="section">
+<h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span>
+<span>  <span class="co"># mt$inner_product_derivative_matrix()</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-inner_product"></a><div class="section">
 <h3 id="method-inner-product-">Method <code>inner_product()</code><a class="anchor" aria-label="anchor" href="#method-inner-product-"></a></h3>
 <p>Inner product between two tangent vectors at a base point.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">inner_product</span><span class="op">(</span><span class="va">tangent_vec_a</span>, <span class="va">tangent_vec_b</span>, base_point <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RiemannianMetric</span><span class="op">$</span><span class="fu">inner_product</span><span class="op">(</span><span class="va">tangent_vec_a</span>, <span class="va">tangent_vec_b</span>, <span class="va">base_point</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -252,6 +276,14 @@ the manifold. Defaults to <code>NULL</code>.</p></dd>
 <p>A scalar value representing the inner product between the two
 input tangent vectors at the input base point.</p>
 </div>
+<div class="section">
+<h4 id="examples-3">Examples<a class="anchor" aria-label="anchor" href="#examples-3"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">mt</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMetricLogEuclidean.html">SPDMetricLogEuclidean</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">mt</span><span class="op">$</span><span class="fu">inner_product</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, base_point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-inner_coproduct"></a><div class="section">
 <h3 id="method-inner-coproduct-">Method <code>inner_coproduct()</code><a class="anchor" aria-label="anchor" href="#method-inner-coproduct-"></a></h3>
@@ -290,6 +322,14 @@ the manifold. Defaults to <code>NULL</code>.</p></dd>
 <p>A scalar value representing the inner coproduct between the two
 input cotangent vectors at the input base point.</p>
 </div>
+<div class="section">
+<h4 id="examples-4">Examples<a class="anchor" aria-label="anchor" href="#examples-4"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span>
+<span>  <span class="co"># mt$inner_coproduct(diag(0, 3), diag(1, 3), base_point = diag(1, 3))</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-hamiltonian"></a><div class="section">
 <h3 id="method-hamiltonian-">Method <code>hamiltonian()</code><a class="anchor" aria-label="anchor" href="#method-hamiltonian-"></a></h3>
@@ -316,6 +356,14 @@ a cotangent vector.</p></dd>
 <h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
 <p>A numeric value representing the Hamiltonian energy at <code>state</code>.</p>
 </div>
+<div class="section">
+<h4 id="examples-5">Examples<a class="anchor" aria-label="anchor" href="#examples-5"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span>
+<span>  <span class="co"># mt$hamiltonian()</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-squared_norm"></a><div class="section">
 <h3 id="method-squared-norm-">Method <code>squared_norm()</code><a class="anchor" aria-label="anchor" href="#method-squared-norm-"></a></h3>
@@ -343,6 +391,9 @@ the manifold. Defaults to <code>NULL</code>.</p></dd>
 <h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
 <p>A numeric value representing the squared norm of the input
 vector.</p>
+<p>if (reticulate::py_module_available("geomstats")) 
+mt &lt;- SPDMetricLogEuclidean$new(n = 3)
+mt$squared_norm(diag(0, 3), diag(1, 3))</p>
 </div>
 
 </div><p></p><hr><a id="method-RiemannianMetric-norm"></a><div class="section">
@@ -375,6 +426,9 @@ inner products.</p>
 <div class="section">
 <h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
 <p>A numeric value representing the norm of the input vector.</p>
+<p>if (reticulate::py_module_available("geomstats")) 
+mt &lt;- SPDMetricLogEuclidean$new(n = 3)
+mt$norm(diag(0, 3), diag(1, 3))</p>
 </div>
 
 </div><p></p><hr><a id="method-RiemannianMetric-normalize"></a><div class="section">
@@ -399,9 +453,17 @@ the manifold. Defaults to <code>NULL</code>.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
-<p>A numeric array of shape <code>dim</code> storing the normalized versio of
+<p>A numeric array of shape <code>dim</code> storing the normalized version of
 the input tangent vector.</p>
 </div>
+<div class="section">
+<h4 id="examples-6">Examples<a class="anchor" aria-label="anchor" href="#examples-6"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span>
+<span>  <span class="co"># mt$normalize(diag(2, 3), diag(1, 3))</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-random_unit_tangent_vec"></a><div class="section">
 <h3 id="method-random-unit-tangent-vec-">Method <code>random_unit_tangent_vec()</code><a class="anchor" aria-label="anchor" href="#method-random-unit-tangent-vec-"></a></h3>
@@ -431,6 +493,14 @@ Defaults to <code>1L</code>.</p></dd>
 <p>A numeric array of shape <code>c(n_vectors, dim)</code> storing random unit
 tangent vectors at <code>base_point</code>.</p>
 </div>
+<div class="section">
+<h4 id="examples-7">Examples<a class="anchor" aria-label="anchor" href="#examples-7"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span>
+<span>  <span class="co"># mt$random_unit_tangent_vec(diag(1, 3))</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-squared_dist"></a><div class="section">
 <h3 id="method-squared-dist-">Method <code>squared_dist()</code><a class="anchor" aria-label="anchor" href="#method-squared-dist-"></a></h3>
@@ -460,6 +530,9 @@ parent <code><a href="Connection.html">Connection</a></code> class.</p></dd>
 <h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
 <p>A numeric value storing the squared geodesic distance between the
 two input points.</p>
+<p>if (reticulate::py_module_available("geomstats")) 
+mt &lt;- SPDMetricLogEuclidean$new(n = 3)
+mt$squared_dist(diag(1, 3), diag(1, 3))</p>
 </div>
 
 </div><p></p><hr><a id="method-RiemannianMetric-dist"></a><div class="section">
@@ -496,6 +569,14 @@ parent <code><a href="Connection.html">Connection</a></code> class.</p></dd>
 <p>A numeric value storing the geodesic distance between the two
 input points.</p>
 </div>
+<div class="section">
+<h4 id="examples-8">Examples<a class="anchor" aria-label="anchor" href="#examples-8"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">mt</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMetricLogEuclidean.html">SPDMetricLogEuclidean</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">mt</span><span class="op">$</span><span class="fu">dist</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-dist_broadcast"></a><div class="section">
 <h3 id="method-dist-broadcast-">Method <code>dist_broadcast()</code><a class="anchor" aria-label="anchor" href="#method-dist-broadcast-"></a></h3>
@@ -533,6 +614,14 @@ all points from <code>points_b</code>.</p>
 <code>n_samples_a != n_samples_b</code> storing the geodesic distance between
 points in set A and points in set B.</p>
 </div>
+<div class="section">
+<h4 id="examples-9">Examples<a class="anchor" aria-label="anchor" href="#examples-9"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">mt</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SPDMetricLogEuclidean.html">SPDMetricLogEuclidean</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">mt</span><span class="op">$</span><span class="fu">dist</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-RiemannianMetric-dist_pairwise"></a><div class="section">
 <h3 id="method-dist-pairwise-">Method <code>dist_pairwise()</code><a class="anchor" aria-label="anchor" href="#method-dist-pairwise-"></a></h3>
@@ -712,6 +801,100 @@ See also https://en.wikipedia.org/wiki/Sectional_curvature.</p>
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$metric_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt$metric_matrix()</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$cometric_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt$cometric_matrix()</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$inner_product_derivative_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt$inner_product_derivative_matrix()</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$inner_product`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">mt</span> <span class="op">&lt;-</span> <span class="va"><a href="SPDMetricLogEuclidean.html">SPDMetricLogEuclidean</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">mt</span><span class="op">$</span><span class="fu">inner_product</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, base_point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$inner_coproduct`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt$inner_coproduct(diag(0, 3), diag(1, 3), base_point = diag(1, 3))</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$hamiltonian`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt$hamiltonian()</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$normalize`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt$normalize(diag(2, 3), diag(1, 3))</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$random_unit_tangent_vec`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt &lt;- SPDMetricLogEuclidean$new(n = 3)</span></span></span>
+<span class="r-in"><span>  <span class="co"># mt$random_unit_tangent_vec(diag(1, 3))</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$dist`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">mt</span> <span class="op">&lt;-</span> <span class="va"><a href="SPDMetricLogEuclidean.html">SPDMetricLogEuclidean</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">mt</span><span class="op">$</span><span class="fu">dist</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `RiemannianMetric$dist_broadcast`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">mt</span> <span class="op">&lt;-</span> <span class="va"><a href="SPDMetricLogEuclidean.html">SPDMetricLogEuclidean</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">mt</span><span class="op">$</span><span class="fu">dist</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
