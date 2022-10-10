@@ -43,6 +43,7 @@ if (reticulate::py_module_available("geomstats")) {
 \author{
 Nina Miolane
 }
+\keyword{internal}
 \section{Super class}{
 \code{rgeomstats::PythonClass} -> \code{Manifold}
 }

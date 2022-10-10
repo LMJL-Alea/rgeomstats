@@ -5,6 +5,8 @@
 #'   space near each point.
 #'
 #' @author Nina Miolane
+#'
+#' @keywords internal
 Manifold <- R6::R6Class(
   classname = "Manifold",
   inherit = PythonClass,

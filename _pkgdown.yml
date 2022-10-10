@@ -13,7 +13,6 @@ reference:
     - SPDMetricLogEuclidean
   - subtitle: Geometry abstract classes
   - contents:
-    - Manifold
     - OpenSet
     - VectorSpace
     - NFoldManifold
