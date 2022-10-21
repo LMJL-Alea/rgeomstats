@@ -5,6 +5,7 @@
 #' @author Nicolas Guigui and Nina Miolane
 #'
 #' @family special orthogonal classes
+#' @keywords internal
 SpecialOrthogonalMatrices <- R6::R6Class(
   classname = "SpecialOrthogonalMatrices",
   inherit = MatrixLieGroup,
@@ -81,7 +82,7 @@ SpecialOrthogonalMatrices <- R6::R6Class(
     #' @description Project a matrix on \eqn{\mathrm{SO}(n)} by minimizing the
     #'   Frobenius norm.
     #'
-    #' @param point A numeric array of shape \eqn{\cdot \times n \times n}
+    #' @param point A numeric array of shape \eqn{[\dots \times n \times n]}
     #'   specifying one or more matrices.
     #'
     #' @return A numeric array of the same shape storing the projected matrices.
@@ -110,7 +111,6 @@ SpecialOrthogonalMatrices <- R6::R6Class(
       super$set_python_class(
         do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
       )
-      # private$set_fields()
     }
   )
 )
@@ -254,6 +254,7 @@ SpecialOrthogonalVectors <- R6::R6Class(
 #' @author Nicolas Guigui and Nina Miolane
 #'
 #' @family special orthogonal classes
+#' @keywords internal
 SpecialOrthogonal2Vectors <- R6::R6Class(
   classname = "SpecialOrthogonal2Vectors",
   inherit = SpecialOrthogonalVectors,
@@ -324,6 +325,7 @@ SpecialOrthogonal2Vectors <- R6::R6Class(
 #' @author Nicolas Guigui and Nina Miolane
 #'
 #' @family special orthogonal classes
+#' @keywords internal
 SpecialOrthogonal3Vectors <- R6::R6Class(
   classname = "SpecialOrthogonal3Vectors",
   inherit = SpecialOrthogonalVectors,

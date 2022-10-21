@@ -19,6 +19,7 @@ Other special orthogonal classes:
 Nicolas Guigui and Nina Miolane
 }
 \concept{special orthogonal classes}
+\keyword{internal}
 \section{Super classes}{
 \code{rgeomstats::PythonClass} -> \code{\link[rgeomstats:Manifold]{rgeomstats::Manifold}} -> \code{\link[rgeomstats:LieGroup]{rgeomstats::LieGroup}} -> \code{\link[rgeomstats:SpecialOrthogonalVectors]{rgeomstats::SpecialOrthogonalVectors}} -> \code{SpecialOrthogonal3Vectors}
 }

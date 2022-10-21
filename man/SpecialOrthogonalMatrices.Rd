@@ -16,6 +16,7 @@ Other special orthogonal classes:
 Nicolas Guigui and Nina Miolane
 }
 \concept{special orthogonal classes}
+\keyword{internal}
 \section{Super classes}{
 \code{rgeomstats::PythonClass} -> \code{\link[rgeomstats:Manifold]{rgeomstats::Manifold}} -> \code{\link[rgeomstats:MatrixLieGroup]{rgeomstats::MatrixLieGroup}} -> \code{SpecialOrthogonalMatrices}
 }
@@ -169,7 +170,7 @@ Frobenius norm.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \eqn{\cdot \times n \times n}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
 specifying one or more matrices.}
 }
 \if{html}{\out{</div>}}
