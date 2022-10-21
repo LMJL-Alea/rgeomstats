@@ -4,14 +4,14 @@ template:
 
 reference:
   - title: Geometry
-  - subtitle: Symmetric Positive Definite Matrices
+  - subtitle: Manifold of symmetric positive definite matrices
   - contents:
     - SPDMatrix
     - SPDMetricAffine
     - SPDMetricBuresWasserstein
     - SPDMetricEuclidean
     - SPDMetricLogEuclidean
-  - subtitle: Special Orthogonal Group
+  - subtitle: Special orthogonal group
   - contents:
     - SpecialOrthogonal
   - subtitle: N-Fold Product Manifold
