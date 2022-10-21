@@ -21,13 +21,10 @@ VectorSpace <- R6::R6Class(
     #'
     #' @return An object of class [`VectorSpace`].
     initialize = function(shape, ...) {
-      check_extra_params(...)
-      shape <- as.integer(shape)
+      dots <- capture_extra_params(...)
+      dots$shape <- as.integer(shape)
       super$set_python_class(
-        gs$geometry$manifold$VectorSpace(
-          shape = shape,
-          ...
-        )
+        do.call(gs$geometry$manifold$VectorSpace, dots)
       )
       private$set_fields()
     },

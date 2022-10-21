@@ -31,8 +31,7 @@ SPDMatrices <- R6::R6Class(
     #'   spdm
     #' }
     initialize = function(n, ...) {
-      check_extra_params(...)
-      dots <- list(...)
+      dots <- capture_extra_params(...)
       dots$n <- as.integer(n)
       if ("shape" %in% names(dots)) {
         dots$shape <- dots$shape |>

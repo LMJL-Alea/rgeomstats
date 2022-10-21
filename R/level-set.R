@@ -46,8 +46,7 @@ LevelSet <- R6::R6Class(
                           tangent_submersion,
                           default_coords_type = "intrinsic",
                           ...) {
-      check_extra_params(...)
-      dots <- list(...)
+      dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       if ("shape" %in% names(dots)) {
         dots$shape <- dots$shape |>

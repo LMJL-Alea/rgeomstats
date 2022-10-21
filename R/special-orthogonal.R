@@ -27,8 +27,7 @@ SpecialOrthogonalMatrices <- R6::R6Class(
     #'
     #' @return An object of class [`SpecialOrthogonalMatrices`].
     initialize = function(n, ...) {
-      check_extra_params(...)
-      dots <- list(...)
+      dots <- capture_extra_params(...)
       dots$n <- as.integer(n)
       super$set_python_class(
         do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
@@ -105,8 +104,7 @@ SpecialOrthogonalMatrices <- R6::R6Class(
   inherit = LevelSet,
   public = list(
     initialize = function(n, ...) {
-      check_extra_params(...)
-      dots <- list(...)
+      dots <- capture_extra_params(...)
       dots$n <- as.integer(n)
       super$set_python_class(
         do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)

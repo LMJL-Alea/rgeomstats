@@ -252,12 +252,10 @@ RiemannianMetric <- R6::R6Class(
     #'   mt$squared_dist(diag(1, 3), diag(1, 3))
     #' }
     squared_dist = function(point_a, point_b, ...) {
-      check_extra_params(...)
-      super$get_python_class()$squared_dist(
-        point_a = point_a,
-        point_b = point_b,
-        ...
-      )
+      dots <- capture_extra_params(...)
+      dots$point_a <- point_a
+      dots$point_b <- point_b
+      do.call(super$get_python_class()$squared_dist, dots)
     },
 
     #' @description Geodesic distance between two points.
@@ -278,12 +276,10 @@ RiemannianMetric <- R6::R6Class(
     #'   mt$dist(diag(1, 3), diag(1, 3))
     #' }
     dist = function(point_a, point_b, ...) {
-      check_extra_params(...)
-      super$get_python_class()$dist(
-        point_a = point_a,
-        point_b = point_b,
-        ...
-      )
+      dots <- capture_extra_params(...)
+      dots$point_a <- point_a
+      dots$point_b <- point_b
+      do.call(super$get_python_class()$dist, dots)
     },
 
     #' @description Computes the geodesic distance between points.
@@ -329,13 +325,10 @@ RiemannianMetric <- R6::R6Class(
     #' @return A numeric matrix of shape `c(n_samples, n_samples)` storing the
     #'   pairwise geodesic distances between all the points.
     dist_pairwise = function(points, n_jobs = 1, ...) {
-      check_extra_params(...)
-      n_jobs <- as.integer(n_jobs)
-      super$get_python_class()$dist_pairwise(
-        points = points,
-        n_jobs = n_jobs,
-        ...
-      )
+      dots <- capture_extra_params(...)
+      dots$points <- points
+      dots$n_jobs <- as.integer(n_jobs)
+      do.call(super$get_python_class()$dist_pairwise, dots)
     },
 
     #' @description Computes the diameter of set of points on a manifold.

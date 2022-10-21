@@ -28,8 +28,7 @@ MatrixLieAlgebra <- R6::R6Class(
     #'
     #' @return An object of class [`MatrixLieAlgebra`].
     initialize = function(dim, n, ...) {
-      check_extra_params(...)
-      dots <- list(...)
+      dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       dots$n <- as.integer(n)
       super$set_python_class(

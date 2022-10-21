@@ -177,18 +177,14 @@ Connection <- R6::R6Class(
     ladder_parallel_transport = function(tangent_vec, base_point, direction,
                                          n_rungs = 1, scheme = "pole",
                                          alpha = 1, ...) {
-      check_extra_params(...)
-      n_rungs <- as.integer(n_rungs)
-      scheme <- match.arg(scheme, c("pole", "schild"))
-      super$get_python_class()$ladder_parallel_transport(
-        tangent_vec = tangent_vec,
-        base_point = base_point,
-        direction = direction,
-        n_rungs = n_rungs,
-        scheme = scheme,
-        alpha = alpha,
-        ...
-      )
+      dots <- capture_extra_params(...)
+      dots$tangent_vec <- tangent_vec
+      dots$base_point <- base_point
+      dots$direction <- direction
+      dots$n_rungs <- as.integer(n_rungs)
+      dots$scheme <- match.arg(scheme, c("pole", "schild"))
+      dots$alpha <- alpha
+      do.call(super$get_python_class()$ladder_parallel_transport, dots)
     },
 
     #' @description Computes the curvature.

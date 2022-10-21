@@ -43,8 +43,7 @@ MatrixLieGroup <- R6::R6Class(
                           n,
                           lie_algebra = NULL,
                           ...) {
-      check_extra_params(...)
-      dots <- list(...)
+      dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       dots$n <- as.integer(n)
       if (!is.null(lie_algebra))
@@ -260,8 +259,7 @@ LieGroup <- R6::R6Class(
                           shape,
                           lie_algebra = NULL,
                           ...) {
-      check_extra_params(...)
-      dots <- list(...)
+      dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       dots$shape <- shape |>
         purrr::map(as.integer) |>
