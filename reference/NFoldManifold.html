@@ -122,7 +122,7 @@ Choices are <code>"intrinsic"</code> or <code>"extrinsic"</code>. Defaults to <c
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h4>
 <p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">nfm</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/NFoldManifold.html">NFoldManifold</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
-<span>    base_manifold <span class="op">=</span> <span class="va"><a href="../reference/SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    base_manifold <span class="op">=</span> <span class="fu"><a href="../reference/SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
 <span>    n_copies <span class="op">=</span> <span class="fl">3</span></span>
 <span>  <span class="op">)</span></span>
 <span>  <span class="va">nfm</span></span>
@@ -159,7 +159,7 @@ Choices are <code>"intrinsic"</code> or <code>"extrinsic"</code>. Defaults to <c
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">nfm</span> <span class="op">&lt;-</span> <span class="va">NFoldManifold</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    base_manifold <span class="op">=</span> <span class="va"><a href="SPDMatrices.html">SPDMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    base_manifold <span class="op">=</span> <span class="fu"><a href="SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    n_copies <span class="op">=</span> <span class="fl">3</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">nfm</span></span></span>
