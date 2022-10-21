@@ -11,6 +11,9 @@ reference:
     - SPDMetricBuresWasserstein
     - SPDMetricEuclidean
     - SPDMetricLogEuclidean
+  - subtitle: Special Orthogonal Group
+  - contents:
+    - SpecialOrthogonal
   - subtitle: N-Fold Product Manifold
   - contents:
     - NFoldManifold

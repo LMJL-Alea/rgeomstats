@@ -115,7 +115,7 @@ manifold. Defaults to \code{NULL}.}
 on the manifold. Defaults to \code{NULL}.}
 
 \item{\code{default_coords_type}}{A string specifying the coordinate type.
-Choices are \code{extrensic} or \code{intrinsic}. Defaults to \code{intrinsic}.}
+Choices are \code{extrinsic} or \code{intrinsic}. Defaults to \code{intrinsic}.}
 }
 \if{html}{\out{</div>}}
 }

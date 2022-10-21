@@ -37,7 +37,7 @@ OpenSet <- R6::R6Class(
         dots$metric <- dots$metric$get_python_class()
       dots$ambient_space <- ambient_space$get_python_class()
       super$set_python_class(
-        do.call(gs$geometry$spd_matrices$OpenSet, dots)
+        do.call(gs$geometry$base$OpenSet, dots)
       )
       private$set_fields()
     },

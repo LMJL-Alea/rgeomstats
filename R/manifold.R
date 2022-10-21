@@ -39,7 +39,7 @@ Manifold <- R6::R6Class(
     #' @param metric A [`RiemannianMetric`] object specifying the metric to use
     #'   on the manifold. Defaults to `NULL`.
     #' @param default_coords_type A string specifying the coordinate type.
-    #'   Choices are `extrensic` or `intrinsic`. Defaults to `intrinsic`.
+    #'   Choices are `extrinsic` or `intrinsic`. Defaults to `intrinsic`.
     #'
     #' @return An object of class [`Manifold`].
     initialize = function(dim, shape = NULL, metric = NULL, default_coords_type = "intrinsic") {
