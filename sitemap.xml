@@ -19,7 +19,19 @@
     <loc>https://lmjl-alea.github.io/rgeomstats/reference/Connection.html</loc>
   </url>
   <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/LevelSet.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/LieGroup.html</loc>
+  </url>
+  <url>
     <loc>https://lmjl-alea.github.io/rgeomstats/reference/Manifold.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/MatrixLieAlgebra.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/MatrixLieGroup.html</loc>
   </url>
   <url>
     <loc>https://lmjl-alea.github.io/rgeomstats/reference/NFoldManifold.html</loc>
@@ -44,6 +56,21 @@
   </url>
   <url>
     <loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricLogEuclidean.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal2Vectors.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal3Vectors.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonalMatrices.html</loc>
+  </url>
+  <url>
+    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonalVectors.html</loc>
   </url>
   <url>
     <loc>https://lmjl-alea.github.io/rgeomstats/reference/VectorSpace.html</loc>
