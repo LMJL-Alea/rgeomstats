@@ -9,17 +9,20 @@
 #'
 #' @author Yann Thanwerdas
 #'
-#' @export
+#' @family symmetric positive definite matrix classes
+#' @keywords internal
 SPDMatrices <- R6::R6Class(
   classname = "SPDMatrices",
   inherit = OpenSet,
   public = list(
-    #' @field n Integer value specifying the shape of the matrices: \eqn{n \times n}.
+    #' @field n An integer value specifying the number of rows and columns of the
+    #'   matrices.
     n = NULL,
 
     #' @description The [`SPDMatrices`] class constructor.
     #'
-    #' @param n An integer value representing the shape of the `n x n` matrices.
+    #' @param n An integer value specifying the number of rows and columns of the
+    #'   matrices.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`OpenSet`] and [`Manifold`] classes.
     #'
@@ -318,3 +321,28 @@ SPDMatrices <- R6::R6Class(
     }
   )
 )
+
+#' Class for the Manifold of Symmetric Positive Definite Matrices
+#'
+#' This function generates an instance of the class for the manifold of
+#' symmetric positive definite matrices \eqn{\mathrm{SPD}(n)}.
+#'
+#' @author Yann Thanwerdas
+#'
+#' @param n An integer value specifying the number of rows and columns of the
+#'   matrices.
+#' @param ... Extra arguments to be passed to parent class constructors. See
+#'   [`OpenSet`] and [`Manifold`] classes.
+#'
+#' @return An object of class [`SPDMatrices`].
+#'
+#' @family symmetric positive definite matrix classes
+#' @export
+#' @examples
+#' if (reticulate::py_module_available("geomstats")) {
+#'   spd3 <- SPDMatrix(n = 3)
+#'   spd3
+#' }
+SPDMatrix <- function(n, ...) {
+  SPDMatrices$new(n = n, ...)
+}

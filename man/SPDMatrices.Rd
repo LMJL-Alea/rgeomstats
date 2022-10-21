@@ -171,16 +171,23 @@ if (reticulate::py_module_available("geomstats")) {
   spdm$inverse_differential_power(2, diag(1, 3), A)
 }
 }
+\seealso{
+Other symmetric positive definite matrix classes: 
+\code{\link{SPDMatrix}()}
+}
 \author{
 Yann Thanwerdas
 }
+\concept{symmetric positive definite matrix classes}
+\keyword{internal}
 \section{Super classes}{
 \code{rgeomstats::PythonClass} -> \code{\link[rgeomstats:Manifold]{rgeomstats::Manifold}} -> \code{\link[rgeomstats:OpenSet]{rgeomstats::OpenSet}} -> \code{SPDMatrices}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{n}}{Integer value specifying the shape of the matrices: \eqn{n \times n}.}
+\item{\code{n}}{An integer value specifying the number of rows and columns of the
+matrices.}
 }
 \if{html}{\out{</div>}}
 }
@@ -230,7 +237,8 @@ The \code{\link{SPDMatrices}} class constructor.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{n}}{An integer value representing the shape of the \verb{n x n} matrices.}
+\item{\code{n}}{An integer value specifying the number of rows and columns of the
+matrices.}
 
 \item{\code{...}}{Extra arguments to be passed to parent class constructors. See
 \code{\link{OpenSet}} and \code{\link{Manifold}} classes.}

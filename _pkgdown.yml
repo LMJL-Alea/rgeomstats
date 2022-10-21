@@ -6,7 +6,7 @@ reference:
   - title: Geometry
   - subtitle: Symmetric Positive Definite Matrices
   - contents:
-    - SPDMatrices
+    - SPDMatrix
     - SPDMetricAffine
     - SPDMetricBuresWasserstein
     - SPDMetricEuclidean
