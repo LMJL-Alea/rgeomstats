@@ -16,7 +16,7 @@ manifold \eqn{M}.
 
 if (reticulate::py_module_available("geomstats")) {
   nfm <- NFoldManifold$new(
-    base_manifold = SPDMatrices$new(n = 3),
+    base_manifold = SPDMatrix(n = 3),
     n_copies = 3
   )
   nfm
@@ -89,7 +89,7 @@ A \code{\link{NFoldManifold}} \link[R6:R6Class]{R6::R6Class} object.
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
   nfm <- NFoldManifold$new(
-    base_manifold = SPDMatrices$new(n = 3),
+    base_manifold = SPDMatrix(n = 3),
     n_copies = 3
   )
   nfm

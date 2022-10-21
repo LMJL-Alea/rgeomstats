@@ -51,14 +51,12 @@ OpenSet <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   mf <- SPDMatrices$new(n = 3)
+    #'   mf <- SPDMatrix(n = 3)
     #'   A <- matrix(1:9, 3, 3)
     #'   mf$projection(A)
     #' }
     projection = function(point) {
-      super$get_python_class()$projection(
-        point = point
-      )
+      super$get_python_class()$projection(point = point)
     }
   ),
   private = list(

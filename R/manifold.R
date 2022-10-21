@@ -75,11 +75,11 @@ Manifold <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   mf <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   A <- diag(1, 3)
-    #'   mf$belongs(A)
+    #'   spd3$belongs(A)
     #'   B <- diag(-1, 3)
-    #'   mf$belongs(B)
+    #'   spd3$belongs(B)
     #' }
     belongs = function(point, atol = gs$backend$atol) {
       super$get_python_class()$belongs(point, atol = atol)
@@ -136,8 +136,8 @@ Manifold <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   mf <- SPDMatrices$new(n = 3)
-    #'   # mf$random_point(10) # TO DO: uncomment when bug fixed in gs
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   # spd3$random_point(10) # TO DO: uncomment when bug fixed in gs
     #' }
     random_point = function(n_samples = 1, bound = 1.0) {
       super$get_python_class()$random_point(
@@ -184,8 +184,8 @@ Manifold <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   mf <- SPDMatrices$new(n = 3)
-    #'   mf$random_tangent_vec(diag(1, 3), 10)
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   spd3$random_tangent_vec(diag(1, 3), 10)
     #' }
     random_tangent_vec = function(base_point, n_samples = 1) {
       if (!self$belongs(base_point))

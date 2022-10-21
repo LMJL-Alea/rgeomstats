@@ -14,8 +14,8 @@ matrices.
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
-  spdm
+  spd3 <- SPDMatrix(n = 3)
+  spd3
 }
 
 ## ------------------------------------------------
@@ -23,14 +23,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$cholesky_factor(A)
+  spd3$cholesky_factor(A)
 }
 
 ## ------------------------------------------------
@@ -38,14 +38,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_cholesky_factor(diag(1, 3), A)
+  spd3$differential_cholesky_factor(diag(1, 3), A)
 }
 
 ## ------------------------------------------------
@@ -53,8 +53,8 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
-  spdm$expm(diag(-1, 3))
+  spd3 <- SPDMatrix(n = 3)
+  spd3$expm(diag(-1, 3))
 }
 
 ## ------------------------------------------------
@@ -62,14 +62,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_exp(diag(1, 3), A)
+  spd3$differential_exp(diag(1, 3), A)
 }
 
 ## ------------------------------------------------
@@ -77,14 +77,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$inverse_differential_exp(diag(1, 3), A)
+  spd3$inverse_differential_exp(diag(1, 3), A)
 }
 
 ## ------------------------------------------------
@@ -92,8 +92,8 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
-  spdm$logm(diag(1, 3))
+  spd3 <- SPDMatrix(n = 3)
+  spd3$logm(diag(1, 3))
 }
 
 ## ------------------------------------------------
@@ -101,14 +101,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_log(diag(1, 3), A)
+  spd3$differential_log(diag(1, 3), A)
 }
 
 ## ------------------------------------------------
@@ -116,14 +116,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$inverse_differential_log(diag(1, 3), A)
+  spd3$inverse_differential_log(diag(1, 3), A)
 }
 
 ## ------------------------------------------------
@@ -131,14 +131,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$powerm(diag(1, 3), 2)
+  spd3$powerm(diag(1, 3), 2)
 }
 
 ## ------------------------------------------------
@@ -146,14 +146,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_power(2, diag(1, 3), A)
+  spd3$differential_power(2, diag(1, 3), A)
 }
 
 ## ------------------------------------------------
@@ -161,14 +161,14 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$inverse_differential_power(2, diag(1, 3), A)
+  spd3$inverse_differential_power(2, diag(1, 3), A)
 }
 }
 \seealso{
@@ -251,8 +251,8 @@ An object of class \code{\link{SPDMatrices}}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
-  spdm
+  spd3 <- SPDMatrix(n = 3)
+  spd3
 }
 }
 \if{html}{\out{</div>}}
@@ -285,14 +285,14 @@ column-major fashion.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$cholesky_factor(A)
+  spd3$cholesky_factor(A)
 }
 }
 \if{html}{\out{</div>}}
@@ -327,14 +327,14 @@ diagonal elements in a column-major fashion.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_cholesky_factor(diag(1, 3), A)
+  spd3$differential_cholesky_factor(diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}
@@ -365,8 +365,8 @@ matrix \code{mat}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
-  spdm$expm(diag(-1, 3))
+  spd3 <- SPDMatrix(n = 3)
+  spd3$expm(diag(-1, 3))
 }
 }
 \if{html}{\out{</div>}}
@@ -400,14 +400,14 @@ SPD matrices at \code{base_point} applied to \code{tangent_vec}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_exp(diag(1, 3), A)
+  spd3$differential_exp(diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}
@@ -442,14 +442,14 @@ exponential on SPD matrices at \code{base_point} applied to \code{tangent_vec}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$inverse_differential_exp(diag(1, 3), A)
+  spd3$inverse_differential_exp(diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}
@@ -480,8 +480,8 @@ matrix \code{mat}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
-  spdm$logm(diag(1, 3))
+  spd3 <- SPDMatrix(n = 3)
+  spd3$logm(diag(1, 3))
 }
 }
 \if{html}{\out{</div>}}
@@ -515,14 +515,14 @@ SPD matrices at \code{base_point} applied to \code{tangent_vec}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_log(diag(1, 3), A)
+  spd3$differential_log(diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}
@@ -557,14 +557,14 @@ logarithm on SPD matrices at \code{base_point} applied to \code{tangent_vec}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$inverse_differential_log(diag(1, 3), A)
+  spd3$inverse_differential_log(diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}
@@ -598,14 +598,14 @@ such matrices elevated at the corresponding powers.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$powerm(diag(1, 3), 2)
+  spd3$powerm(diag(1, 3), 2)
 }
 }
 \if{html}{\out{</div>}}
@@ -642,14 +642,14 @@ applied to \code{tangent_vec}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$differential_power(2, diag(1, 3), A)
+  spd3$differential_power(2, diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}
@@ -687,14 +687,14 @@ function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  spdm <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   V <- cbind(
     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     c(0, 0, 1)
   )
   A <- V \%*\% diag(1:3) \%*\% t(V)
-  spdm$inverse_differential_power(2, diag(1, 3), A)
+  spd3$inverse_differential_power(2, diag(1, 3), A)
 }
 }
 \if{html}{\out{</div>}}

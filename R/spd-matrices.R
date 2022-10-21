@@ -30,8 +30,8 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   spdm
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   spd3
     #' }
     initialize = function(n, ...) {
       dots <- capture_extra_params(...)
@@ -60,14 +60,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$cholesky_factor(A)
+    #'   spd3$cholesky_factor(A)
     #' }
     cholesky_factor = function(mat) {
       if (!self$belongs(mat))
@@ -84,14 +84,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$differential_cholesky_factor(diag(1, 3), A)
+    #'   spd3$differential_cholesky_factor(diag(1, 3), A)
     #' }
     differential_cholesky_factor = function(tangent_vec, base_point) {
       if (!self$belongs(base_point))
@@ -111,8 +111,8 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   spdm$expm(diag(-1, 3))
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   spd3$expm(diag(-1, 3))
     #' }
     expm = function(mat) {
       super$get_python_class()$expm(mat = mat)
@@ -125,14 +125,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$differential_exp(diag(1, 3), A)
+    #'   spd3$differential_exp(diag(1, 3), A)
     #' }
     differential_exp = function(tangent_vec, base_point) {
       super$get_python_class()$differential_exp(
@@ -149,14 +149,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$inverse_differential_exp(diag(1, 3), A)
+    #'   spd3$inverse_differential_exp(diag(1, 3), A)
     #' }
     inverse_differential_exp = function(tangent_vec, base_point) {
       super$get_python_class()$inverse_differential_exp(
@@ -174,8 +174,8 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
-    #'   spdm$logm(diag(1, 3))
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   spd3$logm(diag(1, 3))
     #' }
     logm = function(mat) {
       if (!self$belongs(mat))
@@ -190,14 +190,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$differential_log(diag(1, 3), A)
+    #'   spd3$differential_log(diag(1, 3), A)
     #' }
     differential_log = function(tangent_vec, base_point) {
       super$get_python_class()$differential_log(
@@ -214,14 +214,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$inverse_differential_log(diag(1, 3), A)
+    #'   spd3$inverse_differential_log(diag(1, 3), A)
     #' }
     inverse_differential_log = function(tangent_vec, base_point) {
       super$get_python_class()$inverse_differential_log(
@@ -241,14 +241,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$powerm(diag(1, 3), 2)
+    #'   spd3$powerm(diag(1, 3), 2)
     #' }
     powerm = function(mat, power) {
       if (!self$belongs(mat))
@@ -269,14 +269,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$differential_power(2, diag(1, 3), A)
+    #'   spd3$differential_power(2, diag(1, 3), A)
     #' }
     differential_power = function(power, tangent_vec, base_point) {
       super$get_python_class()$differential_power(
@@ -297,14 +297,14 @@ SPDMatrices <- R6::R6Class(
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
-    #'   spdm <- SPDMatrices$new(n = 3)
+    #'   spd3 <- SPDMatrix(n = 3)
     #'   V <- cbind(
     #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
     #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
     #'     c(0, 0, 1)
     #'   )
     #'   A <- V %*% diag(1:3) %*% t(V)
-    #'   spdm$inverse_differential_power(2, diag(1, 3), A)
+    #'   spd3$inverse_differential_power(2, diag(1, 3), A)
     #' }
     inverse_differential_power = function(power, tangent_vec, base_point) {
       super$get_python_class()$inverse_differential_power(

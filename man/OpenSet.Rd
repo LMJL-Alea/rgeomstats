@@ -15,7 +15,7 @@ space.
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
+  mf <- SPDMatrix(n = 3)
   A <- matrix(1:9, 3, 3)
   mf$projection(A)
 }
@@ -108,7 +108,7 @@ projected onto the manifold.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
+  mf <- SPDMatrix(n = 3)
   A <- matrix(1:9, 3, 3)
   mf$projection(A)
 }

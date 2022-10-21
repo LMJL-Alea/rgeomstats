@@ -15,11 +15,11 @@ space near each point.
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   A <- diag(1, 3)
-  mf$belongs(A)
+  spd3$belongs(A)
   B <- diag(-1, 3)
-  mf$belongs(B)
+  spd3$belongs(B)
 }
 
 ## ------------------------------------------------
@@ -27,8 +27,8 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
-  # mf$random_point(10) # TO DO: uncomment when bug fixed in gs
+  spd3 <- SPDMatrix(n = 3)
+  # spd3$random_point(10) # TO DO: uncomment when bug fixed in gs
 }
 
 ## ------------------------------------------------
@@ -36,8 +36,8 @@ if (reticulate::py_module_available("geomstats")) {
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
-  mf$random_tangent_vec(diag(1, 3), 10)
+  spd3 <- SPDMatrix(n = 3)
+  spd3$random_tangent_vec(diag(1, 3), 10)
 }
 }
 \author{
@@ -150,11 +150,11 @@ manifold.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
+  spd3 <- SPDMatrix(n = 3)
   A <- diag(1, 3)
-  mf$belongs(A)
+  spd3$belongs(A)
   B <- diag(-1, 3)
-  mf$belongs(B)
+  spd3$belongs(B)
 }
 }
 \if{html}{\out{</div>}}
@@ -249,8 +249,8 @@ manifold.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
-  # mf$random_point(10) # TO DO: uncomment when bug fixed in gs
+  spd3 <- SPDMatrix(n = 3)
+  # spd3$random_point(10) # TO DO: uncomment when bug fixed in gs
 }
 }
 \if{html}{\out{</div>}}
@@ -328,8 +328,8 @@ are tangent to the manifold at \code{base_point}.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrices$new(n = 3)
-  mf$random_tangent_vec(diag(1, 3), 10)
+  spd3 <- SPDMatrix(n = 3)
+  spd3$random_tangent_vec(diag(1, 3), 10)
 }
 }
 \if{html}{\out{</div>}}
