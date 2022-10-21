@@ -10,10 +10,6 @@ SpecialOrthogonalMatrices <- R6::R6Class(
   classname = "SpecialOrthogonalMatrices",
   inherit = MatrixLieGroup,
   public = list(
-    #' @field n An integer value specifying the number of rows and columns of
-    #'   the matrices.
-    n = NULL,
-
     #' @field bi_invariant_metric An object of class `BiInvariantMetric`
     #'   specifying the metric to equip the manifold with.
     bi_invariant_metric = NULL,
@@ -32,10 +28,12 @@ SpecialOrthogonalMatrices <- R6::R6Class(
       super$set_python_class(
         do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
       )
-      private$set_fields()
 
       # Set up the second parent class here
       private$second_inheritance <- .SpecialOrthogonalMatrices$new(n, ...)
+      private$second_inheritance$set_fields()
+
+      private$set_fields()
     },
 
     #' @description Evaluates if a point belongs to the manifold.
@@ -109,6 +107,9 @@ SpecialOrthogonalMatrices <- R6::R6Class(
       super$set_python_class(
         do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
       )
+    },
+    set_fields = function() {
+      super$set_fields()
     }
   )
 )

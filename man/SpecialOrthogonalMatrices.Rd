@@ -23,9 +23,6 @@ Nicolas Guigui and Nina Miolane
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{n}}{An integer value specifying the number of rows and columns of
-the matrices.}
-
 \item{\code{bi_invariant_metric}}{An object of class \code{BiInvariantMetric}
 specifying the metric to equip the manifold with.}
 }
