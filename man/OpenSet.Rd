@@ -15,10 +15,12 @@ space.
 ## ------------------------------------------------
 
 if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrix(n = 3)
-  A <- matrix(1:9, 3, 3)
-  mf$projection(A)
+  spd3 <- SPDMatrix(n = 3)
+  spd3$projection(diag(1, 3))
 }
+}
+\seealso{
+SPDMatrix
 }
 \author{
 Nicolas Guigui and Nina Miolane
@@ -96,21 +98,20 @@ Project a point in the ambient space onto the manifold.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} specifying a vector in the
-ambient space onto the manifold.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+specifying one or more vectors in the ambient space of the manifold.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} storing the input \code{vector}
-projected onto the manifold.
+A numeric array of the same shape \code{dim} storing the corresponding
+projections onto the manifold.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
-  mf <- SPDMatrix(n = 3)
-  A <- matrix(1:9, 3, 3)
-  mf$projection(A)
+  spd3 <- SPDMatrix(n = 3)
+  spd3$projection(diag(1, 3))
 }
 }
 \if{html}{\out{</div>}}

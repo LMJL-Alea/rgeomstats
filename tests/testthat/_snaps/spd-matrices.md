@@ -3,12 +3,15 @@
     Code
       spd3$cholesky_factor(A)
     Output
-      [1] 1.2247449 0.4082483 0.0000000 1.1547005 0.0000000 1.7320508
+                [,1]     [,2]     [,3]
+      [1,] 1.2247449 0.000000 0.000000
+      [2,] 0.4082483 1.154701 0.000000
+      [3,] 0.0000000 0.000000 1.732051
 
 # SPDMatrices method differential_cholesky_factor() works
 
     Code
-      spd3$differential_cholesky_factor(diag(1, 3), A)
+      spd3$differential_cholesky_factor(D, A)
     Output
                  [,1]      [,2]      [,3]
       [1,]  0.4082483 0.0000000 0.0000000
@@ -18,72 +21,62 @@
 # SPDMatrices method differential_exp() works
 
     Code
-      spd3$differential_exp(diag(1, 3), A)
+      spd3$differential_exp(D, A)
     Output
                [,1]     [,2]     [,3]
       [1,] 5.053669 2.335387  0.00000
       [2,] 2.335387 5.053669  0.00000
       [3,] 0.000000 0.000000 20.08554
 
-# SPDMatrices method differential_log() works
-
-    Code
-      spd3$differential_log(diag(1, 3), A)
-    Output
-            [,1]  [,2]      [,3]
-      [1,]  0.75 -0.25 0.0000000
-      [2,] -0.25  0.75 0.0000000
-      [3,]  0.00  0.00 0.3333333
-
-# SPDMatrices method differential_power() works
-
-    Code
-      spd3$differential_power(2, diag(1, 3), A)
-    Output
-           [,1] [,2] [,3]
-      [1,]    3    1    0
-      [2,]    1    3    0
-      [3,]    0    0    6
-
 # SPDMatrices method inverse_differential_exp() works
 
     Code
-      spd3$inverse_differential_exp(diag(1, 3), A)
+      spd3$inverse_differential_exp(D, A)
     Output
                  [,1]       [,2]       [,3]
       [1,]  0.2516074 -0.1162721 0.00000000
       [2,] -0.1162721  0.2516074 0.00000000
       [3,]  0.0000000  0.0000000 0.04978707
 
+# SPDMatrices method differential_log() works
+
+    Code
+      spd3$differential_log(D, A)
+    Output
+            [,1]  [,2]      [,3]
+      [1,]  0.75 -0.25 0.0000000
+      [2,] -0.25  0.75 0.0000000
+      [3,]  0.00  0.00 0.3333333
+
 # SPDMatrices method inverse_differential_log() works
 
     Code
-      spd3$inverse_differential_log(diag(1, 3), A)
+      spd3$inverse_differential_log(D, A)
     Output
            [,1] [,2] [,3]
       [1,]  1.5  0.5    0
       [2,]  0.5  1.5    0
       [3,]  0.0  0.0    3
 
+# SPDMatrices method differential_power() works
+
+    Code
+      spd3$differential_power(2, D, A)
+    Output
+           [,1] [,2] [,3]
+      [1,]    3    1    0
+      [2,]    1    3    0
+      [3,]    0    0    6
+
 # SPDMatrices method inverse_differential_power() works
 
     Code
-      spd3$inverse_differential_power(2, diag(1, 3), A)
+      spd3$inverse_differential_power(2, D, A)
     Output
              [,1]   [,2]      [,3]
       [1,]  0.375 -0.125 0.0000000
       [2,] -0.125  0.375 0.0000000
       [3,]  0.000  0.000 0.1666667
-
-# SPDMatrices method projection() works
-
-    Code
-      spd3$projection(A)
-    Output
-               [,1]     [,2]     [,3]
-      [1,] 2.034900 3.202344 4.369788
-      [2,] 3.202344 5.039562 6.876781
-      [3,] 4.369788 6.876781 9.383774
 
 # SPDMatrices method random_tangent_vec() works
 

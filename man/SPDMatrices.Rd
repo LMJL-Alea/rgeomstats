@@ -132,12 +132,6 @@ if (reticulate::py_module_available("geomstats")) {
 
 if (reticulate::py_module_available("geomstats")) {
   spd3 <- SPDMatrix(n = 3)
-  V <- cbind(
-    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
-    c(sqrt(2) / 2, sqrt(2) / 2, 0),
-    c(0, 0, 1)
-  )
-  A <- V \%*\% diag(1:3) \%*\% t(V)
   spd3$powerm(diag(1, 3), 2)
 }
 
@@ -273,14 +267,14 @@ matrix.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{mat}}{An SPD matrix.}
+\item{\code{mat}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-The Cholesky factor represented as a numeric vector which stores
-its lower triangular matrix including the diagonal elements in a
-column-major fashion.
+A numeric array of the same shape storing the corresponding
+Cholesky factors.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -312,17 +306,18 @@ Computes the differential of the Cholesky factor map.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
-base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices at corresponding base points.}
 
-\item{\code{base_point}}{An SPD matrix specifying the base point.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices specifying base points for the input
+tangent vectors.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-The differential of the Cholesky factor map represented as a
-numeric vector which stores its lower triangular matrix including the
-diagonal elements in a column-major fashion.
+A numeric array of shape \eqn{[\dots \times n \times n]} storing
+the differentials of the corresponding Cholesky factor maps.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -354,13 +349,14 @@ Computes the matrix exponential for a symmetric matrix.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{mat}}{A symmetric matrix.}
+\item{\code{mat}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-An SPD matrix storing the exponential of the input symmetric
-matrix \code{mat}.
+A numeric array of the same shape storing the corresponding
+matrix exponentials.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -386,16 +382,19 @@ Computes the differential of the matrix exponential.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
-base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices at corresponding base points.}
 
-\item{\code{base_point}}{An SPD matrix specifying the base point.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices specifying base points for the input
+tangent vectors.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A matrix storing the differential of the matrix exponential on
-SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+A numeric array of shape \eqn{[\dots \times n \times]} storing
+the differentials of matrix exponential at corresponding base points
+applied to corresponding tangent vectors.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -428,16 +427,19 @@ exponential.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
-base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices at corresponding base points.}
 
-\item{\code{base_point}}{An SPD matrix specifying the base point.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices specifying base points for the input
+tangent vectors.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A matrix storing the inverse of the differential of the matrix
-exponential on SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+A numeric array of shape \eqn{[\dots \times n \times]} storing
+the inverse of the differentials of matrix exponential at corresponding
+base points applied to corresponding tangent vectors.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -469,13 +471,14 @@ Computes the matrix logarithm of an SPD matrix.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{mat}}{An SPD matrix.}
+\item{\code{mat}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A symmetric matrix storing the logarithm of the input symmetric
-matrix \code{mat}.
+A numeric array of the same shape storing the logarithms of the
+input SPD matrices.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -501,16 +504,19 @@ Computes the differential of the matrix logarithm.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
-base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices at corresponding base points.}
 
-\item{\code{base_point}}{An SPD matrix specifying the base point.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices specifying base points for the input
+tangent vectors.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A matrix storing the differential of the matrix logarithm on
-SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+A numeric array of shape \eqn{[\dots \times n \times]} storing
+the differentials of matrix logarithm at corresponding base points
+applied to corresponding tangent vectors.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -543,16 +549,19 @@ logarithm.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
-base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices at corresponding base points.}
 
-\item{\code{base_point}}{An SPD matrix specifying the base point.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices specifying base points for the input
+tangent vectors.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A matrix storing the inverse of the differential of the matrix
-logarithm on SPD matrices at \code{base_point} applied to \code{tangent_vec}.
+A numeric array of shape \eqn{[\dots \times n \times]} storing
+the inverse of the differentials of matrix logarithm at corresponding
+base points applied to corresponding tangent vectors.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -584,27 +593,22 @@ Computes the matrix power of an SPD matrix.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{mat}}{An SPD matrix.}
+\item{\code{mat}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices.}
 
-\item{\code{power}}{A numeric scalar or vector specifying the desired power(s).}
+\item{\code{power}}{A numeric value or vector specifying the desired power(s).}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-An SPD matrix representing the matrix power of the input matrix
-as: \deqn{A^p = \exp(p \log(A)).} If \code{power} is a vector, a list of
-such matrices elevated at the corresponding powers.
+A numeric array of the same shape as \code{mat} storing the
+corresponding matrix powers computed as: \deqn{A^p = \exp(p \log(A)).}
+If \code{power} is a vector, a list of such arrays is returned.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
   spd3 <- SPDMatrix(n = 3)
-  V <- cbind(
-    c(sqrt(2) / 2, -sqrt(2) / 2, 0),
-    c(sqrt(2) / 2, sqrt(2) / 2, 0),
-    c(0, 0, 1)
-  )
-  A <- V \%*\% diag(1:3) \%*\% t(V)
   spd3$powerm(diag(1, 3), 2)
 }
 }
@@ -625,19 +629,21 @@ Computes the differential of the matrix power function.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{power}}{An integer scalar specifying the desired power.}
+\item{\code{power}}{An integer value specifying the desired power.}
 
-\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
-base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices at corresponding base points.}
 
-\item{\code{base_point}}{An SPD matrix specifying the base point.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices specifying base points for the input
+tangent vectors.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A matrix storing the differential of the power function on
-\eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at \code{base_point}
-applied to \code{tangent_vec}.
+A numeric array of shape \eqn{[\dots \times n \times]} storing
+the differential of the power function \deqn{A^p = \exp(p \log(A))} at
+corresponding base points applied to corresponding tangent vectors.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -670,19 +676,22 @@ function.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{power}}{An integer scalar specifying the desired power.}
+\item{\code{power}}{An integer value specifying the desired power.}
 
-\item{\code{tangent_vec}}{A symmetric matrix specifying the tangent vector at
-base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more symmetric matrices at corresponding base points.}
 
-\item{\code{base_point}}{An SPD matrix specifying the base point.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more SPD matrices specifying base points for the input
+tangent vectors.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A matrix storing the inverse of the differential of the power
-function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
-\code{base_point} applied to \code{tangent_vec}.
+A numeric array of shape \eqn{[\dots \times n \times]} storing
+the inverse of the differential of the power function \deqn{A^p =
+  \exp(p \log(A))} at corresponding base points applied to corresponding
+tangent vectors.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}

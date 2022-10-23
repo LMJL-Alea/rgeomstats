@@ -3,9 +3,11 @@
 #' @description Class for the manifold of symmetric positive definite (SPD)
 #'   matrices.
 #'
-#' @param tangent_vec A symmetric matrix specifying the tangent vector at
-#'   base point.
-#' @param base_point An SPD matrix specifying the base point.
+#' @param tangent_vec A numeric array of shape \eqn{[\dots \times n \times n]}
+#'   specifying one or more symmetric matrices at corresponding base points.
+#' @param base_point A numeric array of shape \eqn{[\dots \times n \times n]}
+#'   specifying one or more SPD matrices specifying base points for the input
+#'   tangent vectors.
 #'
 #' @author Yann Thanwerdas
 #'
@@ -52,11 +54,11 @@ SPDMatrices <- R6::R6Class(
     #' @description Computes Cholesky factor for a symmetric positive definite
     #'   matrix.
     #'
-    #' @param mat An SPD matrix.
+    #' @param mat A numeric array of shape \eqn{[\dots \times n \times n]}
+    #'   specifying one or more SPD matrices.
     #'
-    #' @return The Cholesky factor represented as a numeric vector which stores
-    #'   its lower triangular matrix including the diagonal elements in a
-    #'   column-major fashion.
+    #' @return A numeric array of the same shape storing the corresponding
+    #'   Cholesky factors.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -70,17 +72,13 @@ SPDMatrices <- R6::R6Class(
     #'   spd3$cholesky_factor(A)
     #' }
     cholesky_factor = function(mat) {
-      if (!self$belongs(mat))
-        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
-      M <- super$get_python_class()$cholesky_factor(mat = mat)
-      M[lower.tri(M, diag = TRUE)]
+      super$get_python_class()$cholesky_factor(mat = mat)
     },
 
     #' @description Computes the differential of the Cholesky factor map.
     #'
-    #' @return The differential of the Cholesky factor map represented as a
-    #'   numeric vector which stores its lower triangular matrix including the
-    #'   diagonal elements in a column-major fashion.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing
+    #'   the differentials of the corresponding Cholesky factor maps.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -94,8 +92,6 @@ SPDMatrices <- R6::R6Class(
     #'   spd3$differential_cholesky_factor(diag(1, 3), A)
     #' }
     differential_cholesky_factor = function(tangent_vec, base_point) {
-      if (!self$belongs(base_point))
-        cli::cli_abort("The input matrix {.arg base_point} should be SPD.")
       super$get_python_class()$differential_cholesky_factor(
         tangent_vec = tangent_vec,
         base_point = base_point
@@ -104,10 +100,11 @@ SPDMatrices <- R6::R6Class(
 
     #' @description Computes the matrix exponential for a symmetric matrix.
     #'
-    #' @param mat A symmetric matrix.
+    #' @param mat A numeric array of shape \eqn{[\dots \times n \times n]}
+    #'   specifying one or more symmetric matrices.
     #'
-    #' @return An SPD matrix storing the exponential of the input symmetric
-    #'   matrix `mat`.
+    #' @return A numeric array of the same shape storing the corresponding
+    #'   matrix exponentials.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -120,8 +117,9 @@ SPDMatrices <- R6::R6Class(
 
     #' @description Computes the differential of the matrix exponential.
     #'
-    #' @return A matrix storing the differential of the matrix exponential on
-    #'   SPD matrices at `base_point` applied to `tangent_vec`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times]} storing
+    #'   the differentials of matrix exponential at corresponding base points
+    #'   applied to corresponding tangent vectors.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -144,8 +142,9 @@ SPDMatrices <- R6::R6Class(
     #' @description Computes the inverse of the differential of the matrix
     #'   exponential.
     #'
-    #' @return A matrix storing the inverse of the differential of the matrix
-    #'   exponential on SPD matrices at `base_point` applied to `tangent_vec`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times]} storing
+    #'   the inverse of the differentials of matrix exponential at corresponding
+    #'   base points applied to corresponding tangent vectors.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -167,10 +166,11 @@ SPDMatrices <- R6::R6Class(
 
     #' @description Computes the matrix logarithm of an SPD matrix.
     #'
-    #' @param mat An SPD matrix.
+    #' @param mat A numeric array of shape \eqn{[\dots \times n \times n]}
+    #'   specifying one or more SPD matrices.
     #'
-    #' @return A symmetric matrix storing the logarithm of the input symmetric
-    #'   matrix `mat`.
+    #' @return A numeric array of the same shape storing the logarithms of the
+    #'   input SPD matrices.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -178,15 +178,14 @@ SPDMatrices <- R6::R6Class(
     #'   spd3$logm(diag(1, 3))
     #' }
     logm = function(mat) {
-      if (!self$belongs(mat))
-        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
       super$get_python_class()$logm(mat = mat)
     },
 
     #' @description Computes the differential of the matrix logarithm.
     #'
-    #' @return A matrix storing the differential of the matrix logarithm on
-    #'   SPD matrices at `base_point` applied to `tangent_vec`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times]} storing
+    #'   the differentials of matrix logarithm at corresponding base points
+    #'   applied to corresponding tangent vectors.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -209,8 +208,9 @@ SPDMatrices <- R6::R6Class(
     #' @description Computes the inverse of the differential of the matrix
     #'   logarithm.
     #'
-    #' @return A matrix storing the inverse of the differential of the matrix
-    #'   logarithm on SPD matrices at `base_point` applied to `tangent_vec`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times]} storing
+    #'   the inverse of the differentials of matrix logarithm at corresponding
+    #'   base points applied to corresponding tangent vectors.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -232,27 +232,20 @@ SPDMatrices <- R6::R6Class(
 
     #' @description Computes the matrix power of an SPD matrix.
     #'
-    #' @param mat An SPD matrix.
-    #' @param power A numeric scalar or vector specifying the desired power(s).
+    #' @param mat A numeric array of shape \eqn{[\dots \times n \times n]}
+    #'   specifying one or more SPD matrices.
+    #' @param power A numeric value or vector specifying the desired power(s).
     #'
-    #' @return An SPD matrix representing the matrix power of the input matrix
-    #'   as: \deqn{A^p = \exp(p \log(A)).} If `power` is a vector, a list of
-    #'   such matrices elevated at the corresponding powers.
+    #' @return A numeric array of the same shape as `mat` storing the
+    #'   corresponding matrix powers computed as: \deqn{A^p = \exp(p \log(A)).}
+    #'   If `power` is a vector, a list of such arrays is returned.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
     #'   spd3 <- SPDMatrix(n = 3)
-    #'   V <- cbind(
-    #'     c(sqrt(2) / 2, -sqrt(2) / 2, 0),
-    #'     c(sqrt(2) / 2, sqrt(2) / 2, 0),
-    #'     c(0, 0, 1)
-    #'   )
-    #'   A <- V %*% diag(1:3) %*% t(V)
     #'   spd3$powerm(diag(1, 3), 2)
     #' }
     powerm = function(mat, power) {
-      if (!self$belongs(mat))
-        cli::cli_abort("The input matrix {.arg mat} should be SPD.")
       super$get_python_class()$powerm(
         mat = mat,
         power = power
@@ -261,11 +254,11 @@ SPDMatrices <- R6::R6Class(
 
     #' @description Computes the differential of the matrix power function.
     #'
-    #' @param power An integer scalar specifying the desired power.
+    #' @param power An integer value specifying the desired power.
     #'
-    #' @return A matrix storing the differential of the power function on
-    #'   \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at `base_point`
-    #'   applied to `tangent_vec`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times]} storing
+    #'   the differential of the power function \deqn{A^p = \exp(p \log(A))} at
+    #'   corresponding base points applied to corresponding tangent vectors.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -289,11 +282,12 @@ SPDMatrices <- R6::R6Class(
     #' @description Computes the inverse of the differential of the matrix power
     #'   function.
     #'
-    #' @param power An integer scalar specifying the desired power.
+    #' @param power An integer value specifying the desired power.
     #'
-    #' @return A matrix storing the inverse of the differential of the power
-    #'   function on \eqn{\mathrm{SPD}(n)}: \deqn{A^p = \exp(p \log(A))} at
-    #'   `base_point` applied to `tangent_vec`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times]} storing
+    #'   the inverse of the differential of the power function \deqn{A^p =
+    #'   \exp(p \log(A))} at corresponding base points applied to corresponding
+    #'   tangent vectors.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
