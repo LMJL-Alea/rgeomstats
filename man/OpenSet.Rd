@@ -104,7 +104,7 @@ specifying one or more vectors in the ambient space of the manifold.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of the same shape \code{dim} storing the corresponding
+A numeric array of the same shape storing the corresponding
 projections onto the manifold.
 }
 \subsection{Examples}{

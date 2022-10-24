@@ -20,12 +20,6 @@ test_that("SPDMatrices constructor works", {
   expect_true("SPDMatrices" %in% class(spd3))
 })
 
-test_that("SPDMatrices method belongs() works", {
-  spd3 <- SPDMatrix(n = 3)
-  expect_true(spd3$belongs(A))
-  expect_false(spd3$belongs(diag(-1, 3)))
-})
-
 test_that("SPDMatrices method cholesky_factor() works", {
   spd3 <- SPDMatrix(n = 3)
   expect_snapshot(spd3$cholesky_factor(A))
@@ -86,12 +80,33 @@ test_that("SPDMatrices method projection() works", {
   expect_equal(spd3$projection(D), D)
 })
 
+test_that("SPDMatrices method belongs() works", {
+  spd3 <- SPDMatrix(n = 3)
+  expect_true(spd3$belongs(A))
+  expect_false(spd3$belongs(diag(-1, 3)))
+})
+
+test_that("SPDMatrices method is_tangent() works", {
+  spd3 <- SPDMatrix(n = 3)
+  expect_true(spd3$is_tangent(Z))
+})
+
+test_that("SPDMatrices method to_tangent() works", {
+  spd3 <- SPDMatrix(n = 3)
+  expect_equal(spd3$to_tangent(D), D)
+})
+
 test_that("SPDMatrices method random_point() works", {
   skip("Needs bug fix in gs")
   reticulate::py_set_seed(1234)
   spd3 <- SPDMatrix(n = 3)
   spl <- spd3$random_point(10)
   expect_snapshot(spl)
+})
+
+test_that("SPDMatrices method regularize() works", {
+  spd3 <- SPDMatrix(n = 3)
+  expect_equal(spd3$regularize(D), D)
 })
 
 test_that("SPDMatrices method random_tangent_vec() works", {

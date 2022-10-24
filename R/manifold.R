@@ -65,21 +65,19 @@ Manifold <- R6::R6Class(
 
     #' @description Evaluates if a point belongs to the manifold.
     #'
-    #' @param point An numeric array of shape `dim` specifying a point to be
-    #'   checked.
+    #' @param point A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+    #'   specifying one or more points to be checked.
     #' @param atol A numeric value specifying the absolute tolerance for
     #'   checking. Defaults to `gs$backend$atol`.
     #'
-    #' @return A boolean that tells whether the input point belongs to the
-    #'   manifold.
+    #' @return A boolean value or vector storing whether the corresponding
+    #'   points belong to the manifold.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
     #'   spd3 <- SPDMatrix(n = 3)
     #'   A <- diag(1, 3)
-    #'   spd3$belongs(A)
-    #'   B <- diag(-1, 3)
-    #'   spd3$belongs(B)
+    #'   spd3$belongs(diag(1, 3))
     #' }
     belongs = function(point, atol = gs$backend$atol) {
       super$get_python_class()$belongs(point, atol = atol)
@@ -87,15 +85,23 @@ Manifold <- R6::R6Class(
 
     #' @description Checks whether a vector is tangent at a base point.
     #'
-    #' @param vector An numeric array of shape `dim` specifying a vector to be
-    #'   checked.
-    #' @param base_point An numeric array of shape `dim` specifying a base point
-    #'   which belongs to the manifold.
+    #' @param vector A numeric array of shape \eqn{[\dots \times
+    #'   [\mathrm{dim}]]} specifying one or more vectors to be checked.
+    #' @param base_point A numeric array of shape \eqn{[\dots \times
+    #'   [\mathrm{dim}]]} specifying one or more base points on the manifold.
+    #'   Defaults to `NULL` in which case the identity is used.
     #' @param atol A numeric value specifying the absolute tolerance for
     #'   checking. Defaults to `gs$backend$atol`.
     #'
-    #' @return A boolean that tells whether the input `vector` is ≥tangent to
-    #'   the manifold at `base_point`.
+    #' @return A boolean value or vector storing whether the corresponding
+    #'   points are tangent to the manifold at corresponding base points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   A <- diag(1, 3)
+    #'   spd3$is_tangent(diag(1, 3))
+    #' }
     is_tangent = function(vector, base_point = NULL, atol = gs$backend$atol) {
       super$get_python_class()$is_tangent(
         vector = vector,
@@ -106,13 +112,23 @@ Manifold <- R6::R6Class(
 
     #' @description Projects a vector to a tangent space of the manifold.
     #'
-    #' @param vector A (list of) numeric array(s) of shape `dim` specifying a
-    #'   (list of) vector(s) to project on the manifold.
-    #' @param base_point A (list of) numeric array(s) of shape `dim` specifying
-    #'   a (list of) point(s) on the manifold. Defaults to `NULL`.
+    #' @param vector A numeric array of shape \eqn{[\dots \times
+    #'   [\mathrm{dim}]]} specifying one or more vectors to project on the
+    #'   manifold.
+    #' @param base_point A numeric array of shape \eqn{[\dots \times
+    #'   [\mathrm{dim}]]} specifying one or more base points on the manifold.
+    #'   Defaults to `NULL` in which case the identity is used.
     #'
-    #' @return A (list of) numeric array(s) of shape `dim` storing a (list of)
-    #'   projected vector(s) that belong to the manifold.
+    #' @return A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+    #'   storing the corresponding projections onto the manifold at
+    #'   corresponding base points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   A <- diag(1, 3)
+    #'   spd3$to_tangent(diag(1, 3))
+    #' }
     to_tangent = function(vector, base_point = NULL) {
       super$get_python_class()$to_tangent(
         vector = vector,
@@ -124,15 +140,13 @@ Manifold <- R6::R6Class(
     #'
     #' @details If the manifold is compact, a uniform distribution is used.
     #'
-    #' @param base_point An numeric array of shape `dim` specifying a base point
-    #'   which belongs to the manifold.
     #' @param n_samples An integer value specifying the number of samples to be
     #'   drawn. Defaults to `1L`.
     #' @param bound A numeric value specifying the bound of the interval in
-    #'   which to sample for non compact manifolds. Defaults to `1L`.
+    #'   which to sample for non-compact manifolds. Defaults to `1L`.
     #'
-    #' @return A list of numeric arrays representing a sample of points on the
-    #'   manifold.
+    #' @return A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+    #'   storing a sample of points on the manifold.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -149,11 +163,18 @@ Manifold <- R6::R6Class(
     #' @description Regularizes a point to the canonical representation for the
     #'   manifold.
     #'
-    #' @param point A numeric array of shape `dim` specifying a point which
-    #'   belongs to the manifold.
+    #' @param point A numeric array of shape \eqn{[\dots \times
+    #'   [\mathrm{dim}]]} specifying one or more points on the manifold.
     #'
-    #' @return A numeric array of shape `dim` storing a regularized version of
-    #'   the input `point`.
+    #' @return A numeric array of the same shape storing the corresponding
+    #'   regularized points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   A <- diag(1, 3)
+    #'   spd3$regularize(diag(1, 3))
+    #' }
     regularize = function(point) {
       super$get_python_class()$regularize(
         point = point
@@ -165,9 +186,14 @@ Manifold <- R6::R6Class(
     #' @param metric An object of class [`RiemannianMetric`].
     #'
     #' @return The [Manifold] class itself invisibly.
+    #'
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   spd3 <- SPDMatrix(n = 3)
+    #'   # sdp3$set_metric(SPDMetricAffine$new(n = 3)) # TO DO: does not work
+    #' }
     set_metric = function(metric) {
       super$get_python_class()$metric(
-        metric = metric
+        metric = metric$get_python_class()
       )
       invisible(self)
     },

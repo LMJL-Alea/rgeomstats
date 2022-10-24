@@ -17,9 +17,27 @@ space near each point.
 if (reticulate::py_module_available("geomstats")) {
   spd3 <- SPDMatrix(n = 3)
   A <- diag(1, 3)
-  spd3$belongs(A)
-  B <- diag(-1, 3)
-  spd3$belongs(B)
+  spd3$belongs(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `Manifold$is_tangent`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  A <- diag(1, 3)
+  spd3$is_tangent(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `Manifold$to_tangent`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  A <- diag(1, 3)
+  spd3$to_tangent(diag(1, 3))
 }
 
 ## ------------------------------------------------
@@ -29,6 +47,16 @@ if (reticulate::py_module_available("geomstats")) {
 if (reticulate::py_module_available("geomstats")) {
   spd3 <- SPDMatrix(n = 3)
   # spd3$random_point(10) # TO DO: uncomment when bug fixed in gs
+}
+
+## ------------------------------------------------
+## Method `Manifold$regularize`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  A <- diag(1, 3)
+  spd3$regularize(diag(1, 3))
 }
 
 ## ------------------------------------------------
@@ -135,8 +163,8 @@ Evaluates if a point belongs to the manifold.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{An numeric array of shape \code{dim} specifying a point to be
-checked.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+specifying one or more points to be checked.}
 
 \item{\code{atol}}{A numeric value specifying the absolute tolerance for
 checking. Defaults to \code{gs$backend$atol}.}
@@ -144,17 +172,15 @@ checking. Defaults to \code{gs$backend$atol}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A boolean that tells whether the input point belongs to the
-manifold.
+A boolean value or vector storing whether the corresponding
+points belong to the manifold.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{if (reticulate::py_module_available("geomstats")) {
   spd3 <- SPDMatrix(n = 3)
   A <- diag(1, 3)
-  spd3$belongs(A)
-  B <- diag(-1, 3)
-  spd3$belongs(B)
+  spd3$belongs(diag(1, 3))
 }
 }
 \if{html}{\out{</div>}}
@@ -174,11 +200,12 @@ Checks whether a vector is tangent at a base point.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{vector}}{An numeric array of shape \code{dim} specifying a vector to be
-checked.}
+\item{\code{vector}}{A numeric array of shape \eqn{[\dots \times
+[\mathrm{dim}]]} specifying one or more vectors to be checked.}
 
-\item{\code{base_point}}{An numeric array of shape \code{dim} specifying a base point
-which belongs to the manifold.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times
+  [\mathrm{dim}]]} specifying one or more base points on the manifold.
+Defaults to \code{NULL} in which case the identity is used.}
 
 \item{\code{atol}}{A numeric value specifying the absolute tolerance for
 checking. Defaults to \code{gs$backend$atol}.}
@@ -186,9 +213,21 @@ checking. Defaults to \code{gs$backend$atol}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A boolean that tells whether the input \code{vector} is ≥tangent to
-the manifold at \code{base_point}.
+A boolean value or vector storing whether the corresponding
+points are tangent to the manifold at corresponding base points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  A <- diag(1, 3)
+  spd3$is_tangent(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Manifold-to_tangent"></a>}}
@@ -202,18 +241,33 @@ Projects a vector to a tangent space of the manifold.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{vector}}{A (list of) numeric array(s) of shape \code{dim} specifying a
-(list of) vector(s) to project on the manifold.}
+\item{\code{vector}}{A numeric array of shape \eqn{[\dots \times
+  [\mathrm{dim}]]} specifying one or more vectors to project on the
+manifold.}
 
-\item{\code{base_point}}{A (list of) numeric array(s) of shape \code{dim} specifying
-a (list of) point(s) on the manifold. Defaults to \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times
+  [\mathrm{dim}]]} specifying one or more base points on the manifold.
+Defaults to \code{NULL} in which case the identity is used.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A (list of) numeric array(s) of shape \code{dim} storing a (list of)
-projected vector(s) that belong to the manifold.
+A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+storing the corresponding projections onto the manifold at
+corresponding base points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  A <- diag(1, 3)
+  spd3$to_tangent(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Manifold-random_point"></a>}}
@@ -231,10 +285,7 @@ Samples random points on the manifold.
 drawn. Defaults to \code{1L}.}
 
 \item{\code{bound}}{A numeric value specifying the bound of the interval in
-which to sample for non compact manifolds. Defaults to \code{1L}.}
-
-\item{\code{base_point}}{An numeric array of shape \code{dim} specifying a base point
-which belongs to the manifold.}
+which to sample for non-compact manifolds. Defaults to \code{1L}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -243,8 +294,8 @@ If the manifold is compact, a uniform distribution is used.
 }
 
 \subsection{Returns}{
-A list of numeric arrays representing a sample of points on the
-manifold.
+A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+storing a sample of points on the manifold.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -271,15 +322,27 @@ manifold.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} specifying a point which
-belongs to the manifold.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times
+[\mathrm{dim}]]} specifying one or more points on the manifold.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} storing a regularized version of
-the input \code{point}.
+A numeric array of the same shape storing the corresponding
+regularized points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  A <- diag(1, 3)
+  spd3$regularize(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Manifold-set_metric"></a>}}
@@ -299,6 +362,11 @@ Sets the Riemannian Metric associated to the manifold.
 }
 \subsection{Returns}{
 The \link{Manifold} class itself invisibly.
+
+if (reticulate::py_module_available("geomstats")) {
+spd3 <- SPDMatrix(n = 3)sdp3$set_metric(SPDMetricAffine$new(n = 3)) # TO DO: does not work
+
+}
 }
 }
 \if{html}{\out{<hr>}}

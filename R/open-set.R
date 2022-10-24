@@ -48,7 +48,7 @@ OpenSet <- R6::R6Class(
     #' @param point A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
     #'   specifying one or more vectors in the ambient space of the manifold.
     #'
-    #' @return A numeric array of the same shape `dim` storing the corresponding
+    #' @return A numeric array of the same shape storing the corresponding
     #'   projections onto the manifold.
     #'
     #' @examples
