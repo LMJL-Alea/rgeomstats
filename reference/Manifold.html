@@ -157,8 +157,8 @@ Choices are <code>extrinsic</code> or <code>intrinsic</code>. Defaults to <code>
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>point</code></dt>
-<dd><p>An numeric array of shape <code>dim</code> specifying a point to be
-checked.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times [\mathrm{dim}]]\)
+specifying one or more points to be checked.</p></dd>
 
 
 <dt><code>atol</code></dt>
@@ -170,17 +170,15 @@ checking. Defaults to <code>gs$backend$atol</code>.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A boolean that tells whether the input point belongs to the
-manifold.</p>
+<p>A boolean value or vector storing whether the corresponding
+points belong to the manifold.</p>
 </div>
 <div class="section">
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h4>
 <p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">belongs</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
-<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">belongs</span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
+<span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">belongs</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -195,13 +193,14 @@ manifold.</p>
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>vector</code></dt>
-<dd><p>An numeric array of shape <code>dim</code> specifying a vector to be
-checked.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times
+[\mathrm{dim}]]\) specifying one or more vectors to be checked.</p></dd>
 
 
 <dt><code>base_point</code></dt>
-<dd><p>An numeric array of shape <code>dim</code> specifying a base point
-which belongs to the manifold.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times
+  [\mathrm{dim}]]\) specifying one or more base points on the manifold.
+Defaults to <code>NULL</code> in which case the identity is used.</p></dd>
 
 
 <dt><code>atol</code></dt>
@@ -213,9 +212,18 @@ checking. Defaults to <code>gs$backend$atol</code>.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>A boolean that tells whether the input <code>vector</code> is ≥tangent to
-the manifold at <code>base_point</code>.</p>
+<p>A boolean value or vector storing whether the corresponding
+points are tangent to the manifold at corresponding base points.</p>
 </div>
+<div class="section">
+<h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">is_tangent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-Manifold-to_tangent"></a><div class="section">
 <h3 id="method-to-tangent-">Method <code>to_tangent()</code><a class="anchor" aria-label="anchor" href="#method-to-tangent-"></a></h3>
@@ -227,22 +235,34 @@ the manifold at <code>base_point</code>.</p>
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>vector</code></dt>
-<dd><p>A (list of) numeric array(s) of shape <code>dim</code> specifying a
-(list of) vector(s) to project on the manifold.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times
+  [\mathrm{dim}]]\) specifying one or more vectors to project on the
+manifold.</p></dd>
 
 
 <dt><code>base_point</code></dt>
-<dd><p>A (list of) numeric array(s) of shape <code>dim</code> specifying
-a (list of) point(s) on the manifold. Defaults to <code>NULL</code>.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times
+  [\mathrm{dim}]]\) specifying one or more base points on the manifold.
+Defaults to <code>NULL</code> in which case the identity is used.</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p>A (list of) numeric array(s) of shape <code>dim</code> storing a (list of)
-projected vector(s) that belong to the manifold.</p>
+<p>A numeric array of shape \([\dots \times [\mathrm{dim}]]\)
+storing the corresponding projections onto the manifold at
+corresponding base points.</p>
 </div>
+<div class="section">
+<h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">to_tangent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-Manifold-random_point"></a><div class="section">
 <h3 id="method-random-point-">Method <code>random_point()</code><a class="anchor" aria-label="anchor" href="#method-random-point-"></a></h3>
@@ -260,12 +280,7 @@ drawn. Defaults to <code>1L</code>.</p></dd>
 
 <dt><code>bound</code></dt>
 <dd><p>A numeric value specifying the bound of the interval in
-which to sample for non compact manifolds. Defaults to <code>1L</code>.</p></dd>
-
-
-<dt><code>base_point</code></dt>
-<dd><p>An numeric array of shape <code>dim</code> specifying a base point
-which belongs to the manifold.</p></dd>
+which to sample for non-compact manifolds. Defaults to <code>1L</code>.</p></dd>
 
 
 </dl><p></p></div>
@@ -277,11 +292,11 @@ which belongs to the manifold.</p></dd>
 
 <div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>A list of numeric arrays representing a sample of points on the
-manifold.</p>
+<p>A numeric array of shape \([\dots \times [\mathrm{dim}]]\)
+storing a sample of points on the manifold.</p>
 </div>
 <div class="section">
-<h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a></h4>
+<h4 id="examples-3">Examples<a class="anchor" aria-label="anchor" href="#examples-3"></a></h4>
 <p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="co"># spd3$random_point(10) # TO DO: uncomment when bug fixed in gs</span></span>
@@ -300,17 +315,26 @@ manifold.</p><div class="section">
 <div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>point</code></dt>
-<dd><p>A numeric array of shape <code>dim</code> specifying a point which
-belongs to the manifold.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times
+[\mathrm{dim}]]\) specifying one or more points on the manifold.</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
-<p>A numeric array of shape <code>dim</code> storing a regularized version of
-the input <code>point</code>.</p>
+<p>A numeric array of the same shape storing the corresponding
+regularized points.</p>
 </div>
+<div class="section">
+<h4 id="examples-4">Examples<a class="anchor" aria-label="anchor" href="#examples-4"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">regularize</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-Manifold-set_metric"></a><div class="section">
 <h3 id="method-set-metric-">Method <code>set_metric()</code><a class="anchor" aria-label="anchor" href="#method-set-metric-"></a></h3>
@@ -330,6 +354,8 @@ the input <code>point</code>.</p>
 <div class="section">
 <h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
 <p>The Manifold class itself invisibly.</p>
+<p>if (reticulate::py_module_available("geomstats")) 
+spd3 &lt;- SPDMatrix(n = 3)sdp3$set_metric(SPDMetricAffine$new(n = 3)) # TO DO: does not work</p>
 </div>
 
 </div><p></p><hr><a id="method-Manifold-random_tangent_vec"></a><div class="section">
@@ -359,7 +385,7 @@ drawn. Defaults to <code>1L</code>.</p></dd>
 are tangent to the manifold at <code>base_point</code>.</p>
 </div>
 <div class="section">
-<h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a></h4>
+<h4 id="examples-5">Examples<a class="anchor" aria-label="anchor" href="#examples-5"></a></h4>
 <p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">random_tangent_vec</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></span>
@@ -397,9 +423,27 @@ are tangent to the manifold at <code>base_point</code>.</p>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">belongs</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">belongs</span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">belongs</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `Manifold$is_tangent`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">is_tangent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `Manifold$to_tangent`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">to_tangent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
@@ -409,6 +453,16 @@ are tangent to the manifold at <code>base_point</code>.</p>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="co"># spd3$random_point(10) # TO DO: uncomment when bug fixed in gs</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `Manifold$regularize`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">spd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SPDMatrix.html">SPDMatrix</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spd3</span><span class="op">$</span><span class="fu">regularize</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
