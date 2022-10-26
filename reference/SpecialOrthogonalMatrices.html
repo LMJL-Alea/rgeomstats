@@ -134,8 +134,8 @@ the matrices.</p></dd>
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>point</code></dt>
-<dd><p>An numeric array of shape <code>dim</code> specifying a point to be
-checked.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times
+\{\mathrm{dim}\}]\) specifying one or more points to be checked.</p></dd>
 
 
 <dt><code>atol</code></dt>
@@ -147,8 +147,8 @@ checking. Defaults to <code>gs$backend$atol</code>.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A boolean that tells whether the input point belongs to the
-manifold.</p>
+<p>A boolean value or vector storing whether the input points belong
+to the manifold.</p>
 </div>
 
 </div><p></p><hr><a id="method-SpecialOrthogonalMatrices-intrinsic_to_extrinsic_coords"></a><div class="section">
