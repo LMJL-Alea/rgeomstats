@@ -1,8 +1,8 @@
-pandoc: 2.14.2
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-10-24T20:47Z
+last_built: 2022-10-26T14:11Z
 urls:
   reference: https://lmjl-alea.github.io/rgeomstats/reference
   article: https://lmjl-alea.github.io/rgeomstats/articles
