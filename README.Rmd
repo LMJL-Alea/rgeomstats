@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# rgeomstats
+# rgeomstats <a href="https://lmjl-alea.github.io/rgeomstats/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 [![check-standard](https://github.com/LMJL-Alea/rgeomstats/workflows/R-CMD-check/badge.svg)](https://github.com/LMJL-Alea/rgeomstats/actions)

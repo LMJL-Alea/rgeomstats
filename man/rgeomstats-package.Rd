@@ -20,5 +20,16 @@ Useful links:
 \author{
 \strong{Maintainer}: Aymeric Stamm \email{aymeric.stamm@math.cnrs.fr} (\href{https://orcid.org/0000-0002-8725-3654}{ORCID})
 
+Other contributors:
+\itemize{
+  \item Nicolas Guigui (c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")) [contributor]
+  \item Alice Le Brigant (c("Member of the Geomstats Core Team", ORCID = "0000-0002-8055-4753")) [contributor]
+  \item Johan Mathe (c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")) [contributor]
+  \item Nina Miolane (c("Member of the Geomstats Core Team", ORCID = "0000-0002-1200-9024")) [contributor]
+  \item Xavier Pennec (c("Member of the Geomstats Core Team", ORCID = "0000-0002-6617-7664")) [contributor]
+  \item Luis Pereira (c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")) [contributor]
+  \item Yann Thanwerdas (c("Member of the Geomstats Core Team", ORCID = "0000-0002-9351-6318")) [contributor]
+}
+
 }
 \keyword{internal}

@@ -2,8 +2,31 @@ Package: rgeomstats
 Title: An R Interface to Geomstats
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Aymeric", "Stamm", , "aymeric.stamm@math.cnrs.fr", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-8725-3654")))
+    person("Aymeric", "Stamm", 
+           email = "aymeric.stamm@math.cnrs.fr", 
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-8725-3654")),
+    person("Nicolas", "Guigui", 
+           role = "ctb", 
+           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")'),
+    person("Alice", "Le Brigant", 
+           role = "ctb", 
+           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-8055-4753")'),
+    person("Johan", "Mathe", 
+           role = "ctb", 
+           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")'),
+    person("Nina", "Miolane", 
+           role = "ctb", 
+           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-1200-9024")'),
+    person("Xavier", "Pennec", 
+           role = "ctb", 
+           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-6617-7664")'),
+    person("Luis", "Pereira", 
+           role = "ctb", 
+           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")'),
+    person("Yann", "Thanwerdas", 
+           role = "ctb", 
+           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-9351-6318")'))
 Description: Provides an R interface to the Python package Geomstats.
 License: MIT + file LICENSE
 Encoding: UTF-8
