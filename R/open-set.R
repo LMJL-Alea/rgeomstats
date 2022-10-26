@@ -26,7 +26,7 @@ OpenSet <- R6::R6Class(
     #'   [`Manifold`] class.
     #'
     #' @return An object of class [`OpenSet`].
-    initialize = function(dim, ambient_space, ...) {
+    initialize = function(dim, ambient_space, ...) { # nocov start
       dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       if ("shape" %in% names(dots)) {
@@ -41,7 +41,7 @@ OpenSet <- R6::R6Class(
         do.call(gs$geometry$base$OpenSet, dots)
       )
       private$set_fields()
-    },
+    }, # nocov end
 
     #' @description Project a point in the ambient space onto the manifold.
     #'

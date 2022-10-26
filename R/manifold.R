@@ -42,7 +42,7 @@ Manifold <- R6::R6Class(
     #'   Choices are `extrinsic` or `intrinsic`. Defaults to `intrinsic`.
     #'
     #' @return An object of class [`Manifold`].
-    initialize = function(dim, shape = NULL, metric = NULL, default_coords_type = "intrinsic") {
+    initialize = function(dim, shape = NULL, metric = NULL, default_coords_type = "intrinsic") { # nocov start
       dim <- as.integer(dim)
       if (!is.null(shape)) {
         shape <- shape |>
@@ -61,7 +61,7 @@ Manifold <- R6::R6Class(
         )
       )
       private$set_fields()
-    },
+    }, # nocov end
 
     #' @description Evaluates if a point belongs to the manifold.
     #'
