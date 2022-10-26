@@ -38,13 +38,13 @@ SpecialOrthogonalMatrices <- R6::R6Class(
 
     #' @description Evaluates if a point belongs to the manifold.
     #'
-    #' @param point An numeric array of shape `dim` specifying a point to be
-    #'   checked.
+    #' @param point A numeric array of shape \eqn{[\dots \times
+    #'   \{\mathrm{dim}\}]} specifying one or more points to be checked.
     #' @param atol A numeric value specifying the absolute tolerance for
     #'   checking. Defaults to `gs$backend$atol`.
     #'
-    #' @return A boolean that tells whether the input point belongs to the
-    #'   manifold.
+    #' @return A boolean value or vector storing whether the input points belong
+    #'   to the manifold.
     belongs = function(point, atol = gs$backend$atol) {
       private$second_inheritance$belongs(point, atol = atol)
     },

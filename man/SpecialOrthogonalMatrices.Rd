@@ -96,8 +96,8 @@ Evaluates if a point belongs to the manifold.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{An numeric array of shape \code{dim} specifying a point to be
-checked.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times
+\{\mathrm{dim}\}]} specifying one or more points to be checked.}
 
 \item{\code{atol}}{A numeric value specifying the absolute tolerance for
 checking. Defaults to \code{gs$backend$atol}.}
@@ -105,8 +105,8 @@ checking. Defaults to \code{gs$backend$atol}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A boolean that tells whether the input point belongs to the
-manifold.
+A boolean value or vector storing whether the input points belong
+to the manifold.
 }
 }
 \if{html}{\out{<hr>}}

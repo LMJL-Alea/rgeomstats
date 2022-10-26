@@ -1,6 +1,6 @@
 V <- cbind(
   c(sqrt(2) / 2, -sqrt(2) / 2, 0),
-  c(sqrt(2) / 2, sqrt(2) / 2, 0),
+  c(sqrt(2) / 2,  sqrt(2) / 2, 0),
   c(0, 0, 1)
 )
 A <- V %*% diag(1:3) %*% t(V)

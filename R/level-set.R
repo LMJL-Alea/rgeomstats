@@ -45,7 +45,7 @@ LevelSet <- R6::R6Class(
                           value,
                           tangent_submersion,
                           default_coords_type = "intrinsic",
-                          ...) {
+                          ...) { # nocov start
       dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       if ("shape" %in% names(dots)) {
@@ -62,7 +62,7 @@ LevelSet <- R6::R6Class(
         do.call(gs$geometry$base$LevelSet, dots)
       )
       private$set_fields()
-    },
+    }, # nocov end
 
     #' @description Converts from intrinsic to extrinsic coordinates.
     #'

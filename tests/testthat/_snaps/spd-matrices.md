@@ -11,7 +11,7 @@
 # SPDMatrices method differential_cholesky_factor() works
 
     Code
-      spd3$differential_cholesky_factor(D, A)
+      spd3$differential_cholesky_factor(Id, A)
     Output
                  [,1]      [,2]      [,3]
       [1,]  0.4082483 0.0000000 0.0000000
@@ -21,7 +21,7 @@
 # SPDMatrices method differential_exp() works
 
     Code
-      spd3$differential_exp(D, A)
+      spd3$differential_exp(Id, A)
     Output
                [,1]     [,2]     [,3]
       [1,] 5.053669 2.335387  0.00000
@@ -31,7 +31,7 @@
 # SPDMatrices method inverse_differential_exp() works
 
     Code
-      spd3$inverse_differential_exp(D, A)
+      spd3$inverse_differential_exp(Id, A)
     Output
                  [,1]       [,2]       [,3]
       [1,]  0.2516074 -0.1162721 0.00000000
@@ -41,7 +41,7 @@
 # SPDMatrices method differential_log() works
 
     Code
-      spd3$differential_log(D, A)
+      spd3$differential_log(Id, A)
     Output
             [,1]  [,2]      [,3]
       [1,]  0.75 -0.25 0.0000000
@@ -51,7 +51,7 @@
 # SPDMatrices method inverse_differential_log() works
 
     Code
-      spd3$inverse_differential_log(D, A)
+      spd3$inverse_differential_log(Id, A)
     Output
            [,1] [,2] [,3]
       [1,]  1.5  0.5    0
@@ -61,7 +61,7 @@
 # SPDMatrices method differential_power() works
 
     Code
-      spd3$differential_power(2, D, A)
+      spd3$differential_power(2, Id, A)
     Output
            [,1] [,2] [,3]
       [1,]    3    1    0
@@ -71,7 +71,7 @@
 # SPDMatrices method inverse_differential_power() works
 
     Code
-      spd3$inverse_differential_power(2, D, A)
+      spd3$inverse_differential_power(2, Id, A)
     Output
              [,1]   [,2]      [,3]
       [1,]  0.375 -0.125 0.0000000
@@ -81,7 +81,7 @@
 # SPDMatrices method random_tangent_vec() works
 
     Code
-      spd3$random_tangent_vec(D, 10)
+      spd3$random_tangent_vec(Id, 10)
     Output
       , , 1
       

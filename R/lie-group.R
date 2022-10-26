@@ -42,7 +42,7 @@ MatrixLieGroup <- R6::R6Class(
     initialize = function(dim,
                           n,
                           lie_algebra = NULL,
-                          ...) {
+                          ...) { # nocov start
       dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       dots$n <- as.integer(n)
@@ -52,7 +52,7 @@ MatrixLieGroup <- R6::R6Class(
         do.call(gs$geometry$lie_group$MatrixLieGroup, dots)
       )
       private$set_fields()
-    },
+    }, # nocov end
 
     #' @description Exponentiates a left-invariant vector field from a base
     #'   point.
@@ -258,7 +258,7 @@ LieGroup <- R6::R6Class(
     initialize = function(dim,
                           shape,
                           lie_algebra = NULL,
-                          ...) {
+                          ...) { # nocov start
       dots <- capture_extra_params(...)
       dots$dim <- as.integer(dim)
       dots$shape <- shape |>
@@ -270,7 +270,7 @@ LieGroup <- R6::R6Class(
         do.call(gs$geometry$lie_group$LieGroup, dots)
       )
       private$set_fields()
-    },
+    }, # nocov end
 
     #' @description Exponentiates a left-invariant vector field from a base
     #'   point.

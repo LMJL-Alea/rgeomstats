@@ -1,19 +1,19 @@
 V <- cbind(
   c(sqrt(2) / 2, -sqrt(2) / 2, 0),
-  c(sqrt(2) / 2, sqrt(2) / 2, 0),
+  c(sqrt(2) / 2,  sqrt(2) / 2, 0),
   c(0, 0, 1)
 )
 A <- V %*% diag(1:3) %*% t(V)
 B <- V %*% diag(4:6) %*% t(V)
-D <- diag(1, 3)
-Z <- diag(0, 3)
+Id <- diag(1, 3)
+Ze <- diag(0, 3)
 S1 <- array(dim = c(2, 3, 3))
 S1[1, , ] <- A
 S1[2, , ] <- B
 S2 <- array(dim = c(3, 3, 3))
 S2[1, , ] <- A
 S2[2, , ] <- B
-S2[3, , ] <- D
+S2[3, , ] <- Id
 
 test_that("SPDMatrices constructor works", {
   spd3 <- SPDMatrix(n = 3)
@@ -27,57 +27,57 @@ test_that("SPDMatrices method cholesky_factor() works", {
 
 test_that("SPDMatrices method differential_cholesky_factor() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$differential_cholesky_factor(D, A))
+  expect_snapshot(spd3$differential_cholesky_factor(Id, A))
 })
 
 test_that("SPDMatrices method expm() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_equal(spd3$expm(Z), D)
+  expect_equal(spd3$expm(Ze), Id)
 })
 
 test_that("SPDMatrices method differential_exp() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$differential_exp(D, A))
+  expect_snapshot(spd3$differential_exp(Id, A))
 })
 
 test_that("SPDMatrices method inverse_differential_exp() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$inverse_differential_exp(D, A))
+  expect_snapshot(spd3$inverse_differential_exp(Id, A))
 })
 
 test_that("SPDMatrices method logm() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_equal(spd3$logm(D), Z)
+  expect_equal(spd3$logm(Id), Ze)
 })
 
 test_that("SPDMatrices method differential_log() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$differential_log(D, A))
+  expect_snapshot(spd3$differential_log(Id, A))
 })
 
 test_that("SPDMatrices method inverse_differential_log() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$inverse_differential_log(D, A))
+  expect_snapshot(spd3$inverse_differential_log(Id, A))
 })
 
 test_that("SPDMatrices method powerm() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_equal(spd3$powerm(D, 2), D)
+  expect_equal(spd3$powerm(Id, 2), Id)
 })
 
 test_that("SPDMatrices method differential_power() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$differential_power(2, D, A))
+  expect_snapshot(spd3$differential_power(2, Id, A))
 })
 
 test_that("SPDMatrices method inverse_differential_power() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$inverse_differential_power(2, D, A))
+  expect_snapshot(spd3$inverse_differential_power(2, Id, A))
 })
 
 test_that("SPDMatrices method projection() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_equal(spd3$projection(D), D)
+  expect_equal(spd3$projection(Id), Id)
 })
 
 test_that("SPDMatrices method belongs() works", {
@@ -88,12 +88,12 @@ test_that("SPDMatrices method belongs() works", {
 
 test_that("SPDMatrices method is_tangent() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_true(spd3$is_tangent(Z))
+  expect_true(spd3$is_tangent(Ze))
 })
 
 test_that("SPDMatrices method to_tangent() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_equal(spd3$to_tangent(D), D) # TO DO: not sure I understand why D projects to D.
+  expect_equal(spd3$to_tangent(Id), Id) # TO DO: not sure I understand why Id projects to Id.
 })
 
 test_that("SPDMatrices method random_point() works", {
@@ -105,7 +105,7 @@ test_that("SPDMatrices method random_point() works", {
 
 test_that("SPDMatrices method regularize() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_equal(spd3$regularize(D), D)
+  expect_equal(spd3$regularize(Id), Id)
 })
 
 test_that("SPDMatrices method set_metric() works", {
@@ -118,5 +118,5 @@ test_that("SPDMatrices method set_metric() works", {
 test_that("SPDMatrices method random_tangent_vec() works", {
   reticulate::py_set_seed(1234)
   spd3 <- SPDMatrix(n = 3)
-  expect_snapshot(spd3$random_tangent_vec(D, 10))
+  expect_snapshot(spd3$random_tangent_vec(Id, 10))
 })
