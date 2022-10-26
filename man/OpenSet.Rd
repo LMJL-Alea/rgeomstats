@@ -98,8 +98,9 @@ Project a point in the ambient space onto the manifold.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
-specifying one or more vectors in the ambient space of the manifold.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times
+  \{\mathrm{dim}\}]} specifying one or more vectors in the ambient space
+of the manifold.}
 }
 \if{html}{\out{</div>}}
 }

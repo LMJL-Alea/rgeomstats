@@ -93,15 +93,14 @@ test_that("SPDMatrices method is_tangent() works", {
 
 test_that("SPDMatrices method to_tangent() works", {
   spd3 <- SPDMatrix(n = 3)
-  expect_equal(spd3$to_tangent(D), D)
+  expect_equal(spd3$to_tangent(D), D) # TO DO: not sure I understand why D projects to D.
 })
 
 test_that("SPDMatrices method random_point() works", {
   skip("Needs bug fix in gs")
   reticulate::py_set_seed(1234)
   spd3 <- SPDMatrix(n = 3)
-  spl <- spd3$random_point(10)
-  expect_snapshot(spl)
+  expect_snapshot(spd3$random_point(10))
 })
 
 test_that("SPDMatrices method regularize() works", {
@@ -109,9 +108,15 @@ test_that("SPDMatrices method regularize() works", {
   expect_equal(spd3$regularize(D), D)
 })
 
+test_that("SPDMatrices method set_metric() works", {
+  spd3 <- SPDMatrix(n = 3)
+  met <- SPDMetricBuresWasserstein$new(n = 3)
+  spd3$set_metric(met)
+  expect_equal(spd3$metric, met$get_python_class())
+})
+
 test_that("SPDMatrices method random_tangent_vec() works", {
   reticulate::py_set_seed(1234)
   spd3 <- SPDMatrix(n = 3)
-  spl <- spd3$random_tangent_vec(D, 10)
-  expect_snapshot(spl)
+  expect_snapshot(spd3$random_tangent_vec(D, 10))
 })

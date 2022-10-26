@@ -45,8 +45,9 @@ OpenSet <- R6::R6Class(
 
     #' @description Project a point in the ambient space onto the manifold.
     #'
-    #' @param point A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
-    #'   specifying one or more vectors in the ambient space of the manifold.
+    #' @param point A numeric array of shape \eqn{[\dots \times
+    #'   \{\mathrm{dim}\}]} specifying one or more vectors in the ambient space
+    #'   of the manifold.
     #'
     #' @return A numeric array of the same shape storing the corresponding
     #'   projections onto the manifold.

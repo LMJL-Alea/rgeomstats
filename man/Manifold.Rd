@@ -60,6 +60,17 @@ if (reticulate::py_module_available("geomstats")) {
 }
 
 ## ------------------------------------------------
+## Method `Manifold$set_metric`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  spd3$metric
+  spd3$set_metric(SPDMetricBuresWasserstein$new(n = 3))
+  spd3$metric
+}
+
+## ------------------------------------------------
 ## Method `Manifold$random_tangent_vec`
 ## ------------------------------------------------
 
@@ -163,8 +174,8 @@ Evaluates if a point belongs to the manifold.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
-specifying one or more points to be checked.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times
+\{\mathrm{dim}\}]} specifying one or more points to be checked.}
 
 \item{\code{atol}}{A numeric value specifying the absolute tolerance for
 checking. Defaults to \code{gs$backend$atol}.}
@@ -252,7 +263,7 @@ Defaults to \code{NULL} in which case the identity is used.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+A numeric array of shape \eqn{[\dots \times \{\mathrm{dim}\}]}
 storing the corresponding projections onto the manifold at
 corresponding base points.
 }
@@ -294,7 +305,7 @@ If the manifold is compact, a uniform distribution is used.
 }
 
 \subsection{Returns}{
-A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+A numeric array of shape \eqn{[\dots \times \{\mathrm{dim}\}]}
 storing a sample of points on the manifold.
 }
 \subsection{Examples}{
@@ -362,12 +373,20 @@ Sets the Riemannian Metric associated to the manifold.
 }
 \subsection{Returns}{
 The \link{Manifold} class itself invisibly.
-
-if (reticulate::py_module_available("geomstats")) {
-spd3 <- SPDMatrix(n = 3)sdp3$set_metric(SPDMetricAffine$new(n = 3)) # TO DO: does not work
-
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  spd3 <- SPDMatrix(n = 3)
+  spd3$metric
+  spd3$set_metric(SPDMetricBuresWasserstein$new(n = 3))
+  spd3$metric
 }
 }
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Manifold-random_tangent_vec"></a>}}
@@ -381,8 +400,8 @@ Generates a random tangent vector.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{base_point}}{An numeric array of shape \code{dim} specifying a base point
-which belongs to the manifold.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times
+\{\mathrm{dim}\}]} specifying one or more base points on the manifold.}
 
 \item{\code{n_samples}}{An integer value specifying the number of samples to be
 drawn. Defaults to \code{1L}.}
@@ -390,8 +409,9 @@ drawn. Defaults to \code{1L}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A list of numeric arrays representing a sample of vectors that
-are tangent to the manifold at \code{base_point}.
+A numeric array of shape \eqn{[\dots \times \{\mathrm{dim}\}]}
+storing a sample of vectors that are tangent to the manifold at
+corresponding base points.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}

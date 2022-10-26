@@ -65,8 +65,8 @@ Manifold <- R6::R6Class(
 
     #' @description Evaluates if a point belongs to the manifold.
     #'
-    #' @param point A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
-    #'   specifying one or more points to be checked.
+    #' @param point A numeric array of shape \eqn{[\dots \times
+    #'   \{\mathrm{dim}\}]} specifying one or more points to be checked.
     #' @param atol A numeric value specifying the absolute tolerance for
     #'   checking. Defaults to `gs$backend$atol`.
     #'
@@ -119,7 +119,7 @@ Manifold <- R6::R6Class(
     #'   [\mathrm{dim}]]} specifying one or more base points on the manifold.
     #'   Defaults to `NULL` in which case the identity is used.
     #'
-    #' @return A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+    #' @return A numeric array of shape \eqn{[\dots \times \{\mathrm{dim}\}]}
     #'   storing the corresponding projections onto the manifold at
     #'   corresponding base points.
     #'
@@ -145,7 +145,7 @@ Manifold <- R6::R6Class(
     #' @param bound A numeric value specifying the bound of the interval in
     #'   which to sample for non-compact manifolds. Defaults to `1L`.
     #'
-    #' @return A numeric array of shape \eqn{[\dots \times [\mathrm{dim}]]}
+    #' @return A numeric array of shape \eqn{[\dots \times \{\mathrm{dim}\}]}
     #'   storing a sample of points on the manifold.
     #'
     #' @examples
@@ -187,26 +187,30 @@ Manifold <- R6::R6Class(
     #'
     #' @return The [Manifold] class itself invisibly.
     #'
+    #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
     #'   spd3 <- SPDMatrix(n = 3)
-    #'   # sdp3$set_metric(SPDMetricAffine$new(n = 3)) # TO DO: does not work
+    #'   spd3$metric
+    #'   spd3$set_metric(SPDMetricBuresWasserstein$new(n = 3))
+    #'   spd3$metric
     #' }
     set_metric = function(metric) {
-      super$get_python_class()$metric(
-        metric = metric$get_python_class()
-      )
+      pc <- super$get_python_class()
+      pc$metric <- metric$get_python_class()
+      private$set_fields()
       invisible(self)
     },
 
     #' @description Generates a random tangent vector.
     #'
-    #' @param base_point An numeric array of shape `dim` specifying a base point
-    #'   which belongs to the manifold.
+    #' @param base_point A numeric array of shape \eqn{[\dots \times
+    #'   \{\mathrm{dim}\}]} specifying one or more base points on the manifold.
     #' @param n_samples An integer value specifying the number of samples to be
     #'   drawn. Defaults to `1L`.
     #'
-    #' @return A list of numeric arrays representing a sample of vectors that
-    #'   are tangent to the manifold at `base_point`.
+    #' @return A numeric array of shape \eqn{[\dots \times \{\mathrm{dim}\}]}
+    #'   storing a sample of vectors that are tangent to the manifold at
+    #'   corresponding base points.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -214,14 +218,11 @@ Manifold <- R6::R6Class(
     #'   spd3$random_tangent_vec(diag(1, 3), 10)
     #' }
     random_tangent_vec = function(base_point, n_samples = 1) {
-      if (!self$belongs(base_point))
-        cli::cli_abort("The input matrix {.arg base_point} should be SPD.")
       n_samples <- as.integer(n_samples)
-      array_res <- super$get_python_class()$random_tangent_vec(
+      super$get_python_class()$random_tangent_vec(
         base_point = base_point,
         n_samples = n_samples
       )
-      purrr::array_tree(array_res, margin = 1)
     }
   ),
   private = list(
