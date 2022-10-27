@@ -101,11 +101,13 @@ point.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A numeric array of shape \code{c(n, n)} specifying a
-tangent vector at base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times n \times
+  n]} specifying one or more tangent vectors at corresponding base
+points.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more base points on the manifold. Defaults to identity if
+\code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -119,9 +121,9 @@ or the identity.
 }
 
 \subsection{Returns}{
-A numeric array of shape \code{c(n, n)} storing the left
-multiplication of the Lie exponential of the input tangent vector with
-\code{base_point}.
+A numeric array of shape \eqn{[\dots \times n \times n]} storing
+the left multiplication of the Lie exponential of the input tangent
+vectors with the corresponding base points.
 }
 }
 \if{html}{\out{<hr>}}
@@ -139,8 +141,9 @@ to \code{point}.
 \describe{
 \item{\code{point}}{A numeric array of shape \code{c(n, n)} specifying a point.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more base points on the manifold. Defaults to identity if
+\code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -192,8 +195,9 @@ tangent vector at base point.}
 \item{\code{tangent_vector_b}}{A numeric array of shape \code{c(n, n)} specifying a
 tangent vector at base point.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more base points on the manifold. Defaults to identity if
+\code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }

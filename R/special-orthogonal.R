@@ -45,17 +45,25 @@ SpecialOrthogonalMatrices <- R6::R6Class(
     #'
     #' @return A boolean value or vector storing whether the input points belong
     #'   to the manifold.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   so3$belongs(diag(1, 3))
+    #' }
     belongs = function(point, atol = gs$backend$atol) {
       private$second_inheritance$belongs(point, atol = atol)
     },
 
     #' @description Converts from intrinsic to extrinsic coordinates.
     #'
-    #' @param point_intrinsic A numeric array of shape `dim` specifying a point
-    #'   in the embedded manifold in intrinsic coordinates.
+    #' @param point_intrinsic A numeric array of shape \eqn{[\dots \times \{
+    #'   \mathrm{dim} \}]} specifying one or more points on the embedded
+    #'   manifold in intrinsic coordinates.
     #'
-    #' @return A numeric array of shape `dim_embedding` representing the same
-    #'   point in the embedded manifold in extrinsic coordinates.
+    #' @return A numeric array of shape \eqn{[\dots \times \{
+    #'   \mathrm{dim_embedding} \}]} storing the same points on the embedded
+    #'   manifold in extrinsic coordinates.
     intrinsic_to_extrinsic_coords = function(point_intrinsic) {
       private$second_inheritance$intrinsic_to_extrinsic_coords(
         point_intrinsic = point_intrinsic
@@ -64,12 +72,13 @@ SpecialOrthogonalMatrices <- R6::R6Class(
 
     #' @description Converts from extrinsic to intrinsic coordinates.
     #'
-    #' @param point_extrinsic A numeric array of shape `dim_embedding`
-    #'   specifying a point in the embedded manifold in extrinsic coordinates,
-    #'   i.E. in the coordinates of the embedding manifold.
+    #' @param point_extrinsic A numeric array of shape \eqn{[\dots \times \{
+    #'   \mathrm{dim_embedding} \}]} specifying one or more points on the
+    #'   embedded manifold in extrinsic coordinates.
     #'
-    #' @return A numeric array of shape `dim` representing the same point in the
-    #'   embedded manifold in intrinsic coordinates.
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim} \}]}
+    #'   storing the same points on the embedded manifold in intrinsic
+    #'   coordinates.
     extrinsic_to_intrinsic_coords = function(point_extrinsic) {
       private$second_inheritance$extrinsic_to_intrinsic_coords(
         point_extrinsic = point_extrinsic
@@ -83,6 +92,12 @@ SpecialOrthogonalMatrices <- R6::R6Class(
     #'   specifying one or more matrices.
     #'
     #' @return A numeric array of the same shape storing the projected matrices.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(3)
+    #'   so3$projection(diag(1, 3))
+    #' }
     projection = function(point) {
       private$second_inheritance$get_python_class()$projection(point = point)
     }

@@ -6,6 +6,26 @@
 \description{
 Class for special orthogonal groups in matrix representation.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `SpecialOrthogonalMatrices$belongs`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$belongs(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonalMatrices$projection`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(3)
+  so3$projection(diag(1, 3))
+}
+}
 \seealso{
 Other special orthogonal classes: 
 \code{\link{SpecialOrthogonal2Vectors}},
@@ -108,6 +128,17 @@ checking. Defaults to \code{gs$backend$atol}.}
 A boolean value or vector storing whether the input points belong
 to the manifold.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$belongs(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonalMatrices-intrinsic_to_extrinsic_coords"></a>}}
@@ -121,14 +152,16 @@ Converts from intrinsic to extrinsic coordinates.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point_intrinsic}}{A numeric array of shape \code{dim} specifying a point
-in the embedded manifold in intrinsic coordinates.}
+\item{\code{point_intrinsic}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim} \}]} specifying one or more points on the embedded
+manifold in intrinsic coordinates.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim_embedding} representing the same
-point in the embedded manifold in extrinsic coordinates.
+A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim_embedding} \}]} storing the same points on the embedded
+manifold in extrinsic coordinates.
 }
 }
 \if{html}{\out{<hr>}}
@@ -143,15 +176,16 @@ Converts from extrinsic to intrinsic coordinates.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point_extrinsic}}{A numeric array of shape \code{dim_embedding}
-specifying a point in the embedded manifold in extrinsic coordinates,
-i.E. in the coordinates of the embedding manifold.}
+\item{\code{point_extrinsic}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim_embedding} \}]} specifying one or more points on the
+embedded manifold in extrinsic coordinates.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} representing the same point in the
-embedded manifold in intrinsic coordinates.
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim} \}]}
+storing the same points on the embedded manifold in intrinsic
+coordinates.
 }
 }
 \if{html}{\out{<hr>}}
@@ -175,6 +209,17 @@ specifying one or more matrices.}
 \subsection{Returns}{
 A numeric array of the same shape storing the projected matrices.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(3)
+  so3$projection(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonalMatrices-clone"></a>}}

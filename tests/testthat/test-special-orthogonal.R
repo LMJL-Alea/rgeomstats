@@ -40,3 +40,24 @@ test_that("SpecialOrthogonalMatrices method belongs() works", {
   so3 <- SpecialOrthogonal(n = 3)
   expect_true(so3$belongs(Id))
 })
+
+test_that("SpecialOrthogonalMatrices method intrinsic_to_extrinsic_coords() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_snapshot(so3$intrinsic_to_extrinsic_coords(Id), error = TRUE)
+})
+
+test_that("SpecialOrthogonalMatrices method extrinsic_to_intrinsic_coords() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_snapshot(so3$extrinsic_to_intrinsic_coords(Id), error = TRUE)
+})
+
+test_that("SpecialOrthogonalMatrices method projection() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_equal(so3$projection(Id), Id)
+})
+
+test_that("SpecialOrthogonalMatrices method exp() works", {
+  skip("Needs bug fix in gs")
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_equal(so3$exp(Ze), Id)
+})

@@ -2,8 +2,9 @@
 #'
 #' @description Class for matrix Lie groups.
 #'
-#' @param base_point A numeric array of shape `c(n, n)` specifying a tangent
-#'   base point. Defaults to identity if `NULL`.
+#' @param base_point A numeric array of shape \eqn{[\dots \times n \times n]}
+#'   specifying one or more base points on the manifold. Defaults to identity if
+#'   `NULL`.
 #'
 #' @author Nina Miolane
 #'
@@ -64,12 +65,13 @@ MatrixLieGroup <- R6::R6Class(
     #'   Therefore, the Lie exponential is obtained when `base_point` is `NULL`,
     #'   or the identity.
     #'
-    #' @param tangent_vec A numeric array of shape `c(n, n)` specifying a
-    #'   tangent vector at base point.
+    #' @param tangent_vec A numeric array of shape \eqn{[\dots \times n \times
+    #'   n]} specifying one or more tangent vectors at corresponding base
+    #'   points.
     #'
-    #' @return A numeric array of shape `c(n, n)` storing the left
-    #'   multiplication of the Lie exponential of the input tangent vector with
-    #'   `base_point`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing
+    #'   the left multiplication of the Lie exponential of the input tangent
+    #'   vectors with the corresponding base points.
     exp = function(tangent_vec, base_point = NULL) {
       super$get_python_class()$exp(
         tangent_vec = tangent_vec,
