@@ -33,3 +33,21 @@ You can install the development version of **rgeomstats** via:
 # install.packages("remotes")
 remotes::install_github("LMJL-Alea/rgeomstats")
 ```
+
+## Example
+
+You can instantiate the space $\mathrm{SO}(3)$ of 3D rotations and sample random points in this space as follows:
+
+```{r}
+library(rgeomstats)
+so3 <- SpecialOrthogonal(n = 3)
+spl <- so3$random_point(n_samples = 5)
+dim(spl)
+```
+
+All Geomstats-like computations are stored in arrays. In particular, sample IDs are always stored along the first dimension. Hence, it is always possible to convert a sample into a list via:
+
+```{r}
+purrr::array_tree(spl, margin = 1)
+```
+
