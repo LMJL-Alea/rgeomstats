@@ -8,25 +8,25 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-8725-3654")),
     person("Nicolas", "Guigui", 
            role = "ctb", 
-           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")'),
+           comment = c("Author of the Geomstats Python package", ORCID = "0000-0002-7901-0732")),
     person("Alice", "Le Brigant", 
            role = "ctb", 
-           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-8055-4753")'),
+           comment = c("Author of the Geomstats Python package", ORCID = "0000-0002-8055-4753")),
     person("Johan", "Mathe", 
            role = "ctb", 
-           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")'),
+           comment = c("Author of the Geomstats Python package")),
     person("Nina", "Miolane", 
            role = "ctb", 
-           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-1200-9024")'),
+           comment = c("Author of the Geomstats Python package", ORCID = "0000-0002-1200-9024")),
     person("Xavier", "Pennec", 
            role = "ctb", 
-           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-6617-7664")'),
+           comment = c("Author of the Geomstats Python package", ORCID = "0000-0002-6617-7664")),
     person("Luis", "Pereira", 
            role = "ctb", 
-           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-7901-0732")'),
+           comment = c("Author of the Geomstats Python package")),
     person("Yann", "Thanwerdas", 
            role = "ctb", 
-           comment = 'c("Member of the Geomstats Core Team", ORCID = "0000-0002-9351-6318")'))
+           comment = c("Author of the Geomstats Python package", ORCID = "0000-0002-9351-6318")))
 Description: Provides an R interface to the Python package Geomstats.
 License: MIT + file LICENSE
 Encoding: UTF-8
