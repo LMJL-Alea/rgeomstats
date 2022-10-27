@@ -14,13 +14,14 @@ coverage](https://codecov.io/gh/LMJL-Alea/rgeomstats/branch/master/graph/badge.s
 status](https://www.r-pkg.org/badges/version/rgeomstats)](https://CRAN.R-project.org/package=rgeomstats)
 <!-- badges: end -->
 
-The goal of rgeomstats is to provide accessibility to the
+The goal of **rgeomstats** is to provide accessibility to the
 [**Geomstats**](https://geomstats.github.io) Python library for the
-community of `R` users.
+community of `R` users through an R interface that mimics as closely as
+possible the carefully designed Python API.
 
 ## Installation
 
-You can install the development version of rgeomstats like so:
+You can install the development version of **rgeomstats** via:
 
 ``` r
 # install.packages("remotes")
