@@ -149,13 +149,15 @@ point.</p><div class="section">
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tangent_vec</code></dt>
-<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a
-tangent vector at base point.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times n \times
+  n]\) specifying one or more tangent vectors at corresponding base
+points.</p></dd>
 
 
 <dt><code>base_point</code></dt>
-<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a tangent
-base point. Defaults to identity if <code>NULL</code>.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times n \times n]\)
+specifying one or more base points on the manifold. Defaults to identity if
+<code>NULL</code>.</p></dd>
 
 
 </dl><p></p></div>
@@ -172,9 +174,9 @@ or the identity.</p>
 
 <div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A numeric array of shape <code>c(n, n)</code> storing the left
-multiplication of the Lie exponential of the input tangent vector with
-<code>base_point</code>.</p>
+<p>A numeric array of shape \([\dots \times n \times n]\) storing
+the left multiplication of the Lie exponential of the input tangent
+vectors with the corresponding base points.</p>
 </div>
 
 </div><p></p><hr><a id="method-MatrixLieGroup-log"></a><div class="section">
@@ -192,8 +194,9 @@ to <code>point</code>.</p><div class="section">
 
 
 <dt><code>base_point</code></dt>
-<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a tangent
-base point. Defaults to identity if <code>NULL</code>.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times n \times n]\)
+specifying one or more base points on the manifold. Defaults to identity if
+<code>NULL</code>.</p></dd>
 
 
 </dl><p></p></div>
@@ -249,8 +252,9 @@ tangent vector at base point.</p></dd>
 
 
 <dt><code>base_point</code></dt>
-<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a tangent
-base point. Defaults to identity if <code>NULL</code>.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times n \times n]\)
+specifying one or more base points on the manifold. Defaults to identity if
+<code>NULL</code>.</p></dd>
 
 
 </dl><p></p></div>
