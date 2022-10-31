@@ -178,6 +178,14 @@ or the identity.</p>
 the left multiplication of the Lie exponential of the input tangent
 vectors with the corresponding base points.</p>
 </div>
+<div class="section">
+<h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="co"># so3$exp(diag(1, 3)) # TO DO: fix in gs</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-MatrixLieGroup-log"></a><div class="section">
 <h3 id="method-log-">Method <code><a href="https://rdrr.io/r/base/Log.html" class="external-link">log()</a></code><a class="anchor" aria-label="anchor" href="#method-log-"></a></h3>
@@ -190,7 +198,8 @@ to <code>point</code>.</p><div class="section">
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>point</code></dt>
-<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a point.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times n \times n]\)
+specifying one or more points.</p></dd>
 
 
 <dt><code>base_point</code></dt>
@@ -211,9 +220,18 @@ the output satisfies $$g = \exp(\log(g, h), h)$$.</p>
 
 <div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>A numeric array of shape <code>c(n, n)</code> such that its Lie exponential
-at <code>base_point</code> is <code>point</code>.</p>
+<p>A numeric array of shape \([\dots \times n \times n]\) such
+that its Lie exponential at corresponding base points matches
+corresponding points.</p>
 </div>
+<div class="section">
+<h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">log</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-MatrixLieGroup-get_identity"></a><div class="section">
 <h3 id="method-get-identity-">Method <code>get_identity()</code><a class="anchor" aria-label="anchor" href="#method-get-identity-"></a></h3>
@@ -224,9 +242,17 @@ at <code>base_point</code> is <code>point</code>.</p>
 
 <div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p>A numeric array of shape <code>dim</code> or <code>c(n, n)</code> storing the identity
+<p>A numeric array of shape \(n \times n\) storing the identity
 of the Lie group.</p>
 </div>
+<div class="section">
+<h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">get_identity</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-MatrixLieGroup-lie_bracket"></a><div class="section">
 <h3 id="method-lie-bracket-">Method <code>lie_bracket()</code><a class="anchor" aria-label="anchor" href="#method-lie-bracket-"></a></h3>
@@ -242,13 +268,15 @@ of the Lie group.</p>
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tangent_vector_a</code></dt>
-<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a
-tangent vector at base point.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times n
+  \times n]\) specifying one or more tangent vectors at corresponding base
+points.</p></dd>
 
 
 <dt><code>tangent_vector_b</code></dt>
-<dd><p>A numeric array of shape <code>c(n, n)</code> specifying a
-tangent vector at base point.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times n
+  \times n]\) specifying one or more tangent vectors at corresponding base
+points.</p></dd>
 
 
 <dt><code>base_point</code></dt>
@@ -269,9 +297,17 @@ identity, compute commutator, go back): $$[A,B] = A_P^{-1}B -
 
 <div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>A numeric array of shape <code>c(n, n)</code> storing the Lie bracket of the
-two input tangent vectors.</p>
+<p>A numeric array of shape \([\dots \times n \times n]\) storing
+the Lie bracket of the two input tangent vectors.</p>
 </div>
+<div class="section">
+<h4 id="examples-3">Examples<a class="anchor" aria-label="anchor" href="#examples-3"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">lie_bracket</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-MatrixLieGroup-tangent_translation_map"></a><div class="section">
 <h3 id="method-tangent-translation-map-">Method <code>tangent_translation_map()</code><a class="anchor" aria-label="anchor" href="#method-tangent-translation-map-"></a></h3>
@@ -287,8 +323,9 @@ two input tangent vectors.</p>
 <div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>point</code></dt>
-<dd><p>A numeric array of shape <code>dim</code> or <code>c(n, n)</code> specifying the
-point at which to compute the map.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times \{ \mathrm{dim},
+  [n \times n] \} ]\) specifying one or more points at which to compute
+the map.</p></dd>
 
 
 <dt><code>left_or_right</code></dt>
@@ -318,9 +355,22 @@ of the map.</p>
 
 <div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
-<p>A function computing the tangent map of the left/right
-translation by <code>point</code>. It can be applied to tangent vectors.</p>
+<p>A function taking as argument a numeric array <code>tangent_vec</code> of
+shape \([\dots \times \{ \mathrm{dim}, [n \times n] \} ]\) specifying
+one or more tangent vectors and returning a numeric array of shape
+\([\dots \times \{ \mathrm{dim}, [n \times n] \} ]\) storing the
+result of the tangent mapping of the left/right translation of input
+tangent points by corresponding base points.</p>
 </div>
+<div class="section">
+<h4 id="examples-4">Examples<a class="anchor" aria-label="anchor" href="#examples-4"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">tangent_map</span> <span class="op">&lt;-</span> <span class="va">so3</span><span class="op">$</span><span class="fu">tangent_translation_map</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">tangent_map</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-MatrixLieGroup-compose"></a><div class="section">
 <h3 id="method-compose-">Method <code>compose()</code><a class="anchor" aria-label="anchor" href="#method-compose-"></a></h3>
@@ -392,6 +442,56 @@ point.</p>
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MatrixLieGroup$exp`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># so3$exp(diag(1, 3)) # TO DO: fix in gs</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MatrixLieGroup$log`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">log</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MatrixLieGroup$get_identity`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">get_identity</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MatrixLieGroup$lie_bracket`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">lie_bracket</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `MatrixLieGroup$tangent_translation_map`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">tangent_map</span> <span class="op">&lt;-</span> <span class="va">so3</span><span class="op">$</span><span class="fu">tangent_translation_map</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">tangent_map</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
