@@ -72,6 +72,12 @@ MatrixLieGroup <- R6::R6Class(
     #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing
     #'   the left multiplication of the Lie exponential of the input tangent
     #'   vectors with the corresponding base points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   # so3$exp(diag(1, 3)) # TO DO: fix in gs
+    #' }
     exp = function(tangent_vec, base_point = NULL) {
       super$get_python_class()$exp(
         tangent_vec = tangent_vec,
@@ -87,10 +93,18 @@ MatrixLieGroup <- R6::R6Class(
     #'   Furthermore, denoting `point` by \eqn{g} and `base_point` by \eqn{h},
     #'   the output satisfies \deqn{g = \exp(\log(g, h), h)}.
     #'
-    #' @param point A numeric array of shape `c(n, n)` specifying a point.
+    #' @param point A numeric array of shape \eqn{[\dots \times n \times n]}
+    #'   specifying one or more points.
     #'
-    #' @return A numeric array of shape `c(n, n)` such that its Lie exponential
-    #'   at `base_point` is `point`.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} such
+    #'   that its Lie exponential at corresponding base points matches
+    #'   corresponding points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   so3$log(diag(1, 3))
+    #' }
     log = function(point, base_point = NULL) {
       super$get_python_class()$log(
         point = point,
@@ -100,10 +114,16 @@ MatrixLieGroup <- R6::R6Class(
 
     #' @description Gets the identity of the group.
     #'
-    #' @return A numeric array of shape `dim` or `c(n, n)` storing the identity
+    #' @return A numeric array of shape \eqn{n \times n} storing the identity
     #'   of the Lie group.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   so3$get_identity()
+    #' }
     get_identity = function() {
-      super$get_python_class()$identity()
+      super$get_python_class()$identity
     },
 
     #' @description Computes the lie bracket of two tangent vectors.
@@ -113,13 +133,21 @@ MatrixLieGroup <- R6::R6Class(
     #'   identity, compute commutator, go back): \deqn{[A,B] = A_P^{-1}B -
     #'   B_P^{-1}A}.
     #'
-    #' @param tangent_vector_a A numeric array of shape `c(n, n)` specifying a
-    #'   tangent vector at base point.
-    #' @param tangent_vector_b A numeric array of shape `c(n, n)` specifying a
-    #'   tangent vector at base point.
+    #' @param tangent_vector_a A numeric array of shape \eqn{[\dots \times n
+    #'   \times n]} specifying one or more tangent vectors at corresponding base
+    #'   points.
+    #' @param tangent_vector_b A numeric array of shape \eqn{[\dots \times n
+    #'   \times n]} specifying one or more tangent vectors at corresponding base
+    #'   points.
     #'
-    #' @return A numeric array of shape `c(n, n)` storing the Lie bracket of the
-    #'   two input tangent vectors.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing
+    #'   the Lie bracket of the two input tangent vectors.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   so3$lie_bracket(diag(0, 3), diag(1, 3))
+    #' }
     lie_bracket = function(tangent_vector_a, tangent_vector_b, base_point = NULL) {
       super$get_python_class()$lie_bracket(
         tangent_vector_a = tangent_vector_a,
@@ -138,8 +166,9 @@ MatrixLieGroup <- R6::R6Class(
     #'   Jacobian translation which actually computes the matrix representation
     #'   of the map.
     #'
-    #' @param point A numeric array of shape `dim` or `c(n, n)` specifying the
-    #'   point at which to compute the map.
+    #' @param point A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim},
+    #'   [n \times n] \} ]} specifying one or more points at which to compute
+    #'   the map.
     #' @param left_or_right A character string specifying whether to compute the
     #'   map for the left or right translation. Choices are `"left"` or
     #'   `"right`. Defaults to `"left"`.
@@ -147,8 +176,19 @@ MatrixLieGroup <- R6::R6Class(
     #'   matrix. If set to `TRUE`, the push forward by the translation by the
     #'   inverse of the point is returned. Defaults to `FALSE`.
     #'
-    #' @return A function computing the tangent map of the left/right
-    #'   translation by `point`. It can be applied to tangent vectors.
+    #' @return A function taking as argument a numeric array `tangent_vec` of
+    #'   shape \eqn{[\dots \times \{ \mathrm{dim}, [n \times n] \} ]} specifying
+    #'   one or more tangent vectors and returning a numeric array of shape
+    #'   \eqn{[\dots \times \{ \mathrm{dim}, [n \times n] \} ]} storing the
+    #'   result of the tangent mapping of the left/right translation of input
+    #'   tangent points by corresponding base points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   tangent_map <- so3$tangent_translation_map(diag(1, 3))
+    #'   tangent_map(diag(1, 3))
+    #' }
     tangent_translation_map = function(point, left_or_right = "left", inverse = FALSE) {
       tm <- super$get_python_class()$tangent_translation_map(
         point = point,

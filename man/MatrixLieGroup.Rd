@@ -6,6 +6,54 @@
 \description{
 Class for matrix Lie groups.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `MatrixLieGroup$exp`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  # so3$exp(diag(1, 3)) # TO DO: fix in gs
+}
+
+## ------------------------------------------------
+## Method `MatrixLieGroup$log`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$log(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `MatrixLieGroup$get_identity`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$get_identity()
+}
+
+## ------------------------------------------------
+## Method `MatrixLieGroup$lie_bracket`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$lie_bracket(diag(0, 3), diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `MatrixLieGroup$tangent_translation_map`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  tangent_map <- so3$tangent_translation_map(diag(1, 3))
+  tangent_map(diag(1, 3))
+}
+}
 \author{
 Nina Miolane
 }
@@ -125,6 +173,17 @@ A numeric array of shape \eqn{[\dots \times n \times n]} storing
 the left multiplication of the Lie exponential of the input tangent
 vectors with the corresponding base points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  # so3$exp(diag(1, 3)) # TO DO: fix in gs
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-MatrixLieGroup-log"></a>}}
@@ -139,7 +198,8 @@ to \code{point}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{c(n, n)} specifying a point.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
+specifying one or more points.}
 
 \item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
 specifying one or more base points on the manifold. Defaults to identity if
@@ -155,9 +215,21 @@ the output satisfies \deqn{g = \exp(\log(g, h), h)}.
 }
 
 \subsection{Returns}{
-A numeric array of shape \code{c(n, n)} such that its Lie exponential
-at \code{base_point} is \code{point}.
+A numeric array of shape \eqn{[\dots \times n \times n]} such
+that its Lie exponential at corresponding base points matches
+corresponding points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$log(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-MatrixLieGroup-get_identity"></a>}}
@@ -169,9 +241,20 @@ Gets the identity of the group.
 }
 
 \subsection{Returns}{
-A numeric array of shape \code{dim} or \code{c(n, n)} storing the identity
+A numeric array of shape \eqn{n \times n} storing the identity
 of the Lie group.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$get_identity()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-MatrixLieGroup-lie_bracket"></a>}}
@@ -189,11 +272,13 @@ Computes the lie bracket of two tangent vectors.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vector_a}}{A numeric array of shape \code{c(n, n)} specifying a
-tangent vector at base point.}
+\item{\code{tangent_vector_a}}{A numeric array of shape \eqn{[\dots \times n
+  \times n]} specifying one or more tangent vectors at corresponding base
+points.}
 
-\item{\code{tangent_vector_b}}{A numeric array of shape \code{c(n, n)} specifying a
-tangent vector at base point.}
+\item{\code{tangent_vector_b}}{A numeric array of shape \eqn{[\dots \times n
+  \times n]} specifying one or more tangent vectors at corresponding base
+points.}
 
 \item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
 specifying one or more base points on the manifold. Defaults to identity if
@@ -209,9 +294,20 @@ identity, compute commutator, go back): \deqn{[A,B] = A_P^{-1}B -
 }
 
 \subsection{Returns}{
-A numeric array of shape \code{c(n, n)} storing the Lie bracket of the
-two input tangent vectors.
+A numeric array of shape \eqn{[\dots \times n \times n]} storing
+the Lie bracket of the two input tangent vectors.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$lie_bracket(diag(0, 3), diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-MatrixLieGroup-tangent_translation_map"></a>}}
@@ -229,8 +325,9 @@ Computes the push-forward map by the left/right translation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the
-point at which to compute the map.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim},
+  [n \times n] \} ]} specifying one or more points at which to compute
+the map.}
 
 \item{\code{left_or_right}}{A character string specifying whether to compute the
 map for the left or right translation. Choices are \code{"left"} or
@@ -253,9 +350,25 @@ of the map.
 }
 
 \subsection{Returns}{
-A function computing the tangent map of the left/right
-translation by \code{point}. It can be applied to tangent vectors.
+A function taking as argument a numeric array \code{tangent_vec} of
+shape \eqn{[\dots \times \{ \mathrm{dim}, [n \times n] \} ]} specifying
+one or more tangent vectors and returning a numeric array of shape
+\eqn{[\dots \times \{ \mathrm{dim}, [n \times n] \} ]} storing the
+result of the tangent mapping of the left/right translation of input
+tangent points by corresponding base points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  tangent_map <- so3$tangent_translation_map(diag(1, 3))
+  tangent_map(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-MatrixLieGroup-compose"></a>}}

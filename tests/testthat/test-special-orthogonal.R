@@ -61,3 +61,24 @@ test_that("SpecialOrthogonalMatrices method exp() works", {
   so3 <- SpecialOrthogonal(n = 3)
   expect_equal(so3$exp(Ze), Id)
 })
+
+test_that("SpecialOrthogonalMatrices method log() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_equal(so3$log(Id), Ze)
+})
+
+test_that("SpecialOrthogonalMatrices method get_identity() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_equal(so3$get_identity(), Id)
+})
+
+test_that("SpecialOrthogonalMatrices method lie_bracket() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_equal(so3$lie_bracket(Ze, Id), Ze)
+})
+
+test_that("SpecialOrthogonalMatrices method tangent_translation_map() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  tangent_map <- so3$tangent_translation_map(Id)
+  expect_equal(tangent_map(Id), Id)
+})
