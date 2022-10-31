@@ -142,7 +142,7 @@ calculations involving potential division by 0 in rotations. Defaults to
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_mat</code></dt>
-<dd><p>A numeric array of shape \(... \times 2 \times 2\)
+<dd><p>A numeric array of shape \([\dots \times 2 \times 2]\)
 specifying one or more 2D rotation matrices.</p></dd>
 
 
@@ -150,9 +150,17 @@ specifying one or more 2D rotation matrices.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A numeric array of shape \(... \times 2\) storing the
+<p>A numeric array of shape \([\dots \times 1]\) storing the
 corresponding axis-angle representations.</p>
 </div>
+<div class="section">
+<h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so2</span><span class="op">$</span><span class="fu">rotation_vector_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal2Vectors-matrix_from_rotation_vector"></a><div class="section">
 <h3 id="method-matrix-from-rotation-vector-">Method <code>matrix_from_rotation_vector()</code><a class="anchor" aria-label="anchor" href="#method-matrix-from-rotation-vector-"></a></h3>
@@ -164,7 +172,7 @@ corresponding axis-angle representations.</p>
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_vec</code></dt>
-<dd><p>A numeric array of shape \(... \times 2\) specifying one
+<dd><p>A numeric array of shape \(... \times 1\) specifying one
 or more 2D rotations in vector representation.</p></dd>
 
 
@@ -175,6 +183,14 @@ or more 2D rotations in vector representation.</p></dd>
 <p>A numeric array of shape \(... \times 2 \times 2\) storing the
 corresponding 2D rotation matrices.</p>
 </div>
+<div class="section">
+<h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so2</span><span class="op">$</span><span class="fu">matrix_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal2Vectors-random_uniform"></a><div class="section">
 <h3 id="method-random-uniform-">Method <code>random_uniform()</code><a class="anchor" aria-label="anchor" href="#method-random-uniform-"></a></h3>
@@ -219,6 +235,28 @@ corresponding 2D rotation matrices.</p>
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal2Vectors$rotation_vector_from_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span><span class="op">$</span><span class="fu">rotation_vector_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal2Vectors$matrix_from_rotation_vector`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span><span class="op">$</span><span class="fu">matrix_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
