@@ -290,22 +290,34 @@ SpecialOrthogonal2Vectors <- R6::R6Class(
     #' @description Converts rotation matrix (in 2D) to rotation vector
     #'   (axis-angle) getting the angle through the `atan2()` function.
     #'
-    #' @param rot_mat A numeric array of shape \eqn{... \times 2 \times 2}
+    #' @param rot_mat A numeric array of shape \eqn{[\dots \times 2 \times 2]}
     #'   specifying one or more 2D rotation matrices.
     #'
-    #' @return A numeric array of shape \eqn{... \times 2} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 1]} storing the
     #'   corresponding axis-angle representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+    #'   so2$rotation_vector_from_matrix(diag(1, 2))
+    #' }
     rotation_vector_from_matrix = function(rot_mat) {
       super$get_python_class()$rotation_vector_from_matrix(rot_mat = rot_mat)
     },
 
     #' @description Convert a 2D rotation from vector to matrix representation.
     #'
-    #' @param rot_vec A numeric array of shape \eqn{... \times 2} specifying one
+    #' @param rot_vec A numeric array of shape \eqn{... \times 1} specifying one
     #'   or more 2D rotations in vector representation.
     #'
     #' @return A numeric array of shape \eqn{... \times 2 \times 2} storing the
     #'   corresponding 2D rotation matrices.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+    #'   so2$matrix_from_rotation_vector(array(0))
+    #' }
     matrix_from_rotation_vector = function(rot_vec) {
       super$get_python_class()$matrix_from_rotation_vector(rot_vec = rot_vec)
     },

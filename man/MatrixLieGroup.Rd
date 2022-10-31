@@ -53,6 +53,24 @@ if (reticulate::py_module_available("geomstats")) {
   tangent_map <- so3$tangent_translation_map(diag(1, 3))
   tangent_map(diag(1, 3))
 }
+
+## ------------------------------------------------
+## Method `MatrixLieGroup$compose`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$compose(diag(1, 3), diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `MatrixLieGroup$inverse`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$inverse(diag(1, 3))
+}
 }
 \author{
 Nina Miolane
@@ -383,18 +401,32 @@ group.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point_a}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the
-left factor in the product.}
+\item{\code{point_a}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, n \times n \}]} specifying one or more left factors in
+the product.}
 
-\item{\code{point_b}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the
-right factor in the product.}
+\item{\code{point_b}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, n \times n \}]} specifying one or more right factors in
+the product.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} or \code{c(n, n)} storing the product
-of \code{point_a} and \code{point_b} along the first dimension.
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, n
+  \times n \}]} storing the product of \code{point_a} and \code{point_b} along the
+first dimension.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$compose(diag(1, 3), diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-MatrixLieGroup-inverse"></a>}}
@@ -402,21 +434,31 @@ of \code{point_a} and \code{point_b} along the first dimension.
 \subsection{Method \code{inverse()}}{
 Computes the inverse law of the Lie group.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MatrixLieGroup$inverse()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MatrixLieGroup$inverse(point)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the
-point to be inverted.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim},
+n \times n \}]} specifying one or more points to be inverted.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} or \code{c(n, n)} storing the inverted
-point.
+A numeric array of the same shape storing the inverted points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3)
+  so3$inverse(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-MatrixLieGroup-clone"></a>}}

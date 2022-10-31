@@ -82,3 +82,25 @@ test_that("SpecialOrthogonalMatrices method tangent_translation_map() works", {
   tangent_map <- so3$tangent_translation_map(Id)
   expect_equal(tangent_map(Id), Id)
 })
+
+test_that("SpecialOrthogonalMatrices method compose() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_equal(so3$compose(Id, Id), Id)
+})
+
+test_that("SpecialOrthogonalMatrices method inverse() works", {
+  so3 <- SpecialOrthogonal(n = 3)
+  expect_equal(so3$inverse(Id), Id)
+})
+
+# SpecialOrthogonal2Vectors -----------------------------------------------
+
+test_that("SpecialOrthogonal2Vectors method rotation_vector_from_matrix() works", {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  expect_equal(so2$rotation_vector_from_matrix(diag(1, 2)), array(0))
+})
+
+test_that("SpecialOrthogonal2Vectors method matrix_from_rotation_vector() works", {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  expect_equal(so2$matrix_from_rotation_vector(array(0)), diag(1, 2))
+})

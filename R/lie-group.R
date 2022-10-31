@@ -205,13 +205,22 @@ MatrixLieGroup <- R6::R6Class(
     #' @description Performs function composition corresponding to the Lie
     #'   group.
     #'
-    #' @param point_a A numeric array of shape `dim` or `c(n, n)` specifying the
-    #'   left factor in the product.
-    #' @param point_b A numeric array of shape `dim` or `c(n, n)` specifying the
-    #'   right factor in the product.
+    #' @param point_a A numeric array of shape \eqn{[\dots \times \{
+    #'   \mathrm{dim}, n \times n \}]} specifying one or more left factors in
+    #'   the product.
+    #' @param point_b A numeric array of shape \eqn{[\dots \times \{
+    #'   \mathrm{dim}, n \times n \}]} specifying one or more right factors in
+    #'   the product.
     #'
-    #' @return A numeric array of shape `dim` or `c(n, n)` storing the product
-    #'   of `point_a` and `point_b` along the first dimension.
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, n
+    #'   \times n \}]} storing the product of `point_a` and `point_b` along the
+    #'   first dimension.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   so3$compose(diag(1, 3), diag(1, 3))
+    #' }
     compose = function(point_a, point_b) {
       super$get_python_class()$compose(
         point_a = point_a,
@@ -221,12 +230,17 @@ MatrixLieGroup <- R6::R6Class(
 
     #' @description Computes the inverse law of the Lie group.
     #'
-    #' @param point A numeric array of shape `dim` or `c(n, n)` specifying the
-    #'   point to be inverted.
+    #' @param point A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim},
+    #'   n \times n \}]} specifying one or more points to be inverted.
     #'
-    #' @return A numeric array of shape `dim` or `c(n, n)` storing the inverted
-    #'   point.
-    inverse = function() {
+    #' @return A numeric array of the same shape storing the inverted points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3)
+    #'   so3$inverse(diag(1, 3))
+    #' }
+    inverse = function(point) {
       super$get_python_class()$inverse(point = point)
     }
   ),

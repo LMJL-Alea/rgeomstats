@@ -9,6 +9,26 @@ vector form, i.e. the Lie group of planar rotations. This class is
 specific to the vector representation of rotations. For the matrix
 representation, use the \code{\link{SpecialOrthogonal}} class and set \code{n = 2}.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal2Vectors$rotation_vector_from_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$rotation_vector_from_matrix(diag(1, 2))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal2Vectors$matrix_from_rotation_vector`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$matrix_from_rotation_vector(array(0))
+}
+}
 \seealso{
 Other special orthogonal classes: 
 \code{\link{SpecialOrthogonal3Vectors}},
@@ -101,15 +121,26 @@ Converts rotation matrix (in 2D) to rotation vector
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_mat}}{A numeric array of shape \eqn{... \times 2 \times 2}
+\item{\code{rot_mat}}{A numeric array of shape \eqn{[\dots \times 2 \times 2]}
 specifying one or more 2D rotation matrices.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 2} storing the
+A numeric array of shape \eqn{[\dots \times 1]} storing the
 corresponding axis-angle representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$rotation_vector_from_matrix(diag(1, 2))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal2Vectors-matrix_from_rotation_vector"></a>}}
@@ -123,7 +154,7 @@ Convert a 2D rotation from vector to matrix representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_vec}}{A numeric array of shape \eqn{... \times 2} specifying one
+\item{\code{rot_vec}}{A numeric array of shape \eqn{... \times 1} specifying one
 or more 2D rotations in vector representation.}
 }
 \if{html}{\out{</div>}}
@@ -132,6 +163,17 @@ or more 2D rotations in vector representation.}
 A numeric array of shape \eqn{... \times 2 \times 2} storing the
 corresponding 2D rotation matrices.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$matrix_from_rotation_vector(array(0))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal2Vectors-random_uniform"></a>}}
