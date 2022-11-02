@@ -102,7 +102,7 @@ specifying the metric to equip the manifold with.</p></dd>
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>The <code>SpecialOrthogonalMatrices</code> class constructor.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SpecialOrthogonalMatrices.html">SpecialOrthogonalMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">n</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SpecialOrthogonalMatrices.html">SpecialOrthogonalMatrices</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">n</span>, <span class="va">...</span>, py_cls <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -115,6 +115,12 @@ the matrices.</p></dd>
 <dt><code>...</code></dt>
 <dd><p>Extra arguments to be passed to parent class constructors. See
 <code><a href="MatrixLieAlgebra.html">MatrixLieAlgebra</a></code>, <code><a href="LevelSet.html">LevelSet</a></code> and <code><a href="Manifold.html">Manifold</a></code> classes.</p></dd>
+
+
+<dt><code>py_cls</code></dt>
+<dd><p>A Python object of class <code>SpecialOrthogonalMatrices</code>.
+Defaults to <code>NULL</code> in which case it is instantiated on the fly using
+the other input arguments.</p></dd>
 
 
 </dl><p></p></div>

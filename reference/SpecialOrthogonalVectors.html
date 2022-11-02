@@ -120,7 +120,7 @@ calculations involving potential divison by 0 in rotations.</p></dd>
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>The <code>SpecialOrthogonalVectors</code> class constructor.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SpecialOrthogonalVectors.html">SpecialOrthogonalVectors</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">n</span>, epsilon <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SpecialOrthogonalVectors.html">SpecialOrthogonalVectors</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">n</span>, epsilon <span class="op">=</span> <span class="fl">0</span>, py_cls <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -134,6 +134,12 @@ the matrices.</p></dd>
 <dd><p>A numeric value specifying the precision to use for
 calculations involving potential divison by 0 in rotations. Defaults to
 <code>0</code>.</p></dd>
+
+
+<dt><code>py_cls</code></dt>
+<dd><p>A Python object of class <code>SpecialOrthogonalVectors</code>.
+Defaults to <code>NULL</code> in which case it is instantiated on the fly using
+the other input arguments.</p></dd>
 
 
 </dl><p></p></div>
@@ -195,8 +201,8 @@ matrix representations.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>A numeric array of shape \([\dots \times n \times n]\) storing the
-corresponding skew matrix representations.</p>
+<p>A numeric array of shape \([\dots \times n \times n]\) storing
+the corresponding skew matrix representations.</p>
 </div>
 <div class="section">
 <h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a></h4>
@@ -219,7 +225,7 @@ skew-symmetric matrix.</p><div class="section">
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>skew_mat</code></dt>
-<dd><p>A numeric array of shape \(... \times n \times n\)
+<dd><p>A numeric array of shape \([\dots \times n \times n]\)
 specifying skew matrices.</p></dd>
 
 
@@ -227,9 +233,17 @@ specifying skew matrices.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p>A numeric array of shape \(... \times \mathrm{dim}\) storing
-the corresponding vector representations.</p>
+<p>A numeric array of shape \([\dots \times \mathrm{dim}]\)
+storing the corresponding vector representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so2</span><span class="op">$</span><span class="fu">vector_from_skew_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonalVectors-regularize_tangent_vec_at_identity"></a><div class="section">
 <h3 id="method-regularize-tangent-vec-at-identity-">Method <code>regularize_tangent_vec_at_identity()</code><a class="anchor" aria-label="anchor" href="#method-regularize-tangent-vec-at-identity-"></a></h3>
@@ -246,8 +260,8 @@ less than \(\pi\).</p><div class="section">
 <div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tangent_vec</code></dt>
-<dd><p>A numeric array of shape \(... \times 1\) specifying
-one or more tangent vectors at base point.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 1]\)
+specifying one or more tangent vectors at base point.</p></dd>
 
 
 <dt><code>metric</code></dt>
@@ -260,9 +274,17 @@ set to <code>NULL</code>, it defaults to using the Euclidean metric.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>A numeric array of shape \(... \times 1\) storing the
+<p>A numeric array of shape \([\dots \times 1]\) storing the
 regularized tangent vector(s).</p>
 </div>
+<div class="section">
+<h4 id="examples-3">Examples<a class="anchor" aria-label="anchor" href="#examples-3"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so2</span><span class="op">$</span><span class="fu">regularize_tangent_vec_at_identity</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonalVectors-regularize_tangent_vec"></a><div class="section">
 <h3 id="method-regularize-tangent-vec-">Method <code>regularize_tangent_vec()</code><a class="anchor" aria-label="anchor" href="#method-regularize-tangent-vec-"></a></h3>
@@ -281,13 +303,13 @@ transport to the identity, determined by the metric, to be less than
 <div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tangent_vec</code></dt>
-<dd><p>A numeric array of shape \(... \times 1\) specifying
-one or more tangent vectors at base point.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 1]\)
+specifying one or more tangent vectors at corresponding base points.</p></dd>
 
 
 <dt><code>base_point</code></dt>
-<dd><p>A numeric array of shape \(... \times 1\) specifying
-one or more points on the manifold.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 1]\)
+specifying one or more points on the manifold.</p></dd>
 
 
 <dt><code>metric</code></dt>
@@ -300,9 +322,17 @@ set to <code>NULL</code>, it defaults to using the Euclidean metric.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
-<p>A numeric array of shape \(... \times 1\) storing the
+<p>A numeric array of shape \([\dots \times 1]\) storing the
 regularized tangent vector(s).</p>
 </div>
+<div class="section">
+<h4 id="examples-4">Examples<a class="anchor" aria-label="anchor" href="#examples-4"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so2</span><span class="op">$</span><span class="fu">regularize_tangent_vec</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonalVectors-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
@@ -343,6 +373,33 @@ regularized tangent vector(s).</p>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">so2</span><span class="op">$</span><span class="fu">skew_matrix_from_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonalVectors$vector_from_skew_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span><span class="op">$</span><span class="fu">vector_from_skew_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonalVectors$regularize_tangent_vec_at_identity`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span><span class="op">$</span><span class="fu">regularize_tangent_vec_at_identity</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonalVectors$regularize_tangent_vec`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so2</span><span class="op">$</span><span class="fu">regularize_tangent_vec</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

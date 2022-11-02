@@ -121,7 +121,8 @@ metric.</p></dd>
 <span>  <span class="va">dim</span>,</span>
 <span>  shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  signature <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  default_coords_type <span class="op">=</span> <span class="st">"intrinsic"</span></span>
+<span>  default_coords_type <span class="op">=</span> <span class="st">"intrinsic"</span>,</span>
+<span>  py_cls <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -144,6 +145,12 @@ metric. Defaults to <code>c(dim, 0L)</code>.</p></dd>
 <dt><code>default_coords_type</code></dt>
 <dd><p>A string specifying the coordinate type.
 Choices are <code>extrensic</code> or <code>intrinsic</code>. Defaults to <code>intrinsic</code>.</p></dd>
+
+
+<dt><code>py_cls</code></dt>
+<dd><p>A Python object of class <code>RiemannianMetric</code>. Defaults to
+<code>NULL</code> in which case it is instantiated on the fly using the other
+input arguments.</p></dd>
 
 
 </dl><p></p></div>

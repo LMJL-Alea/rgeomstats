@@ -131,7 +131,7 @@ Bures-Wasserstein metric on the SPD manifold
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>The <code>SPDMetricBuresWasserstein</code> class constructor.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SPDMetricBuresWasserstein.html">SPDMetricBuresWasserstein</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SPDMetricBuresWasserstein.html">SPDMetricBuresWasserstein</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">n</span>, py_cls <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -139,6 +139,12 @@ Bures-Wasserstein metric on the SPD manifold
 <p></p><div class="arguments"><dl><dt><code>n</code></dt>
 <dd><p>An integer value specifying the shape of the matrices: \(n
 \times n\).</p></dd>
+
+
+<dt><code>py_cls</code></dt>
+<dd><p>A Python object of class <code>SPDMetricBuresWasserstein</code>.
+Defaults to <code>NULL</code> in which case it is instantiated on the fly using
+the other input arguments.</p></dd>
 
 
 </dl><p></p></div>

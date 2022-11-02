@@ -86,7 +86,8 @@ manifold \(M\).</p>
 <span>  <span class="va">base_manifold</span>,</span>
 <span>  <span class="va">n_copies</span>,</span>
 <span>  metric <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  default_coords_type <span class="op">=</span> <span class="st">"intrinsic"</span></span>
+<span>  default_coords_type <span class="op">=</span> <span class="st">"intrinsic"</span>,</span>
+<span>  py_cls <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -110,6 +111,12 @@ Defaults to <code>NULL</code> which uses the Riemannian metric.</p></dd>
 <dt><code>default_coords_type</code></dt>
 <dd><p>A string specifying the coordinate type.
 Choices are <code>"intrinsic"</code> or <code>"extrinsic"</code>. Defaults to <code>"intrinsic"</code>.</p></dd>
+
+
+<dt><code>py_cls</code></dt>
+<dd><p>A Python object of class <code>NFoldManifold</code>. Defaults to
+<code>NULL</code> in which case it is instantiated on the fly using the other
+input arguments.</p></dd>
 
 
 </dl><p></p></div>

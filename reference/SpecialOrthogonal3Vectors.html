@@ -132,7 +132,7 @@ specifying the metric to equip the manifold with.</p></dd>
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>The <code>SpecialOrthogonal3Vectors</code> class constructor.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SpecialOrthogonal3Vectors.html">SpecialOrthogonal3Vectors</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>epsilon <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/SpecialOrthogonal3Vectors.html">SpecialOrthogonal3Vectors</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>epsilon <span class="op">=</span> <span class="fl">0</span>, py_cls <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -141,6 +141,12 @@ specifying the metric to equip the manifold with.</p></dd>
 <dd><p>A numeric value specifying the precision to use for
 calculations involving potential division by 0 in rotations. Defaults to
 <code>0</code>.</p></dd>
+
+
+<dt><code>py_cls</code></dt>
+<dd><p>A Python object of class <code>SpecialOrthogonal3Vectors</code>.
+Defaults to <code>NULL</code> in which case it is instantiated on the fly using
+the other input arguments.</p></dd>
 
 
 </dl><p></p></div>
@@ -161,7 +167,7 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_mat</code></dt>
-<dd><p>A numeric array of shape \(... \times 3 \times 3\)
+<dd><p>A numeric array of shape \([\dots \times 3 \times 3]\)
 specifying one or more 3D rotation matrices.</p></dd>
 
 
@@ -185,9 +191,17 @@ skew-symmetric matrix representing the rotation.</p>
 
 <div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A numeric array of shape \(... \times 3\) storing the
+<p>A numeric array of shape \([\dots \times 3]\) storing the
 corresponding axis-angle representations.</p>
 </div>
+<div class="section">
+<h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">rotation_vector_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-matrix_from_rotation_vector"></a><div class="section">
 <h3 id="method-matrix-from-rotation-vector-">Method <code>matrix_from_rotation_vector()</code><a class="anchor" aria-label="anchor" href="#method-matrix-from-rotation-vector-"></a></h3>
@@ -200,17 +214,25 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_vec</code></dt>
-<dd><p>A numeric array of shape \(... \times 3\) specifying one
-or more 3D rotations in axis-angle representation.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 3]\) specifying
+one or more 3D rotations in axis-angle representation.</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>A numeric array of shape \(... \times 3 \times 3\) storing the
-corresponding matrix representations.</p>
+<p>A numeric array of shape \([\dots \times 3 \times 3]\) storing
+the corresponding matrix representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">matrix_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-quaternion_from_matrix"></a><div class="section">
 <h3 id="method-quaternion-from-matrix-">Method <code>quaternion_from_matrix()</code><a class="anchor" aria-label="anchor" href="#method-quaternion-from-matrix-"></a></h3>
@@ -223,7 +245,7 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_mat</code></dt>
-<dd><p>A numeric array of shape \(... \times 3 \times 3\)
+<dd><p>A numeric array of shape \([\dots \times 3 \times 3]\)
 specifying one or more 3D rotations in matrix representation.</p></dd>
 
 
@@ -231,9 +253,17 @@ specifying one or more 3D rotations in matrix representation.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p>A numeric array of shape \(... \times 4\) storing the
+<p>A numeric array of shape \([\dots \times 4]\) storing the
 corresponding unit quaternion representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">quaternion_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-quaternion_from_rotation_vector"></a><div class="section">
 <h3 id="method-quaternion-from-rotation-vector-">Method <code>quaternion_from_rotation_vector()</code><a class="anchor" aria-label="anchor" href="#method-quaternion-from-rotation-vector-"></a></h3>
@@ -246,17 +276,25 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_vec</code></dt>
-<dd><p>A numeric array of shape \(... \times 3\) specifying one
-or more 3D rotations in axis-angle representation.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 3]\) specifying
+one or more 3D rotations in axis-angle representation.</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>A numeric array of shape \(... \times 4\) storing the
+<p>A numeric array of shape \([\dots \times 4]\) storing the
 corresponding unit quaternion representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-3">Examples<a class="anchor" aria-label="anchor" href="#examples-3"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">quaternion_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-rotation_vector_from_quaternion"></a><div class="section">
 <h3 id="method-rotation-vector-from-quaternion-">Method <code>rotation_vector_from_quaternion()</code><a class="anchor" aria-label="anchor" href="#method-rotation-vector-from-quaternion-"></a></h3>
@@ -269,17 +307,25 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>quaternion</code></dt>
-<dd><p>A numeric array of shape \(... \times 4\) specifying
-one or more 3D rotations in unit quaternion representation.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 4]\)
+specifying one or more 3D rotations in unit quaternion representation.</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
-<p>A numeric array of shape \(... \times 3\) storing the
+<p>A numeric array of shape \([\dots \times 3]\) storing the
 corresponding axis-angle representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-4">Examples<a class="anchor" aria-label="anchor" href="#examples-4"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">rotation_vector_from_quaternion</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-matrix_from_quaternion"></a><div class="section">
 <h3 id="method-matrix-from-quaternion-">Method <code>matrix_from_quaternion()</code><a class="anchor" aria-label="anchor" href="#method-matrix-from-quaternion-"></a></h3>
@@ -292,17 +338,25 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>quaternion</code></dt>
-<dd><p>A numeric array of shape \(... \times 4\) specifying
-one or more 3D rotations in unit quaternion representation.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 4]\)
+specifying one or more 3D rotations in unit quaternion representation.</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
-<p>A numeric array of shape \(... \times 3 \times 3\) storing the
-corresponding matrix representations.</p>
+<p>A numeric array of shape \([\dots \times 3 \times 3]\) storing
+the corresponding matrix representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-5">Examples<a class="anchor" aria-label="anchor" href="#examples-5"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">matrix_from_quaternion</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-matrix_from_tait_bryan_angles"></a><div class="section">
 <h3 id="method-matrix-from-tait-bryan-angles-">Method <code>matrix_from_tait_bryan_angles()</code><a class="anchor" aria-label="anchor" href="#method-matrix-from-tait-bryan-angles-"></a></h3>
@@ -319,7 +373,7 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tait_bryan_angles</code></dt>
-<dd><p>A numeric array of shape \(... \times 3\)
+<dd><p>A numeric array of shape \([\dots \times 3]\)
 specifying one or more 3D rotations in Tait-Bryan angle representation.</p></dd>
 
 
@@ -352,9 +406,17 @@ order.</p>
 
 <div class="section">
 <h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
-<p>A numeric array of shape \(... \times 3 \times 3\) storing the
-corresponding matrix representations.</p>
+<p>A numeric array of shape \([\dots \times 3 \times 3]\) storing
+the corresponding matrix representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-6">Examples<a class="anchor" aria-label="anchor" href="#examples-6"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">matrix_from_tait_bryan_angles</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-tait_bryan_angles_from_matrix"></a><div class="section">
 <h3 id="method-tait-bryan-angles-from-matrix-">Method <code>tait_bryan_angles_from_matrix()</code><a class="anchor" aria-label="anchor" href="#method-tait-bryan-angles-from-matrix-"></a></h3>
@@ -371,7 +433,7 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_mat</code></dt>
-<dd><p>A numeric array of shape \(... \times 3 \times 3\)
+<dd><p>A numeric array of shape \([\dots \times 3 \times 3]\)
 specifying one or more 3D rotations in matrix representation.</p></dd>
 
 
@@ -405,9 +467,17 @@ order.</p>
 
 <div class="section">
 <h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
-<p>A numeric array of shape \(... \times 3\) storing the
+<p>A numeric array of shape \([\dots \times 3]\) storing the
 corresponding Tait-Bryan angle representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-7">Examples<a class="anchor" aria-label="anchor" href="#examples-7"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">tait_bryan_angles_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-quaternion_from_tait_bryan_angles"></a><div class="section">
 <h3 id="method-quaternion-from-tait-bryan-angles-">Method <code>quaternion_from_tait_bryan_angles()</code><a class="anchor" aria-label="anchor" href="#method-quaternion-from-tait-bryan-angles-"></a></h3>
@@ -424,7 +494,7 @@ quaternion representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tait_bryan_angles</code></dt>
-<dd><p>A numeric array of shape \(... \times 3\)
+<dd><p>A numeric array of shape \([\dots \times 3]\)
 specifying one or more 3D rotations in Tait-Bryan angle representation.</p></dd>
 
 
@@ -445,9 +515,17 @@ Choices are either <code>"xyz"</code> or <code>"zyx"</code>. Defaults to <code>"
 </div>
 <div class="section">
 <h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
-<p>A numeric array of shape \(... \times 4\) storing the
+<p>A numeric array of shape \([\dots \times 4]\) storing the
 corresponding unit quaternion representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-8">Examples<a class="anchor" aria-label="anchor" href="#examples-8"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">quaternion_from_tait_bryan_angles</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-rotation_vector_from_tait_bryan_angles"></a><div class="section">
 <h3 id="method-rotation-vector-from-tait-bryan-angles-">Method <code>rotation_vector_from_tait_bryan_angles()</code><a class="anchor" aria-label="anchor" href="#method-rotation-vector-from-tait-bryan-angles-"></a></h3>
@@ -464,7 +542,7 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tait_bryan_angles</code></dt>
-<dd><p>A numeric array of shape \(... \times 3\)
+<dd><p>A numeric array of shape \([\dots \times 3]\)
 specifying one or more 3D rotations in Tait-Bryan angle representation.</p></dd>
 
 
@@ -485,9 +563,17 @@ Choices are either <code>"xyz"</code> or <code>"zyx"</code>. Defaults to <code>"
 </div>
 <div class="section">
 <h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
-<p>A numeric array of shape \(... \times 3\) storing the
+<p>A numeric array of shape \([\dots \times 3]\) storing the
 corresponding axis-angle representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-9">Examples<a class="anchor" aria-label="anchor" href="#examples-9"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">rotation_vector_from_tait_bryan_angles</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-tait_bryan_angles_from_quaternion"></a><div class="section">
 <h3 id="method-tait-bryan-angles-from-quaternion-">Method <code>tait_bryan_angles_from_quaternion()</code><a class="anchor" aria-label="anchor" href="#method-tait-bryan-angles-from-quaternion-"></a></h3>
@@ -504,8 +590,8 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>quaternion</code></dt>
-<dd><p>A numeric array of shape \(... \times 4\) specifying
-one or more 3D rotations in unit quaternion representation.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 4]\)
+specifying one or more 3D rotations in unit quaternion representation.</p></dd>
 
 
 <dt><code>extrinsic_or_intrinsic</code></dt>
@@ -525,9 +611,17 @@ Choices are either <code>"xyz"</code> or <code>"zyx"</code>. Defaults to <code>"
 </div>
 <div class="section">
 <h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
-<p>A numeric array of shape \(... \times 3\) storing the
+<p>A numeric array of shape \([\dots \times 3]\) storing the
 corresponding Tait-Bryan angle representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-10">Examples<a class="anchor" aria-label="anchor" href="#examples-10"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">tait_bryan_angles_from_quaternion</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-tait_bryan_angles_from_rotation_vector"></a><div class="section">
 <h3 id="method-tait-bryan-angles-from-rotation-vector-">Method <code>tait_bryan_angles_from_rotation_vector()</code><a class="anchor" aria-label="anchor" href="#method-tait-bryan-angles-from-rotation-vector-"></a></h3>
@@ -544,8 +638,8 @@ representation.</p><div class="section">
 <div class="section">
 <h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>rot_vec</code></dt>
-<dd><p>A numeric array of shape \(... \times 3\) specifying one
-or more 3D rotations in axis-angle representation.</p></dd>
+<dd><p>A numeric array of shape \([\dots \times 3]\) specifying
+one or more 3D rotations in axis-angle representation.</p></dd>
 
 
 <dt><code>extrinsic_or_intrinsic</code></dt>
@@ -565,9 +659,17 @@ Choices are either <code>"xyz"</code> or <code>"zyx"</code>. Defaults to <code>"
 </div>
 <div class="section">
 <h4 id="returns-12">Returns<a class="anchor" aria-label="anchor" href="#returns-12"></a></h4>
-<p>A numeric array of shape \(... \times 3\) storing the
+<p>A numeric array of shape \([\dots \times 3]\) storing the
 corresponding Tait-Bryan angle representations.</p>
 </div>
+<div class="section">
+<h4 id="examples-11">Examples<a class="anchor" aria-label="anchor" href="#examples-11"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">tait_bryan_angles_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-random_uniform"></a><div class="section">
 <h3 id="method-random-uniform-">Method <code>random_uniform()</code><a class="anchor" aria-label="anchor" href="#method-random-uniform-"></a></h3>
@@ -587,10 +689,18 @@ corresponding Tait-Bryan angle representations.</p>
 </div>
 <div class="section">
 <h4 id="returns-13">Returns<a class="anchor" aria-label="anchor" href="#returns-13"></a></h4>
-<p>A numeric array of shape \(... \times 3\) storing a sample of
-3D rotations in axis-angle representation uniformly sampled in
+<p>A numeric array of shape \([\dots \times 3]\) storing a sample
+of 3D rotations in axis-angle representation uniformly sampled in
 \(\mathrm{SO}(3)\).</p>
 </div>
+<div class="section">
+<h4 id="examples-12">Examples<a class="anchor" aria-label="anchor" href="#examples-12"></a></h4>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span>
+<span>  <span class="va">so3</span><span class="op">$</span><span class="fu">random_uniform</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
+</div>
+
 
 </div><p></p><hr><a id="method-SpecialOrthogonal3Vectors-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
@@ -612,6 +722,127 @@ corresponding Tait-Bryan angle representations.</p>
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$rotation_vector_from_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">rotation_vector_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$matrix_from_rotation_vector`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">matrix_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$quaternion_from_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">quaternion_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$quaternion_from_rotation_vector`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">quaternion_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$rotation_vector_from_quaternion`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">rotation_vector_from_quaternion</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$matrix_from_quaternion`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">matrix_from_quaternion</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$matrix_from_tait_bryan_angles`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">matrix_from_tait_bryan_angles</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$tait_bryan_angles_from_matrix`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">tait_bryan_angles_from_matrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$quaternion_from_tait_bryan_angles`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">quaternion_from_tait_bryan_angles</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$rotation_vector_from_tait_bryan_angles`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">rotation_vector_from_tait_bryan_angles</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$tait_bryan_angles_from_quaternion`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">tait_bryan_angles_from_quaternion</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$tait_bryan_angles_from_rotation_vector`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">tait_bryan_angles_from_rotation_vector</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Method `SpecialOrthogonal3Vectors$random_uniform`</span></span></span>
+<span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_module_available.html" class="external-link">py_module_available</a></span><span class="op">(</span><span class="st">"geomstats"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span> <span class="op">&lt;-</span> <span class="fu"><a href="SpecialOrthogonal.html">SpecialOrthogonal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, point_type <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">so3</span><span class="op">$</span><span class="fu">random_uniform</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
