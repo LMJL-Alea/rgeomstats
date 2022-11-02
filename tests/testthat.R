@@ -9,4 +9,6 @@
 library(testthat)
 library(rgeomstats)
 
-test_check("rgeomstats")
+if (reticulate::py_available() && reticulate::py_module_available("geomstats")) {
+  test_check("rgeomstats")
+}
