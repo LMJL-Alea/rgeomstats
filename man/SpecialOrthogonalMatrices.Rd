@@ -86,7 +86,7 @@ specifying the metric to equip the manifold with.}
 \subsection{Method \code{new()}}{
 The \code{\link{SpecialOrthogonalMatrices}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonalMatrices$new(n, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonalMatrices$new(n, ..., py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -97,6 +97,10 @@ the matrices.}
 
 \item{\code{...}}{Extra arguments to be passed to parent class constructors. See
 \code{\link{MatrixLieAlgebra}}, \code{\link{LevelSet}} and \code{\link{Manifold}} classes.}
+
+\item{\code{py_cls}}{A Python object of class \code{SpecialOrthogonalMatrices}.
+Defaults to \code{NULL} in which case it is instantiated on the fly using
+the other input arguments.}
 }
 \if{html}{\out{</div>}}
 }

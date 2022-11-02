@@ -4,7 +4,7 @@
 \alias{SpecialOrthogonal}
 \title{Class for the Special Orthogonal Group}
 \usage{
-SpecialOrthogonal(n, point_type = "matrix", epsilon = 0, ...)
+SpecialOrthogonal(n, point_type = "matrix", epsilon = 0, ..., py_cls = NULL)
 }
 \arguments{
 \item{n}{An integer value representing the shape of the \verb{n x n} matrices.}
@@ -19,6 +19,10 @@ calculations involving potential division by 0 in rotations. Defaults to
 
 \item{...}{Extra arguments to be passed to parent class constructors. See
 \code{\link{LieGroup}}, \code{\link{MatrixLieAlgebra}}, \code{\link{LevelSet}} and \code{\link{Manifold}} classes.}
+
+\item{py_cls}{A Python object of class \code{SpecialOrthogonal}. Defaults to
+\code{NULL} in which case it is instantiated on the fly using the other input
+arguments.}
 }
 \value{
 An object of class \code{\link{SpecialOrthogonal}} which is an instance of one

@@ -19,3 +19,10 @@
     Output
       [1] -1.93824
 
+# SpecialOrthogonal3Vectors method random_uniform() works
+
+    Code
+      so3$random_uniform()
+    Output
+      [1]  0.2442175 -0.1245445  0.5707172
+

@@ -66,7 +66,7 @@ ambient space.}
 \subsection{Method \code{new()}}{
 The \code{\link{OpenSet}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OpenSet$new(dim, ambient_space, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenSet$new(dim, ambient_space, ..., py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -79,6 +79,10 @@ ambient space.}
 
 \item{\code{...}}{Extra arguments to be passed to parent class constructors. See
 \code{\link{Manifold}} class.}
+
+\item{\code{py_cls}}{A Python object of class \code{OpenSet}. Defaults to \code{NULL} in
+which case it is instantiated on the fly using the other input
+arguments.}
 }
 \if{html}{\out{</div>}}
 }

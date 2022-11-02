@@ -225,7 +225,7 @@ matrices.}
 \subsection{Method \code{new()}}{
 The \code{\link{SPDMatrices}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$new(n, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SPDMatrices$new(n, ..., py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -236,6 +236,10 @@ matrices.}
 
 \item{\code{...}}{Extra arguments to be passed to parent class constructors. See
 \code{\link{OpenSet}} and \code{\link{Manifold}} classes.}
+
+\item{\code{py_cls}}{A Python object of class \code{SPDMatrices}. Defaults to \code{NULL}
+in which case it is instantiated on the fly using the other input
+arguments.}
 }
 \if{html}{\out{</div>}}
 }

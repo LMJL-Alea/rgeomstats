@@ -171,7 +171,8 @@ The \code{\link{RiemannianMetric}} class constructor.
   dim,
   shape = NULL,
   signature = NULL,
-  default_coords_type = "intrinsic"
+  default_coords_type = "intrinsic",
+  py_cls = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -188,6 +189,10 @@ metric. Defaults to \code{c(dim, 0L)}.}
 
 \item{\code{default_coords_type}}{A string specifying the coordinate type.
 Choices are \code{extrensic} or \code{intrinsic}. Defaults to \code{intrinsic}.}
+
+\item{\code{py_cls}}{A Python object of class \code{RiemannianMetric}. Defaults to
+\code{NULL} in which case it is instantiated on the fly using the other
+input arguments.}
 }
 \if{html}{\out{</div>}}
 }

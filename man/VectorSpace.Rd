@@ -49,7 +49,7 @@ Nicolas Guigui and Nina Miolane
 \subsection{Method \code{new()}}{
 The \code{\link{VectorSpace}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{VectorSpace$new(shape, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{VectorSpace$new(shape, ..., py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -60,6 +60,10 @@ manifold. Defaults to \code{NULL}.}
 
 \item{\code{...}}{Extra arguments to be passed to parent class constructors. See
 \code{\link{Manifold}} class.}
+
+\item{\code{py_cls}}{A Python object of class \code{VectorSpace}. Defaults to \code{NULL}
+in which case it is instantiated on the fly using the other input
+arguments.}
 }
 \if{html}{\out{</div>}}
 }

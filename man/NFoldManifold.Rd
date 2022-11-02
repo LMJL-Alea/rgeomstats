@@ -61,7 +61,8 @@ The \code{\link{NFoldManifold}} class constructor.
   base_manifold,
   n_copies,
   metric = NULL,
-  default_coords_type = "intrinsic"
+  default_coords_type = "intrinsic",
+  py_cls = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -79,6 +80,10 @@ Defaults to \code{NULL} which uses the Riemannian metric.}
 
 \item{\code{default_coords_type}}{A string specifying the coordinate type.
 Choices are \code{"intrinsic"} or \code{"extrinsic"}. Defaults to \code{"intrinsic"}.}
+
+\item{\code{py_cls}}{A Python object of class \code{NFoldManifold}. Defaults to
+\code{NULL} in which case it is instantiated on the fly using the other
+input arguments.}
 }
 \if{html}{\out{</div>}}
 }

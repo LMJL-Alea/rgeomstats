@@ -25,15 +25,19 @@ MatrixLieAlgebra <- R6::R6Class(
     #'   the matrix representation of the Lie algebra.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`VectorSpace`] and  [`Manifold`] classes.
+    #' @param py_cls A Python object of class `MatrixLieAlgebra`. Defaults to
+    #'   `NULL` in which case it is instantiated on the fly using the other
+    #'   input arguments.
     #'
     #' @return An object of class [`MatrixLieAlgebra`].
-    initialize = function(dim, n, ...) {
-      dots <- capture_extra_params(...)
-      dots$dim <- as.integer(dim)
-      dots$n <- as.integer(n)
-      super$set_python_class(
-        do.call(gs$geometry$lie_algebra$MatrixLieAlgebra, dots)
-      )
+    initialize = function(dim, n, ..., py_cls = NULL) {
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$dim <- as.integer(dim)
+        dots$n <- as.integer(n)
+        py_cls <- do.call(gs$geometry$lie_algebra$MatrixLieAlgebra, dots)
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 

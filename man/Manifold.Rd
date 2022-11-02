@@ -138,7 +138,8 @@ The \code{\link{Manifold}} class constructor.
   dim,
   shape = NULL,
   metric = NULL,
-  default_coords_type = "intrinsic"
+  default_coords_type = "intrinsic",
+  py_cls = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -155,6 +156,10 @@ on the manifold. Defaults to \code{NULL}.}
 
 \item{\code{default_coords_type}}{A string specifying the coordinate type.
 Choices are \code{extrinsic} or \code{intrinsic}. Defaults to \code{intrinsic}.}
+
+\item{\code{py_cls}}{A Python object of class \code{Manifold}. Defaults to \code{NULL} in
+which case it is instantiated on the fly using the other input
+arguments.}
 }
 \if{html}{\out{</div>}}
 }

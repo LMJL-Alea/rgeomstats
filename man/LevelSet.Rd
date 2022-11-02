@@ -67,7 +67,8 @@ The \code{\link{LevelSet}} class constructor.
   value,
   tangent_submersion,
   default_coords_type = "intrinsic",
-  ...
+  ...,
+  py_cls = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -90,6 +91,10 @@ Choices are \code{extrinsic} or \code{intrinsic}. Defaults to \code{intrinsic}.}
 
 \item{\code{...}}{Extra arguments to be passed to parent class constructors. See
 \code{\link{Manifold}} class.}
+
+\item{\code{py_cls}}{A Python object of class \code{LevelSet}. Defaults to \code{NULL} in
+which case it is instantiated on the fly using the other input
+arguments.}
 }
 \if{html}{\out{</div>}}
 }

@@ -27,6 +27,9 @@ SPDMatrices <- R6::R6Class(
     #'   matrices.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`OpenSet`] and [`Manifold`] classes.
+    #' @param py_cls A Python object of class `SPDMatrices`. Defaults to `NULL`
+    #'   in which case it is instantiated on the fly using the other input
+    #'   arguments.
     #'
     #' @return An object of class [`SPDMatrices`].
     #'
@@ -35,19 +38,20 @@ SPDMatrices <- R6::R6Class(
     #'   spd3 <- SPDMatrix(n = 3)
     #'   spd3
     #' }
-    initialize = function(n, ...) {
-      dots <- capture_extra_params(...)
-      dots$n <- as.integer(n)
-      if ("shape" %in% names(dots)) {
-        dots$shape <- dots$shape |>
-          purrr::map(as.integer) |>
-          reticulate::tuple()
+    initialize = function(n, ..., py_cls = NULL) {
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$n <- as.integer(n)
+        if ("shape" %in% names(dots)) {
+          dots$shape <- dots$shape |>
+            purrr::map(as.integer) |>
+            reticulate::tuple()
+        }
+        if ("metric" %in% names(dots))
+          dots$metric <- dots$metric$get_python_class()
+        py_cls <- do.call(gs$geometry$spd_matrices$SPDMatrices, dots)
       }
-      if ("metric" %in% names(dots))
-        dots$metric <- dots$metric$get_python_class()
-      super$set_python_class(
-        do.call(gs$geometry$spd_matrices$SPDMatrices, dots)
-      )
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 

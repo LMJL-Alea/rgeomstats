@@ -25,17 +25,21 @@ SPDMetricEuclidean <- R6::R6Class(
     #'   \times n}.
     #' @param power_euclidean An integer value specifying the power
     #'   transformation of the classical SPD metric. Defaults to `1L`.
+    #' @param py_cls A Python object of class `SPDMetricEuclidean`. Defaults to
+    #'   `NULL` in which case it is instantiated on the fly using the other
+    #'   input arguments.
     #'
     #' @return An object of class [`SPDMetricEuclidean`].
-    initialize = function(n, power_euclidean = 1) {
-      n <- as.integer(n)
-      power_euclidean <- as.integer(power_euclidean)
-      super$set_python_class(
-        gs$geometry$spd_matrices$SPDMetricEuclidean(
+    initialize = function(n, power_euclidean = 1, py_cls = NULL) {
+      if (is.null(py_cls)) {
+        n <- as.integer(n)
+        power_euclidean <- as.integer(power_euclidean)
+        py_cls <- gs$geometry$spd_matrices$SPDMetricEuclidean(
           n = n,
           power_euclidean = power_euclidean
         )
-      )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     }
   ),

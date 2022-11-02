@@ -14,10 +14,10 @@ extract_class_name <- function(py_class) {
   substr(nm, 1, nchar(nm) - 1)
 }
 
-python_to_r_class <- function(py_class) {
-  cls <- rlang::quo(extract_class_name(py_class))
-  cls <- rlang::eval_tidy(cls$new())
-  cls$set_python_class(py_class)
-  cls
+get_r6_class <- function(cls) {
+  if (inherits(cls, "R6")) return(cls)
+  if (!inherits(cls, "python.builtin.object"))
+    cli::cli_abort("The input object should be a Python class.")
+  out_cls <- get(extract_class_name(cls))
+  out_cls$new(py_cls = cls)
 }
-

@@ -12,6 +12,116 @@ group. If \code{point_type} is \code{'vector'}, the format of the inputs is
 is the parameter of \eqn{\mathrm{GL}(n)} e.g. the amount of rows and
 columns of the matrix.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `LieGroup$exp`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$exp(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$exp_from_identity`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$exp_from_identity(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$exp_not_from_identity`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$exp_not_from_identity(rep(0, 3), rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$log`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$log(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$log_from_identity`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$log_from_identity(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$log_not_from_identity`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$log_not_from_identity(rep(0, 3), rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$get_identity`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$get_identity()
+}
+
+## ------------------------------------------------
+## Method `LieGroup$lie_bracket`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$lie_bracket(diag(0, 3), diag(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$tangent_translation_map`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tangent_translation_map(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$compose`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$compose(rep(0, 3), rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$jacobian_translation`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$jacobian_translation(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `LieGroup$inverse`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$inverse(rep(0, 3))
+}
+}
 \author{
 Nina Miolane
 }
@@ -78,7 +188,7 @@ Euclidean inner product at the identity.}
 \subsection{Method \code{new()}}{
 The \code{\link{LieGroup}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LieGroup$new(dim, shape, lie_algebra = NULL, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{LieGroup$new(dim, shape, lie_algebra = NULL, ..., py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -94,6 +204,10 @@ specifying the tangent space at the identity.}
 
 \item{\code{...}}{Extra arguments to be passed to parent class constructors. See
 \code{\link{Manifold}} class.}
+
+\item{\code{py_cls}}{A Python object of class \code{LieGroup}. Defaults to \code{NULL} in
+which case it is instantiated on the fly using the other input
+arguments.}
 }
 \if{html}{\out{</div>}}
 }
@@ -114,12 +228,13 @@ point.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A numeric array of shape either \eqn{... \times
-  \mathrm{dim}} or \eqn{... \times n \times n} specifying one or more
-tangent vectors at base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more tangent vectors at
+corresponding base points.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more base points on the
+manifold. Defaults to identity if \code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -133,9 +248,21 @@ or the identity.
 }
 
 \subsection{Returns}{
-A numeric array of the same shape as the input array storing the
-group exponential of the input tangent vector(s).
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the group exponential of the input tangent
+vector(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$exp(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-exp_from_identity"></a>}}
@@ -150,16 +277,28 @@ identity.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A numeric array of shape either \eqn{... \times
-  \mathrm{dim}} or \eqn{... \times n \times n} specifying one or more
-tangent vectors at base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more tangent vectors at
+corresponding base points.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of the same shape as the input array storing the
-group exponential of the input tangent vector(s).
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the group exponential of the input tangent
+vector(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$exp_from_identity(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-exp_not_from_identity"></a>}}
@@ -173,19 +312,32 @@ Calculate the group exponential at \code{base_point}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A numeric array of shape either \eqn{... \times
-  \mathrm{dim}} or \eqn{... \times n \times n} specifying one or more
-tangent vectors at base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more tangent vectors at
+corresponding base points.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more base points on the
+manifold. Defaults to identity if \code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of the same shape as the input array storing the
-group exponential of the input tangent vector(s).
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the group exponential of the input tangent
+vector(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$exp_not_from_identity(rep(0, 3), rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-log"></a>}}
@@ -200,11 +352,13 @@ to \code{point}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the point
-at which to compute the map.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more points on the
+manifold.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more base points on the
+manifold. Defaults to identity if \code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -216,9 +370,20 @@ the output satisfies \deqn{g = \exp(\log(g, h), h)}.
 }
 
 \subsection{Returns}{
-A numeric array of the same shape as the input array storing the
-group logarithm of the input point(s).
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the group logarithm of the input point(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$log(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-log_from_identity"></a>}}
@@ -232,15 +397,27 @@ Computes the group logarithm of \code{point} from the identity.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the point
-at which to compute the map.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more points on the
+manifold.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of the same shape as the input array storing the
-group logarithm of the input point(s).
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the group logarithm of the input point(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$log_from_identity(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-log_not_from_identity"></a>}}
@@ -254,18 +431,31 @@ Computes the group logarithm at \code{base_point}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the point
-at which to compute the map.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more points on the
+manifold.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more base points on the
+manifold. Defaults to identity if \code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of the same shape as the input array storing the
-group logarithm of the input point(s).
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the group logarithm of the input point(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$log_not_from_identity(rep(0, 3), rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-get_identity"></a>}}
@@ -277,9 +467,20 @@ Gets the identity of the group.
 }
 
 \subsection{Returns}{
-A numeric array of shape \code{dim} or \code{c(n, n)} storing the identity
-of the Lie group.
+A numeric array of shape \eqn{\{ \mathrm{dim}, [n \times n] \}}
+storing the identity of the Lie group.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$get_identity()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-lie_bracket"></a>}}
@@ -293,14 +494,17 @@ Computes the lie bracket of two tangent vectors.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vector_a}}{A numeric array of shape \code{c(n, n)} specifying a
-tangent vector at base point.}
+\item{\code{tangent_vector_a}}{A numeric array of shape \eqn{[\dots \times n
+  \times n]} specifying one or more tangent vectors at corresponding base
+points.}
 
-\item{\code{tangent_vector_b}}{A numeric array of shape \code{c(n, n)} specifying a
-tangent vector at base point.}
+\item{\code{tangent_vector_b}}{A numeric array of shape \eqn{[\dots \times n
+  \times n]} specifying one or more tangent vectors at corresponding base
+points.}
 
-\item{\code{base_point}}{A numeric array of shape \code{c(n, n)} specifying a tangent
-base point. Defaults to identity if \code{NULL}.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more base points on the
+manifold. Defaults to identity if \code{NULL}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -312,9 +516,20 @@ identity, compute commutator, go back): \deqn{[A,B] = A_P^{-1}B -
 }
 
 \subsection{Returns}{
-A numeric array of shape \code{c(n, n)} storing the Lie bracket of the
-two input tangent vectors.
+A numeric array of shape \eqn{[\dots \times n \times n]} storing
+the Lie bracket of the two input tangent vectors.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$lie_bracket(diag(0, 3), diag(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-tangent_translation_map"></a>}}
@@ -332,8 +547,9 @@ Computes the push-forward map by the left/right translation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the point
-at which to compute the map.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more points on the
+manifold.}
 
 \item{\code{left_or_right}}{A character string specifying whether to compute the map
 for the left or right translation. Choices are \code{"left"} or \verb{"right}.
@@ -359,6 +575,17 @@ of the map.
 A function computing the tangent map of the left/right
 translation by \code{point}. It can be applied to tangent vectors.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tangent_translation_map(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-compose"></a>}}
@@ -373,18 +600,32 @@ group.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point_a}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the
-left factor in the product.}
+\item{\code{point_a}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more left factors in
+the product.}
 
-\item{\code{point_b}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the
-right factor in the product.}
+\item{\code{point_b}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more right factors in
+the product.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} or \code{c(n, n)} storing the product
-of \code{point_a} and \code{point_b} along the first dimension.
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the product of \code{point_a} and \code{point_b} along the
+first dimension.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$compose(rep(0, 3), rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-jacobian_translation"></a>}}
@@ -398,8 +639,9 @@ Computes the Jacobian of left/right translation by a point.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the point
-at which to compute the map.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{
+  \mathrm{dim}, [n \times n] \}]} specifying one or more points on the
+manifold.}
 
 \item{\code{left_or_right}}{A character string specifying whether to compute the map
 for the left or right translation. Choices are \code{"left"} or \verb{"right}.
@@ -408,9 +650,21 @@ Defaults to \code{"left"}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{c(dim, dim)} storing the Jacobian of
-the left/right translation by \code{point}.
+A numeric array of shape \eqn{[\dots \times \mathrm{dim} \times
+  \mathrm{dim}]} storing the Jacobian of the left/right translation by
+\code{point}.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$jacobian_translation(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-inverse"></a>}}
@@ -424,15 +678,26 @@ Computes the inverse law of the Lie group.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \code{dim} or \code{c(n, n)} specifying the
-point to be inverted.}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim},
+[n \times n] \}]} specifying one or more points to be inverted.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \code{dim} or \code{c(n, n)} storing the inverted
-point.
+A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+  \times n] \}]} storing the inverted points.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$inverse(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LieGroup-add_metric"></a>}}

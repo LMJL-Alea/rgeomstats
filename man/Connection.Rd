@@ -65,7 +65,12 @@ manifold.}
 \subsection{Method \code{new()}}{
 The \code{\link{Connection}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Connection$new(dim, shape = NULL, default_coords_type = "intrinsic")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Connection$new(
+  dim,
+  shape = NULL,
+  default_coords_type = "intrinsic",
+  py_cls = NULL
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -78,6 +83,10 @@ manifold. Defaults to \code{NULL}.}
 
 \item{\code{default_coords_type}}{A string specifying the coordinate type.
 Choices are \code{extrensic} or \code{intrinsic}. Defaults to \code{intrinsic}.}
+
+\item{\code{py_cls}}{A Python object of class \code{Connection}. Defaults to \code{NULL}
+in which case it is instantiated on the fly using the other input
+arguments.}
 
 \item{\code{metric}}{A \code{\link{RiemannianMetric}} object specifying the metric to use
 on the manifold. Defaults to \code{NULL}.}

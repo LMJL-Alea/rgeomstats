@@ -48,18 +48,22 @@ Connection <- R6::R6Class(
     #'   on the manifold. Defaults to `NULL`.
     #' @param default_coords_type A string specifying the coordinate type.
     #'   Choices are `extrensic` or `intrinsic`. Defaults to `intrinsic`.
+    #' @param py_cls A Python object of class `Connection`. Defaults to `NULL`
+    #'   in which case it is instantiated on the fly using the other input
+    #'   arguments.
     #'
     #' @return An object of class [`Connection`].
-    initialize = function(dim, shape = NULL, default_coords_type = "intrinsic") {
-      dim <- as.integer(dim)
-      if (!is.null(shape)) shape <- dim
-      super$set_python_class(
-        gs$geometry$connection$Connection(
+    initialize = function(dim, shape = NULL, default_coords_type = "intrinsic", py_cls = NULL) {
+      if (is.null(py_cls)) {
+        dim <- as.integer(dim)
+        if (!is.null(shape)) shape <- dim
+        py_cls <- gs$geometry$connection$Connection(
           dim = dim,
           shape = shape,
           default_coords_type = default_coords_type
         )
-      )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 

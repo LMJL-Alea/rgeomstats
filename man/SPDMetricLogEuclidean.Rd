@@ -85,7 +85,7 @@ Yann Thanwerdas
 \subsection{Method \code{new()}}{
 The \code{\link{SPDMetricLogEuclidean}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SPDMetricLogEuclidean$new(n)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SPDMetricLogEuclidean$new(n, py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -93,6 +93,10 @@ The \code{\link{SPDMetricLogEuclidean}} class constructor.
 \describe{
 \item{\code{n}}{An integer value specifying the shape of the matrices: \eqn{n
 \times n}.}
+
+\item{\code{py_cls}}{A Python object of class \code{SPDMetricLogEuclidean}. Defaults
+to \code{NULL} in which case it is instantiated on the fly using the other
+input arguments.}
 }
 \if{html}{\out{</div>}}
 }

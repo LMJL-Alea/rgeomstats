@@ -24,22 +24,26 @@ OpenSet <- R6::R6Class(
     #'   ambient space.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`Manifold`] class.
+    #' @param py_cls A Python object of class `OpenSet`. Defaults to `NULL` in
+    #'   which case it is instantiated on the fly using the other input
+    #'   arguments.
     #'
     #' @return An object of class [`OpenSet`].
-    initialize = function(dim, ambient_space, ...) { # nocov start
-      dots <- capture_extra_params(...)
-      dots$dim <- as.integer(dim)
-      if ("shape" %in% names(dots)) {
-        dots$shape <- dots$shape |>
-          purrr::map(as.integer) |>
-          reticulate::tuple()
+    initialize = function(dim, ambient_space, ..., py_cls = NULL) { # nocov start
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$dim <- as.integer(dim)
+        if ("shape" %in% names(dots)) {
+          dots$shape <- dots$shape |>
+            purrr::map(as.integer) |>
+            reticulate::tuple()
+        }
+        if ("metric" %in% names(dots))
+          dots$metric <- dots$metric$get_python_class()
+        dots$ambient_space <- ambient_space$get_python_class()
+        py_cls <- do.call(gs$geometry$base$OpenSet, dots)
       }
-      if ("metric" %in% names(dots))
-        dots$metric <- dots$metric$get_python_class()
-      dots$ambient_space <- ambient_space$get_python_class()
-      super$set_python_class(
-        do.call(gs$geometry$base$OpenSet, dots)
-      )
+      super$set_python_class(py_cls)
       private$set_fields()
     }, # nocov end
 

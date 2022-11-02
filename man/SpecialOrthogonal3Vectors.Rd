@@ -9,6 +9,125 @@ vector form, i.e. the Lie group of 3D rotations. This class is specific to
 the vector representation of rotations. For the matrix representation, use
 the \code{\link{SpecialOrthogonal}} class and set \code{n = 3}.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$rotation_vector_from_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$rotation_vector_from_matrix(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$matrix_from_rotation_vector`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$matrix_from_rotation_vector(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$quaternion_from_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$quaternion_from_matrix(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$quaternion_from_rotation_vector`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$quaternion_from_rotation_vector(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$rotation_vector_from_quaternion`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$rotation_vector_from_quaternion(array(c(1, rep(0, 3))))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$matrix_from_quaternion`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$matrix_from_quaternion(c(1, rep(0, 3)))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$matrix_from_tait_bryan_angles`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$matrix_from_tait_bryan_angles(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$tait_bryan_angles_from_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tait_bryan_angles_from_matrix(diag(1, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$quaternion_from_tait_bryan_angles`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$quaternion_from_tait_bryan_angles(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$rotation_vector_from_tait_bryan_angles`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$rotation_vector_from_tait_bryan_angles(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$tait_bryan_angles_from_quaternion`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tait_bryan_angles_from_quaternion(c(1, rep(0, 3)))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$tait_bryan_angles_from_rotation_vector`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tait_bryan_angles_from_rotation_vector(rep(0, 3))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonal3Vectors$random_uniform`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$random_uniform()
+}
+}
 \seealso{
 Other special orthogonal classes: 
 \code{\link{SpecialOrthogonal2Vectors}},
@@ -90,7 +209,7 @@ specifying the metric to equip the manifold with.}
 \subsection{Method \code{new()}}{
 The \code{\link{SpecialOrthogonal3Vectors}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonal3Vectors$new(epsilon = 0)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonal3Vectors$new(epsilon = 0, py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -99,6 +218,10 @@ The \code{\link{SpecialOrthogonal3Vectors}} class constructor.
 \item{\code{epsilon}}{A numeric value specifying the precision to use for
 calculations involving potential division by 0 in rotations. Defaults to
 \code{0}.}
+
+\item{\code{py_cls}}{A Python object of class \code{SpecialOrthogonal3Vectors}.
+Defaults to \code{NULL} in which case it is instantiated on the fly using
+the other input arguments.}
 }
 \if{html}{\out{</div>}}
 }
@@ -119,7 +242,7 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_mat}}{A numeric array of shape \eqn{... \times 3 \times 3}
+\item{\code{rot_mat}}{A numeric array of shape \eqn{[\dots \times 3 \times 3]}
 specifying one or more 3D rotation matrices.}
 }
 \if{html}{\out{</div>}}
@@ -143,9 +266,20 @@ skew-symmetric matrix representing the rotation.
 }
 
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3} storing the
+A numeric array of shape \eqn{[\dots \times 3]} storing the
 corresponding axis-angle representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$rotation_vector_from_matrix(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-matrix_from_rotation_vector"></a>}}
@@ -160,15 +294,26 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_vec}}{A numeric array of shape \eqn{... \times 3} specifying one
-or more 3D rotations in axis-angle representation.}
+\item{\code{rot_vec}}{A numeric array of shape \eqn{[\dots \times 3]} specifying
+one or more 3D rotations in axis-angle representation.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3 \times 3} storing the
-corresponding matrix representations.
+A numeric array of shape \eqn{[\dots \times 3 \times 3]} storing
+the corresponding matrix representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$matrix_from_rotation_vector(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-quaternion_from_matrix"></a>}}
@@ -183,15 +328,26 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_mat}}{A numeric array of shape \eqn{... \times 3 \times 3}
+\item{\code{rot_mat}}{A numeric array of shape \eqn{[\dots \times 3 \times 3]}
 specifying one or more 3D rotations in matrix representation.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 4} storing the
+A numeric array of shape \eqn{[\dots \times 4]} storing the
 corresponding unit quaternion representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$quaternion_from_matrix(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-quaternion_from_rotation_vector"></a>}}
@@ -206,15 +362,26 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_vec}}{A numeric array of shape \eqn{... \times 3} specifying one
-or more 3D rotations in axis-angle representation.}
+\item{\code{rot_vec}}{A numeric array of shape \eqn{[\dots \times 3]} specifying
+one or more 3D rotations in axis-angle representation.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 4} storing the
+A numeric array of shape \eqn{[\dots \times 4]} storing the
 corresponding unit quaternion representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$quaternion_from_rotation_vector(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-rotation_vector_from_quaternion"></a>}}
@@ -229,15 +396,26 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{quaternion}}{A numeric array of shape \eqn{... \times 4} specifying
-one or more 3D rotations in unit quaternion representation.}
+\item{\code{quaternion}}{A numeric array of shape \eqn{[\dots \times 4]}
+specifying one or more 3D rotations in unit quaternion representation.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3} storing the
+A numeric array of shape \eqn{[\dots \times 3]} storing the
 corresponding axis-angle representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$rotation_vector_from_quaternion(array(c(1, rep(0, 3))))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-matrix_from_quaternion"></a>}}
@@ -252,15 +430,26 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{quaternion}}{A numeric array of shape \eqn{... \times 4} specifying
-one or more 3D rotations in unit quaternion representation.}
+\item{\code{quaternion}}{A numeric array of shape \eqn{[\dots \times 4]}
+specifying one or more 3D rotations in unit quaternion representation.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3 \times 3} storing the
-corresponding matrix representations.
+A numeric array of shape \eqn{[\dots \times 3 \times 3]} storing
+the corresponding matrix representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$matrix_from_quaternion(c(1, rep(0, 3)))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-matrix_from_tait_bryan_angles"></a>}}
@@ -279,7 +468,7 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tait_bryan_angles}}{A numeric array of shape \eqn{... \times 3}
+\item{\code{tait_bryan_angles}}{A numeric array of shape \eqn{[\dots \times 3]}
 specifying one or more 3D rotations in Tait-Bryan angle representation.}
 
 \item{\code{extrinsic_or_intrinsic}}{A character string specifying the
@@ -309,9 +498,20 @@ order.
 }
 
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3 \times 3} storing the
-corresponding matrix representations.
+A numeric array of shape \eqn{[\dots \times 3 \times 3]} storing
+the corresponding matrix representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$matrix_from_tait_bryan_angles(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-tait_bryan_angles_from_matrix"></a>}}
@@ -330,7 +530,7 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_mat}}{A numeric array of shape \eqn{... \times 3 \times 3}
+\item{\code{rot_mat}}{A numeric array of shape \eqn{[\dots \times 3 \times 3]}
 specifying one or more 3D rotations in matrix representation.}
 
 \item{\code{extrinsic_or_intrinsic}}{A character string specifying the
@@ -361,9 +561,20 @@ order.
 }
 
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3} storing the
+A numeric array of shape \eqn{[\dots \times 3]} storing the
 corresponding Tait-Bryan angle representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tait_bryan_angles_from_matrix(diag(1, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-quaternion_from_tait_bryan_angles"></a>}}
@@ -382,7 +593,7 @@ quaternion representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tait_bryan_angles}}{A numeric array of shape \eqn{... \times 3}
+\item{\code{tait_bryan_angles}}{A numeric array of shape \eqn{[\dots \times 3]}
 specifying one or more 3D rotations in Tait-Bryan angle representation.}
 
 \item{\code{extrinsic_or_intrinsic}}{A character string specifying the
@@ -397,9 +608,20 @@ Choices are either \code{"xyz"} or \code{"zyx"}. Defaults to \code{"zyx"}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 4} storing the
+A numeric array of shape \eqn{[\dots \times 4]} storing the
 corresponding unit quaternion representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$quaternion_from_tait_bryan_angles(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-rotation_vector_from_tait_bryan_angles"></a>}}
@@ -418,7 +640,7 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tait_bryan_angles}}{A numeric array of shape \eqn{... \times 3}
+\item{\code{tait_bryan_angles}}{A numeric array of shape \eqn{[\dots \times 3]}
 specifying one or more 3D rotations in Tait-Bryan angle representation.}
 
 \item{\code{extrinsic_or_intrinsic}}{A character string specifying the
@@ -433,9 +655,20 @@ Choices are either \code{"xyz"} or \code{"zyx"}. Defaults to \code{"zyx"}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3} storing the
+A numeric array of shape \eqn{[\dots \times 3]} storing the
 corresponding axis-angle representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$rotation_vector_from_tait_bryan_angles(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-tait_bryan_angles_from_quaternion"></a>}}
@@ -454,8 +687,8 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{quaternion}}{A numeric array of shape \eqn{... \times 4} specifying
-one or more 3D rotations in unit quaternion representation.}
+\item{\code{quaternion}}{A numeric array of shape \eqn{[\dots \times 4]}
+specifying one or more 3D rotations in unit quaternion representation.}
 
 \item{\code{extrinsic_or_intrinsic}}{A character string specifying the
 coordinate frame in which the Tait-Bryan angles are expressed. Choices
@@ -469,9 +702,20 @@ Choices are either \code{"xyz"} or \code{"zyx"}. Defaults to \code{"zyx"}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3} storing the
+A numeric array of shape \eqn{[\dots \times 3]} storing the
 corresponding Tait-Bryan angle representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tait_bryan_angles_from_quaternion(c(1, rep(0, 3)))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-tait_bryan_angles_from_rotation_vector"></a>}}
@@ -490,8 +734,8 @@ representation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{rot_vec}}{A numeric array of shape \eqn{... \times 3} specifying one
-or more 3D rotations in axis-angle representation.}
+\item{\code{rot_vec}}{A numeric array of shape \eqn{[\dots \times 3]} specifying
+one or more 3D rotations in axis-angle representation.}
 
 \item{\code{extrinsic_or_intrinsic}}{A character string specifying the
 coordinate frame in which the Tait-Bryan angles are expressed. Choices
@@ -505,9 +749,20 @@ Choices are either \code{"xyz"} or \code{"zyx"}. Defaults to \code{"zyx"}.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3} storing the
+A numeric array of shape \eqn{[\dots \times 3]} storing the
 corresponding Tait-Bryan angle representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$tait_bryan_angles_from_rotation_vector(rep(0, 3))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-random_uniform"></a>}}
@@ -527,10 +782,21 @@ Samples in \eqn{\mathrm{SO}(3)} from a uniform distribution.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 3} storing a sample of
-3D rotations in axis-angle representation uniformly sampled in
+A numeric array of shape \eqn{[\dots \times 3]} storing a sample
+of 3D rotations in axis-angle representation uniformly sampled in
 \eqn{\mathrm{SO}(3)}.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+  so3$random_uniform()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonal3Vectors-clone"></a>}}

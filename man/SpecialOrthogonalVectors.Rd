@@ -29,6 +29,33 @@ if (reticulate::py_module_available("geomstats")) {
   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
   so2$skew_matrix_from_vector(array(0))
 }
+
+## ------------------------------------------------
+## Method `SpecialOrthogonalVectors$vector_from_skew_matrix`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$vector_from_skew_matrix(diag(0, 2))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonalVectors$regularize_tangent_vec_at_identity`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$regularize_tangent_vec_at_identity(array(0))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonalVectors$regularize_tangent_vec`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$regularize_tangent_vec(array(0), array(1))
+}
 }
 \author{
 Nicolas Guigui and Nina Miolane
@@ -94,7 +121,7 @@ calculations involving potential divison by 0 in rotations.}
 \subsection{Method \code{new()}}{
 The \code{\link{SpecialOrthogonalVectors}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonalVectors$new(n, epsilon = 0)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonalVectors$new(n, epsilon = 0, py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -106,6 +133,10 @@ the matrices.}
 \item{\code{epsilon}}{A numeric value specifying the precision to use for
 calculations involving potential divison by 0 in rotations. Defaults to
 \code{0}.}
+
+\item{\code{py_cls}}{A Python object of class \code{SpecialOrthogonalVectors}.
+Defaults to \code{NULL} in which case it is instantiated on the fly using
+the other input arguments.}
 }
 \if{html}{\out{</div>}}
 }
@@ -168,8 +199,8 @@ matrix representations.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{[\dots \times n \times n]} storing the
-corresponding skew matrix representations.
+A numeric array of shape \eqn{[\dots \times n \times n]} storing
+the corresponding skew matrix representations.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -197,15 +228,26 @@ skew-symmetric matrix.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{skew_mat}}{A numeric array of shape \eqn{... \times n \times n}
+\item{\code{skew_mat}}{A numeric array of shape \eqn{[\dots \times n \times n]}
 specifying skew matrices.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times \mathrm{dim}} storing
-the corresponding vector representations.
+A numeric array of shape \eqn{[\dots \times \mathrm{dim}]}
+storing the corresponding vector representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$vector_from_skew_matrix(diag(0, 2))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonalVectors-regularize_tangent_vec_at_identity"></a>}}
@@ -224,8 +266,8 @@ less than \eqn{\pi}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A numeric array of shape \eqn{... \times 1} specifying
-one or more tangent vectors at base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times 1]}
+specifying one or more tangent vectors at base point.}
 
 \item{\code{metric}}{An object of class \code{\link{RiemannianMetric}} specifying the
 metric to compute the norm of the tangent vector or \code{NULL}. If it is
@@ -234,9 +276,20 @@ set to \code{NULL}, it defaults to using the Euclidean metric.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 1} storing the
+A numeric array of shape \eqn{[\dots \times 1]} storing the
 regularized tangent vector(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$regularize_tangent_vec_at_identity(array(0))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonalVectors-regularize_tangent_vec"></a>}}
@@ -257,11 +310,11 @@ transport to the identity, determined by the metric, to be less than
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tangent_vec}}{A numeric array of shape \eqn{... \times 1} specifying
-one or more tangent vectors at base point.}
+\item{\code{tangent_vec}}{A numeric array of shape \eqn{[\dots \times 1]}
+specifying one or more tangent vectors at corresponding base points.}
 
-\item{\code{base_point}}{A numeric array of shape \eqn{... \times 1} specifying
-one or more points on the manifold.}
+\item{\code{base_point}}{A numeric array of shape \eqn{[\dots \times 1]}
+specifying one or more points on the manifold.}
 
 \item{\code{metric}}{An object of class \code{\link{RiemannianMetric}} specifying the
 metric to compute the norm of the tangent vector or \code{NULL}. If it is
@@ -270,9 +323,20 @@ set to \code{NULL}, it defaults to using the Euclidean metric.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 1} storing the
+A numeric array of shape \eqn{[\dots \times 1]} storing the
 regularized tangent vector(s).
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$regularize_tangent_vec(array(0), array(1))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonalVectors-clone"></a>}}

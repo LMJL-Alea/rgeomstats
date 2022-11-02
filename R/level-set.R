@@ -37,6 +37,9 @@ LevelSet <- R6::R6Class(
     #'   Choices are `extrinsic` or `intrinsic`. Defaults to `intrinsic`.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`Manifold`] class.
+    #' @param py_cls A Python object of class `LevelSet`. Defaults to `NULL` in
+    #'   which case it is instantiated on the fly using the other input
+    #'   arguments.
     #'
     #' @return An object of class [`LevelSet`].
     initialize = function(dim,
@@ -45,22 +48,24 @@ LevelSet <- R6::R6Class(
                           value,
                           tangent_submersion,
                           default_coords_type = "intrinsic",
-                          ...) { # nocov start
-      dots <- capture_extra_params(...)
-      dots$dim <- as.integer(dim)
-      if ("shape" %in% names(dots)) {
-        dots$shape <- dots$shape |>
-          purrr::map(as.integer) |>
-          reticulate::tuple()
+                          ...,
+                          py_cls = NULL) { # nocov start
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$dim <- as.integer(dim)
+        if ("shape" %in% names(dots)) {
+          dots$shape <- dots$shape |>
+            purrr::map(as.integer) |>
+            reticulate::tuple()
+        }
+        dots$embedding_space <- embedding_space$get_python_class()
+        dots$submersion <- submersion
+        dots$value <- if (is.null(dim(value))) as.array(value) else value
+        dots$tangent_submersion <- tangent_submersion
+        dots$default_coords_type <- default_coords_type
+        py_cls <- do.call(gs$geometry$base$LevelSet, dots)
       }
-      dots$embedding_space <- embedding_space$get_python_class()
-      dots$submersion <- submersion
-      dots$value <- if (is.null(dim(value))) as.array(value) else value
-      dots$tangent_submersion <- tangent_submersion
-      dots$default_coords_type <- default_coords_type
-      super$set_python_class(
-        do.call(gs$geometry$base$LevelSet, dots)
-      )
+      super$set_python_class(py_cls)
       private$set_fields()
     }, # nocov end
 

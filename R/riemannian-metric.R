@@ -29,21 +29,25 @@ RiemannianMetric <- R6::R6Class(
     #'   metric. Defaults to `c(dim, 0L)`.
     #' @param default_coords_type A string specifying the coordinate type.
     #'   Choices are `extrensic` or `intrinsic`. Defaults to `intrinsic`.
+    #' @param py_cls A Python object of class `RiemannianMetric`. Defaults to
+    #'   `NULL` in which case it is instantiated on the fly using the other
+    #'   input arguments.
     #'
     #' @return An object of class [`RiemannianMetric`].
     initialize = function(dim, shape = NULL, signature = NULL,
-                          default_coords_type = "intrinsic") {
-      dim <- as.integer(dim)
-      if (!is.null(shape)) shape <- dim
-      if (!is.null(signature)) signature <- as.integer(signature)
-      super$set_python_class(
-        gs$geometry$riemannian_metric$RiemannianMetric(
+                          default_coords_type = "intrinsic", py_cls = NULL) {
+      if (is.null(py_cls)) {
+        dim <- as.integer(dim)
+        if (!is.null(shape)) shape <- dim
+        if (!is.null(signature)) signature <- as.integer(signature)
+        py_cls <- gs$geometry$riemannian_metric$RiemannianMetric(
           dim = dim,
           shape = shape,
           signature = signature,
           default_coords_type = default_coords_type
         )
-      )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 

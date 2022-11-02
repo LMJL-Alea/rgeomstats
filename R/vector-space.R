@@ -18,14 +18,18 @@ VectorSpace <- R6::R6Class(
     #'   manifold. Defaults to `NULL`.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`Manifold`] class.
+    #' @param py_cls A Python object of class `VectorSpace`. Defaults to `NULL`
+    #'   in which case it is instantiated on the fly using the other input
+    #'   arguments.
     #'
     #' @return An object of class [`VectorSpace`].
-    initialize = function(shape, ...) {
-      dots <- capture_extra_params(...)
-      dots$shape <- as.integer(shape)
-      super$set_python_class(
-        do.call(gs$geometry$manifold$VectorSpace, dots)
-      )
+    initialize = function(shape, ..., py_cls = NULL) {
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$shape <- as.integer(shape)
+        py_cls <- do.call(gs$geometry$manifold$VectorSpace, dots)
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 

@@ -24,15 +24,17 @@ SPDMetricBuresWasserstein <- R6::R6Class(
     #'
     #' @param n An integer value specifying the shape of the matrices: \eqn{n
     #'   \times n}.
+    #' @param py_cls A Python object of class `SPDMetricBuresWasserstein`.
+    #'   Defaults to `NULL` in which case it is instantiated on the fly using
+    #'   the other input arguments.
     #'
     #' @return An object of class [`SPDMetricBuresWasserstein`].
-    initialize = function(n) {
-      n <- as.integer(n)
-      super$set_python_class(
-        gs$geometry$spd_matrices$SPDMetricBuresWasserstein(
-          n = n
-        )
-      )
+    initialize = function(n, py_cls = NULL) {
+      if (is.null(py_cls)) {
+        n <- as.integer(n)
+        py_cls <- gs$geometry$spd_matrices$SPDMetricBuresWasserstein(n = n)
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     }
   ),

@@ -92,7 +92,7 @@ Nicolas Guigui and Nina Miolane
 \subsection{Method \code{new()}}{
 The \code{\link{SpecialOrthogonal2Vectors}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonal2Vectors$new(epsilon = 0)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SpecialOrthogonal2Vectors$new(epsilon = 0, py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -101,6 +101,10 @@ The \code{\link{SpecialOrthogonal2Vectors}} class constructor.
 \item{\code{epsilon}}{A numeric value specifying the precision to use for
 calculations involving potential division by 0 in rotations. Defaults to
 \code{0}.}
+
+\item{\code{py_cls}}{A Python object of class \code{SpecialOrthogonal2Vectors}.
+Defaults to \code{NULL} in which case it is instantiated on the fly using
+the other input arguments.}
 }
 \if{html}{\out{</div>}}
 }

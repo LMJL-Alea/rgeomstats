@@ -29,17 +29,21 @@ SPDMetricAffine <- R6::R6Class(
     #'   \times n}.
     #' @param power_affine An integer value specifying the power transformation
     #'   of the classical SPD metric. Defaults to `1L`.
+    #' @param py_cls A Python object of class `SPDMetricAffine`. Defaults to
+    #'   `NULL` in which case it is instantiated on the fly using the other
+    #'   input arguments.
     #'
     #' @return An object of class [`SPDMetricAffine`].
-    initialize = function(n, power_affine = 1) {
-      n <- as.integer(n)
-      power_affine <- as.integer(power_affine)
-      super$set_python_class(
-        gs$geometry$spd_matrices$SPDMetricAffine(
+    initialize = function(n, power_affine = 1, py_cls = NULL) {
+      if (is.null(py_cls)) {
+        n <- as.integer(n)
+        power_affine <- as.integer(power_affine)
+        py_cls <- gs$geometry$spd_matrices$SPDMetricAffine(
           n = n,
           power_affine = power_affine
         )
-      )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     }
   ),

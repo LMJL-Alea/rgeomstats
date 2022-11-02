@@ -20,18 +20,21 @@ SpecialOrthogonalMatrices <- R6::R6Class(
     #'   the matrices.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`MatrixLieAlgebra`], [`LevelSet`] and [`Manifold`] classes.
+    #' @param py_cls A Python object of class `SpecialOrthogonalMatrices`.
+    #'   Defaults to `NULL` in which case it is instantiated on the fly using
+    #'   the other input arguments.
     #'
     #' @return An object of class [`SpecialOrthogonalMatrices`].
-    initialize = function(n, ...) {
-      dots <- capture_extra_params(...)
-      dots$n <- as.integer(n)
-      super$set_python_class(
-        do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
-      )
+    initialize = function(n, ..., py_cls = NULL) {
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$n <- as.integer(n)
+        py_cls <- do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
+      }
+      super$set_python_class(py_cls)
 
       # Set up the second parent class here
-      private$second_inheritance <- .SpecialOrthogonalMatrices$new(n, ...)
-      private$second_inheritance$set_fields()
+      private$second_inheritance <- .SpecialOrthogonalMatrices$new(n, ..., py_cls = py_cls) # TO DO: not sure fields are inherited properly here
 
       private$set_fields()
     },
@@ -116,13 +119,16 @@ SpecialOrthogonalMatrices <- R6::R6Class(
   classname = ".SpecialOrthogonalMatrices",
   inherit = LevelSet,
   public = list(
-    initialize = function(n, ...) {
-      dots <- capture_extra_params(...)
-      dots$n <- as.integer(n)
-      super$set_python_class(
-        do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
-      )
-    },
+    initialize = function(n, ..., py_cls = NULL) {
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$n <- as.integer(n)
+        py_cls <- do.call(gs$geometry$special_orthogonal$`_SpecialOrthogonalMatrices`, dots)
+      }
+      super$set_python_class(py_cls)
+      private$set_fields()
+    }
+  ), private = list(
     set_fields = function() {
       super$set_fields()
     }
@@ -159,12 +165,19 @@ SpecialOrthogonalVectors <- R6::R6Class(
     #' @param epsilon A numeric value specifying the precision to use for
     #'   calculations involving potential divison by 0 in rotations. Defaults to
     #'   `0`.
+    #' @param py_cls A Python object of class `SpecialOrthogonalVectors`.
+    #'   Defaults to `NULL` in which case it is instantiated on the fly using
+    #'   the other input arguments.
     #'
     #' @return An object of class [`SpecialOrthogonalVectors`].
-    initialize = function(n, epsilon = 0.0) {
-      super$set_python_class(
-        gs$geometry$special_orthogonal$`_SpecialOrthogonalVectors`(n = n, epsilon = epsilon)
-      )
+    initialize = function(n, epsilon = 0.0, py_cls = NULL) {
+      if (is.null(py_cls)) {
+        py_cls <- gs$geometry$special_orthogonal$`_SpecialOrthogonalVectors`(
+          n = n,
+          epsilon = epsilon
+        )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 
@@ -194,8 +207,8 @@ SpecialOrthogonalVectors <- R6::R6Class(
     #'   specifying one or more vectors from which to compute corresponding skew
     #'   matrix representations.
     #'
-    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing the
-    #'   corresponding skew matrix representations.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing
+    #'   the corresponding skew matrix representations.
     #'
     #' @examples
     #' if (reticulate::py_module_available("geomstats")) {
@@ -210,11 +223,17 @@ SpecialOrthogonalVectors <- R6::R6Class(
     #'   computes the vector defining the cross-product associated to a
     #'   skew-symmetric matrix.
     #'
-    #' @param skew_mat A numeric array of shape \eqn{... \times n \times n}
+    #' @param skew_mat A numeric array of shape \eqn{[\dots \times n \times n]}
     #'   specifying skew matrices.
     #'
-    #' @return A numeric array of shape \eqn{... \times \mathrm{dim}} storing
-    #'   the corresponding vector representations.
+    #' @return A numeric array of shape \eqn{[\dots \times \mathrm{dim}]}
+    #'   storing the corresponding vector representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+    #'   so2$vector_from_skew_matrix(diag(0, 2))
+    #' }
     vector_from_skew_matrix = function(skew_mat) {
       super$get_python_class()$vector_from_skew_matrix(skew_mat = skew_mat)
     },
@@ -223,18 +242,25 @@ SpecialOrthogonalVectors <- R6::R6Class(
     #'   regularizes a tangent vector by getting its norm at the identity to be
     #'   less than \eqn{\pi}.
     #'
-    #' @param tangent_vec A numeric array of shape \eqn{... \times 1} specifying
-    #'   one or more tangent vectors at base point.
+    #' @param tangent_vec A numeric array of shape \eqn{[\dots \times 1]}
+    #'   specifying one or more tangent vectors at base point.
     #' @param metric An object of class [`RiemannianMetric`] specifying the
     #'   metric to compute the norm of the tangent vector or `NULL`. If it is
     #'   set to `NULL`, it defaults to using the Euclidean metric.
     #'
-    #' @return A numeric array of shape \eqn{... \times 1} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 1]} storing the
     #'   regularized tangent vector(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+    #'   so2$regularize_tangent_vec_at_identity(array(0))
+    #' }
     regularize_tangent_vec_at_identity = function(tangent_vec, metric = NULL) {
+      if (!is.null(metric)) metric <- metric$get_python_class()
       super$get_python_class()$regularize_tangent_vec_at_identity(
         tangent_vec = tangent_vec,
-        metric = metric$get_python_class()
+        metric = metric
       )
     },
 
@@ -243,21 +269,28 @@ SpecialOrthogonalVectors <- R6::R6Class(
     #'   transport to the identity, determined by the metric, to be less than
     #'   \eqn{\pi}.
     #'
-    #' @param tangent_vec A numeric array of shape \eqn{... \times 1} specifying
-    #'   one or more tangent vectors at base point.
-    #' @param base_point A numeric array of shape \eqn{... \times 1} specifying
-    #'   one or more points on the manifold.
+    #' @param tangent_vec A numeric array of shape \eqn{[\dots \times 1]}
+    #'   specifying one or more tangent vectors at corresponding base points.
+    #' @param base_point A numeric array of shape \eqn{[\dots \times 1]}
+    #'   specifying one or more points on the manifold.
     #' @param metric An object of class [`RiemannianMetric`] specifying the
     #'   metric to compute the norm of the tangent vector or `NULL`. If it is
     #'   set to `NULL`, it defaults to using the Euclidean metric.
     #'
-    #' @return A numeric array of shape \eqn{... \times 1} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 1]} storing the
     #'   regularized tangent vector(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+    #'   so2$regularize_tangent_vec(array(0), array(1))
+    #' }
     regularize_tangent_vec = function(tangent_vec, base_point, metric = NULL) {
+      if (!is.null(metric)) metric <- metric$get_python_class()
       super$get_python_class()$regularize_tangent_vec(
         tangent_vec = tangent_vec,
         base_point = base_point,
-        metric = metric$get_python_class()
+        metric = metric
       )
     }
   ),
@@ -290,12 +323,18 @@ SpecialOrthogonal2Vectors <- R6::R6Class(
     #' @param epsilon A numeric value specifying the precision to use for
     #'   calculations involving potential division by 0 in rotations. Defaults to
     #'   `0`.
+    #' @param py_cls A Python object of class `SpecialOrthogonal2Vectors`.
+    #'   Defaults to `NULL` in which case it is instantiated on the fly using
+    #'   the other input arguments.
     #'
     #' @return An object of class [`SpecialOrthogonal2Vectors`].
-    initialize = function(epsilon = 0.0) {
-      super$set_python_class(
-        gs$geometry$special_orthogonal$`_SpecialOrthogonal2Vectors`(epsilon = epsilon)
-      )
+    initialize = function(epsilon = 0.0, py_cls = NULL) {
+      if (is.null(py_cls)) {
+        py_cls <- gs$geometry$special_orthogonal$`_SpecialOrthogonal2Vectors`(
+          epsilon = epsilon
+        )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 
@@ -377,12 +416,18 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @param epsilon A numeric value specifying the precision to use for
     #'   calculations involving potential division by 0 in rotations. Defaults to
     #'   `0`.
+    #' @param py_cls A Python object of class `SpecialOrthogonal3Vectors`.
+    #'   Defaults to `NULL` in which case it is instantiated on the fly using
+    #'   the other input arguments.
     #'
     #' @return An object of class [`SpecialOrthogonal3Vectors`].
-    initialize = function(epsilon = 0.0) {
-      super$set_python_class(
-        gs$geometry$special_orthogonal$`_SpecialOrthogonal3Vectors`(epsilon = epsilon)
-      )
+    initialize = function(epsilon = 0.0, py_cls = NULL) {
+      if (is.null(py_cls)) {
+        py_cls <- gs$geometry$special_orthogonal$`_SpecialOrthogonal3Vectors`(
+          epsilon = epsilon
+        )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     },
 
@@ -405,11 +450,17 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' In nD, the rotation vector stores the \eqn{n(n-1)/2} values of the
     #' skew-symmetric matrix representing the rotation.
     #'
-    #' @param rot_mat A numeric array of shape \eqn{... \times 3 \times 3}
+    #' @param rot_mat A numeric array of shape \eqn{[\dots \times 3 \times 3]}
     #'   specifying one or more 3D rotation matrices.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 3]} storing the
     #'   corresponding axis-angle representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$rotation_vector_from_matrix(diag(1, 3))
+    #' }
     rotation_vector_from_matrix = function(rot_mat) {
       super$get_python_class()$rotation_vector_from_matrix(rot_mat = rot_mat)
     },
@@ -417,11 +468,17 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from axis-angle to matrix
     #'   representation.
     #'
-    #' @param rot_vec A numeric array of shape \eqn{... \times 3} specifying one
-    #'   or more 3D rotations in axis-angle representation.
+    #' @param rot_vec A numeric array of shape \eqn{[\dots \times 3]} specifying
+    #'   one or more 3D rotations in axis-angle representation.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3 \times 3} storing the
-    #'   corresponding matrix representations.
+    #' @return A numeric array of shape \eqn{[\dots \times 3 \times 3]} storing
+    #'   the corresponding matrix representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$matrix_from_rotation_vector(rep(0, 3))
+    #' }
     matrix_from_rotation_vector = function(rot_vec) {
       super$get_python_class()$matrix_from_rotation_vector(rot_vec = rot_vec)
     },
@@ -429,11 +486,17 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from matrix to unit quaternion
     #'   representation.
     #'
-    #' @param rot_mat A numeric array of shape \eqn{... \times 3 \times 3}
+    #' @param rot_mat A numeric array of shape \eqn{[\dots \times 3 \times 3]}
     #'   specifying one or more 3D rotations in matrix representation.
     #'
-    #' @return A numeric array of shape \eqn{... \times 4} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 4]} storing the
     #'   corresponding unit quaternion representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$quaternion_from_matrix(diag(1, 3))
+    #' }
     quaternion_from_matrix = function(rot_mat) {
       super$get_python_class()$quaternion_from_matrix(rot_mat = rot_mat)
     },
@@ -441,11 +504,17 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from axis-angle to unit quaternion
     #'   representation.
     #'
-    #' @param rot_vec A numeric array of shape \eqn{... \times 3} specifying one
-    #'   or more 3D rotations in axis-angle representation.
+    #' @param rot_vec A numeric array of shape \eqn{[\dots \times 3]} specifying
+    #'   one or more 3D rotations in axis-angle representation.
     #'
-    #' @return A numeric array of shape \eqn{... \times 4} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 4]} storing the
     #'   corresponding unit quaternion representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$quaternion_from_rotation_vector(rep(0, 3))
+    #' }
     quaternion_from_rotation_vector = function(rot_vec) {
       super$get_python_class()$quaternion_from_rotation_vector(rot_vec = rot_vec)
     },
@@ -453,11 +522,17 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from unit quaternion to axis-angle
     #'   representation.
     #'
-    #' @param quaternion A numeric array of shape \eqn{... \times 4} specifying
-    #'   one or more 3D rotations in unit quaternion representation.
+    #' @param quaternion A numeric array of shape \eqn{[\dots \times 4]}
+    #'   specifying one or more 3D rotations in unit quaternion representation.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 3]} storing the
     #'   corresponding axis-angle representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$rotation_vector_from_quaternion(array(c(1, rep(0, 3))))
+    #' }
     rotation_vector_from_quaternion = function(quaternion) {
       super$get_python_class()$rotation_vector_from_quaternion(quaternion = quaternion)
     },
@@ -465,11 +540,17 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from unit quaternion to matrix
     #'   representation.
     #'
-    #' @param quaternion A numeric array of shape \eqn{... \times 4} specifying
-    #'   one or more 3D rotations in unit quaternion representation.
+    #' @param quaternion A numeric array of shape \eqn{[\dots \times 4]}
+    #'   specifying one or more 3D rotations in unit quaternion representation.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3 \times 3} storing the
-    #'   corresponding matrix representations.
+    #' @return A numeric array of shape \eqn{[\dots \times 3 \times 3]} storing
+    #'   the corresponding matrix representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$matrix_from_quaternion(c(1, rep(0, 3)))
+    #' }
     matrix_from_quaternion = function(quaternion) {
       super$get_python_class()$matrix_from_quaternion(quaternion = quaternion)
     },
@@ -489,7 +570,7 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' Exchanging `'extrinsic'` and `'intrinsic'` amounts to exchanging the
     #' order.
     #'
-    #' @param tait_bryan_angles A numeric array of shape \eqn{... \times 3}
+    #' @param tait_bryan_angles A numeric array of shape \eqn{[\dots \times 3]}
     #'   specifying one or more 3D rotations in Tait-Bryan angle representation.
     #' @param extrinsic_or_intrinsic A character string specifying the
     #'   coordinate frame in which the Tait-Bryan angles are expressed. Choices
@@ -499,8 +580,14 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #'   composition around the three axes of the chosen coordinate frame.
     #'   Choices are either `"xyz"` or `"zyx"`. Defaults to `"zyx"`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3 \times 3} storing the
-    #'   corresponding matrix representations.
+    #' @return A numeric array of shape \eqn{[\dots \times 3 \times 3]} storing
+    #'   the corresponding matrix representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$matrix_from_tait_bryan_angles(rep(0, 3))
+    #' }
     matrix_from_tait_bryan_angles = function(tait_bryan_angles,
                                              extrinsic_or_intrinsic = "extrinsic",
                                              order = "zyx") {
@@ -526,7 +613,7 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' Exchanging `'extrinsic'` and `'intrinsic'` amounts to exchanging the
     #' order.
     #'
-    #' @param rot_mat A numeric array of shape \eqn{... \times 3 \times 3}
+    #' @param rot_mat A numeric array of shape \eqn{[\dots \times 3 \times 3]}
     #'   specifying one or more 3D rotations in matrix representation.
     #' @param extrinsic_or_intrinsic A character string specifying the
     #'   coordinate frame in which the Tait-Bryan angles are expressed. Choices
@@ -536,8 +623,14 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #'   composition around the three axes of the chosen coordinate frame.
     #'   Choices are either `"xyz"` or `"zyx"`. Defaults to `"zyx"`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 3]} storing the
     #'   corresponding Tait-Bryan angle representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$tait_bryan_angles_from_matrix(diag(1, 3))
+    #' }
     tait_bryan_angles_from_matrix = function(rot_mat,
                                              extrinsic_or_intrinsic = "extrinsic",
                                              order = "zyx") {
@@ -551,7 +644,7 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from Tait-Bryan angle to unit
     #'   quaternion representation.
     #'
-    #' @param tait_bryan_angles A numeric array of shape \eqn{... \times 3}
+    #' @param tait_bryan_angles A numeric array of shape \eqn{[\dots \times 3]}
     #'   specifying one or more 3D rotations in Tait-Bryan angle representation.
     #' @param extrinsic_or_intrinsic A character string specifying the
     #'   coordinate frame in which the Tait-Bryan angles are expressed. Choices
@@ -561,8 +654,14 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #'   composition around the three axes of the chosen coordinate frame.
     #'   Choices are either `"xyz"` or `"zyx"`. Defaults to `"zyx"`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 4} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 4]} storing the
     #'   corresponding unit quaternion representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$quaternion_from_tait_bryan_angles(rep(0, 3))
+    #' }
     quaternion_from_tait_bryan_angles = function(tait_bryan_angles,
                                                  extrinsic_or_intrinsic = "extrinsic",
                                                  order = "zyx") {
@@ -576,7 +675,7 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from Tait-Bryan angle to axis-angle
     #'   representation.
     #'
-    #' @param tait_bryan_angles A numeric array of shape \eqn{... \times 3}
+    #' @param tait_bryan_angles A numeric array of shape \eqn{[\dots \times 3]}
     #'   specifying one or more 3D rotations in Tait-Bryan angle representation.
     #' @param extrinsic_or_intrinsic A character string specifying the
     #'   coordinate frame in which the Tait-Bryan angles are expressed. Choices
@@ -586,8 +685,14 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #'   composition around the three axes of the chosen coordinate frame.
     #'   Choices are either `"xyz"` or `"zyx"`. Defaults to `"zyx"`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 3]} storing the
     #'   corresponding axis-angle representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$rotation_vector_from_tait_bryan_angles(rep(0, 3))
+    #' }
     rotation_vector_from_tait_bryan_angles = function(tait_bryan_angles,
                                                       extrinsic_or_intrinsic = "extrinsic",
                                                       order = "zyx") {
@@ -601,8 +706,8 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from matrix to Tait-Bryan angle
     #'   representation.
     #'
-    #' @param quaternion A numeric array of shape \eqn{... \times 4} specifying
-    #'   one or more 3D rotations in unit quaternion representation.
+    #' @param quaternion A numeric array of shape \eqn{[\dots \times 4]}
+    #'   specifying one or more 3D rotations in unit quaternion representation.
     #' @param extrinsic_or_intrinsic A character string specifying the
     #'   coordinate frame in which the Tait-Bryan angles are expressed. Choices
     #'   are either `"extrinsic"` (fixed frame) or `"intrinsic"` (moving frame).
@@ -611,8 +716,14 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #'   composition around the three axes of the chosen coordinate frame.
     #'   Choices are either `"xyz"` or `"zyx"`. Defaults to `"zyx"`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 3]} storing the
     #'   corresponding Tait-Bryan angle representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$tait_bryan_angles_from_quaternion(c(1, rep(0, 3)))
+    #' }
     tait_bryan_angles_from_quaternion = function(quaternion,
                                                  extrinsic_or_intrinsic = "extrinsic",
                                                  order = "zyx") {
@@ -626,8 +737,8 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @description Converts a 3D rotation from axis-angle to Tait-Bryan angle
     #'   representation.
     #'
-    #' @param rot_vec A numeric array of shape \eqn{... \times 3} specifying one
-    #'   or more 3D rotations in axis-angle representation.
+    #' @param rot_vec A numeric array of shape \eqn{[\dots \times 3]} specifying
+    #'   one or more 3D rotations in axis-angle representation.
     #' @param extrinsic_or_intrinsic A character string specifying the
     #'   coordinate frame in which the Tait-Bryan angles are expressed. Choices
     #'   are either `"extrinsic"` (fixed frame) or `"intrinsic"` (moving frame).
@@ -636,8 +747,14 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #'   composition around the three axes of the chosen coordinate frame.
     #'   Choices are either `"xyz"` or `"zyx"`. Defaults to `"zyx"`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3} storing the
+    #' @return A numeric array of shape \eqn{[\dots \times 3]} storing the
     #'   corresponding Tait-Bryan angle representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$tait_bryan_angles_from_rotation_vector(rep(0, 3))
+    #' }
     tait_bryan_angles_from_rotation_vector = function(rot_vec,
                                                       extrinsic_or_intrinsic = "extrinsic",
                                                       order = "zyx") {
@@ -653,9 +770,15 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
     #' @param n_samples An integer value specifying the sample size. Defaults to
     #'   `1L`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 3} storing a sample of
-    #'   3D rotations in axis-angle representation uniformly sampled in
+    #' @return A numeric array of shape \eqn{[\dots \times 3]} storing a sample
+    #'   of 3D rotations in axis-angle representation uniformly sampled in
     #'   \eqn{\mathrm{SO}(3)}.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$random_uniform()
+    #' }
     random_uniform = function(n_samples = 1) {
       super$get_python_class()$random_uniform(n_samples = as.integer(n_samples))
     }
@@ -684,6 +807,9 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
 #'   `0.0`.
 #' @param ... Extra arguments to be passed to parent class constructors. See
 #'   [`LieGroup`], [`MatrixLieAlgebra`], [`LevelSet`] and [`Manifold`] classes.
+#' @param py_cls A Python object of class `SpecialOrthogonal`. Defaults to
+#'   `NULL` in which case it is instantiated on the fly using the other input
+#'   arguments.
 #'
 #' @return An object of class [`SpecialOrthogonal`] which is an instance of one
 #'   of three different [`R6::R6Class`] depending on the values of the input
@@ -705,20 +831,20 @@ SpecialOrthogonal3Vectors <- R6::R6Class(
 #'   so3 <- SpecialOrthogonal(n = 3)
 #'   so3
 #' }
-SpecialOrthogonal <- function(n, point_type = "matrix", epsilon = 0.0, ...) {
+SpecialOrthogonal <- function(n, point_type = "matrix", epsilon = 0.0, ..., py_cls = NULL) {
   if (n == 2 && point_type == "vector") {
-    cls <- SpecialOrthogonal2Vectors$new(epsilon)
+    cls <- SpecialOrthogonal2Vectors$new(epsilon, py_cls = py_cls)
     class(cls) <- c("SpecialOrthogonal", class(cls))
     return(cls)
   }
   if (n == 3 && point_type == "vector") {
-    cls <- SpecialOrthogonal3Vectors$new(epsilon)
+    cls <- SpecialOrthogonal3Vectors$new(epsilon, py_cls = py_cls)
     class(cls) <- c("SpecialOrthogonal", class(cls))
     return(cls)
   }
   if (point_type == "vector")
     cli::cli_abort("SO(n) is only implemented in vector representation for n = 2 or 3.")
-  cls <- SpecialOrthogonalMatrices$new(n, ...)
+  cls <- SpecialOrthogonalMatrices$new(n, ..., py_cls = py_cls)
   class(cls) <- c("SpecialOrthogonal", class(cls))
   cls
 }

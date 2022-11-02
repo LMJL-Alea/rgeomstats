@@ -40,26 +40,30 @@ Manifold <- R6::R6Class(
     #'   on the manifold. Defaults to `NULL`.
     #' @param default_coords_type A string specifying the coordinate type.
     #'   Choices are `extrinsic` or `intrinsic`. Defaults to `intrinsic`.
+    #' @param py_cls A Python object of class `Manifold`. Defaults to `NULL` in
+    #'   which case it is instantiated on the fly using the other input
+    #'   arguments.
     #'
     #' @return An object of class [`Manifold`].
-    initialize = function(dim, shape = NULL, metric = NULL, default_coords_type = "intrinsic") { # nocov start
-      dim <- as.integer(dim)
-      if (!is.null(shape)) {
-        shape <- shape |>
-          purrr::map(as.integer) |>
-          reticulate::tuple()
-      }
-      if (!is.null(metric))
-        metric <- metric$get_python_class()
-      default_coords_type <- match.arg(default_coords_type, c("intrinsic", "extrinsic"))
-      super$set_python_class(
-        gs$geometry$manifold$Manifold(
+    initialize = function(dim, shape = NULL, metric = NULL, default_coords_type = "intrinsic", py_cls = NULL) { # nocov start
+      if (is.null(py_cls)) {
+        dim <- as.integer(dim)
+        if (!is.null(shape)) {
+          shape <- shape |>
+            purrr::map(as.integer) |>
+            reticulate::tuple()
+        }
+        if (!is.null(metric))
+          metric <- metric$get_python_class()
+        default_coords_type <- match.arg(default_coords_type, c("intrinsic", "extrinsic"))
+        py_cls <- gs$geometry$manifold$Manifold(
           dim = dim,
           shape = shape,
           metric = metric,
           default_coords_type = default_coords_type
         )
-      )
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     }, # nocov end
 

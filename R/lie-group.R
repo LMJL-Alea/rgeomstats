@@ -38,20 +38,25 @@ MatrixLieGroup <- R6::R6Class(
     #'   representing the tangent space at the identity.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`Manifold`] class.
+    #' @param py_cls A Python object of class `MatrixLieGroup`. Defaults to
+    #'   `NULL` in which case it is instantiated on the fly using the other
+    #'   input arguments.
     #'
     #' @return An object of class [`MatrixLieGroup`].
     initialize = function(dim,
                           n,
                           lie_algebra = NULL,
-                          ...) { # nocov start
-      dots <- capture_extra_params(...)
-      dots$dim <- as.integer(dim)
-      dots$n <- as.integer(n)
-      if (!is.null(lie_algebra))
-        dots$lie_algebra <- lie_algebra$get_python_class()
-      super$set_python_class(
-        do.call(gs$geometry$lie_group$MatrixLieGroup, dots)
-      )
+                          ...,
+                          py_cls = NULL) { # nocov start
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$dim <- as.integer(dim)
+        dots$n <- as.integer(n)
+        if (!is.null(lie_algebra))
+          dots$lie_algebra <- lie_algebra$get_python_class()
+        py_cls <- do.call(gs$geometry$lie_group$MatrixLieGroup, dots)
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     }, # nocov end
 
@@ -265,13 +270,15 @@ MatrixLieGroup <- R6::R6Class(
 #'   is the parameter of \eqn{\mathrm{GL}(n)} e.g. the amount of rows and
 #'   columns of the matrix.
 #'
-#' @param base_point A numeric array of shape `c(n, n)` specifying a tangent
-#'   base point. Defaults to identity if `NULL`.
-#' @param point A numeric array of shape `dim` or `c(n, n)` specifying the point
-#'   at which to compute the map.
-#' @param tangent_vec A numeric array of shape either \eqn{... \times
-#'   \mathrm{dim}} or \eqn{... \times n \times n} specifying one or more
-#'   tangent vectors at base point.
+#' @param base_point A numeric array of shape \eqn{[\dots \times \{
+#'   \mathrm{dim}, [n \times n] \}]} specifying one or more base points on the
+#'   manifold. Defaults to identity if `NULL`.
+#' @param point A numeric array of shape \eqn{[\dots \times \{
+#'   \mathrm{dim}, [n \times n] \}]} specifying one or more points on the
+#'   manifold.
+#' @param tangent_vec A numeric array of shape \eqn{[\dots \times \{
+#'   \mathrm{dim}, [n \times n] \}]} specifying one or more tangent vectors at
+#'   corresponding base points.
 #' @param left_or_right A character string specifying whether to compute the map
 #'   for the left or right translation. Choices are `"left"` or `"right`.
 #'   Defaults to `"left"`.
@@ -309,22 +316,27 @@ LieGroup <- R6::R6Class(
     #'   specifying the tangent space at the identity.
     #' @param ... Extra arguments to be passed to parent class constructors. See
     #'   [`Manifold`] class.
+    #' @param py_cls A Python object of class `LieGroup`. Defaults to `NULL` in
+    #'   which case it is instantiated on the fly using the other input
+    #'   arguments.
     #'
     #' @return An object of class [`LieGroup`].
     initialize = function(dim,
                           shape,
                           lie_algebra = NULL,
-                          ...) { # nocov start
-      dots <- capture_extra_params(...)
-      dots$dim <- as.integer(dim)
-      dots$shape <- shape |>
-        purrr::map(as.integer) |>
-        reticulate::tuple()
-      if (!is.null(lie_algebra))
-        dots$lie_algebra <- lie_algebra$get_python_class()
-      super$set_python_class(
-        do.call(gs$geometry$lie_group$LieGroup, dots)
-      )
+                          ...,
+                          py_cls = NULL) { # nocov start
+      if (is.null(py_cls)) {
+        dots <- capture_extra_params(...)
+        dots$dim <- as.integer(dim)
+        dots$shape <- shape |>
+          purrr::map(as.integer) |>
+          reticulate::tuple()
+        if (!is.null(lie_algebra))
+          dots$lie_algebra <- lie_algebra$get_python_class()
+        py_cls <- do.call(gs$geometry$lie_group$LieGroup, dots)
+      }
+      super$set_python_class(py_cls)
       private$set_fields()
     }, # nocov end
 
@@ -338,8 +350,15 @@ LieGroup <- R6::R6Class(
     #'   Therefore, the Lie exponential is obtained when `base_point` is `NULL`,
     #'   or the identity.
     #'
-    #' @return A numeric array of the same shape as the input array storing the
-    #'   group exponential of the input tangent vector(s).
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the group exponential of the input tangent
+    #'   vector(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$exp(rep(0, 3))
+    #' }
     exp = function(tangent_vec, base_point = NULL) {
       super$get_python_class()$exp(
         tangent_vec = tangent_vec,
@@ -350,16 +369,30 @@ LieGroup <- R6::R6Class(
     #' @description Compute the group exponential of tangent vector from the
     #'   identity.
     #'
-    #' @return A numeric array of the same shape as the input array storing the
-    #'   group exponential of the input tangent vector(s).
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the group exponential of the input tangent
+    #'   vector(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$exp_from_identity(rep(0, 3))
+    #' }
     exp_from_identity = function(tangent_vec) {
       super$get_python_class()$exp_from_identity(tangent_vec = tangent_vec)
     },
 
     #' @description Calculate the group exponential at `base_point`.
     #'
-    #' @return A numeric array of the same shape as the input array storing the
-    #'   group exponential of the input tangent vector(s).
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the group exponential of the input tangent
+    #'   vector(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$exp_not_from_identity(rep(0, 3), rep(0, 3))
+    #' }
     exp_not_from_identity = function(tangent_vec, base_point) {
       super$get_python_class()$exp_not_from_identity(
         tangent_vec = tangent_vec,
@@ -375,8 +408,14 @@ LieGroup <- R6::R6Class(
     #'   Furthermore, denoting `point` by \eqn{g} and `base_point` by \eqn{h},
     #'   the output satisfies \deqn{g = \exp(\log(g, h), h)}.
     #'
-    #' @return A numeric array of the same shape as the input array storing the
-    #'   group logarithm of the input point(s).
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the group logarithm of the input point(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$log(rep(0, 3))
+    #' }
     log = function(point, base_point = NULL) {
       super$get_python_class()$log(
         point = point,
@@ -386,16 +425,28 @@ LieGroup <- R6::R6Class(
 
     #' @description Computes the group logarithm of `point` from the identity.
     #'
-    #' @return A numeric array of the same shape as the input array storing the
-    #'   group logarithm of the input point(s).
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the group logarithm of the input point(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$log_from_identity(rep(0, 3))
+    #' }
     log_from_identity = function(point) {
       super$get_python_class()$log_from_identity(point = point)
     },
 
     #' @description Computes the group logarithm at `base_point`.
     #'
-    #' @return A numeric array of the same shape as the input array storing the
-    #'   group logarithm of the input point(s).
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the group logarithm of the input point(s).
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$log_not_from_identity(rep(0, 3), rep(0, 3))
+    #' }
     log_not_from_identity = function(point, base_point) {
       super$get_python_class()$log_not_from_identity(
         point = point,
@@ -405,10 +456,16 @@ LieGroup <- R6::R6Class(
 
     #' @description Gets the identity of the group.
     #'
-    #' @return A numeric array of shape `dim` or `c(n, n)` storing the identity
-    #'   of the Lie group.
+    #' @return A numeric array of shape \eqn{\{ \mathrm{dim}, [n \times n] \}}
+    #'   storing the identity of the Lie group.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$get_identity()
+    #' }
     get_identity = function() {
-      super$get_python_class()$identity()
+      super$get_python_class()$identity
     },
 
     #' @description Computes the lie bracket of two tangent vectors.
@@ -418,13 +475,21 @@ LieGroup <- R6::R6Class(
     #'   identity, compute commutator, go back): \deqn{[A,B] = A_P^{-1}B -
     #'   B_P^{-1}A}.
     #'
-    #' @param tangent_vector_a A numeric array of shape `c(n, n)` specifying a
-    #'   tangent vector at base point.
-    #' @param tangent_vector_b A numeric array of shape `c(n, n)` specifying a
-    #'   tangent vector at base point.
+    #' @param tangent_vector_a A numeric array of shape \eqn{[\dots \times n
+    #'   \times n]} specifying one or more tangent vectors at corresponding base
+    #'   points.
+    #' @param tangent_vector_b A numeric array of shape \eqn{[\dots \times n
+    #'   \times n]} specifying one or more tangent vectors at corresponding base
+    #'   points.
     #'
-    #' @return A numeric array of shape `c(n, n)` storing the Lie bracket of the
-    #'   two input tangent vectors.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing
+    #'   the Lie bracket of the two input tangent vectors.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$lie_bracket(diag(0, 3), diag(0, 3))
+    #' }
     lie_bracket = function(tangent_vector_a, tangent_vector_b, base_point = NULL) {
       super$get_python_class()$lie_bracket(
         tangent_vector_a = tangent_vector_a,
@@ -449,6 +514,12 @@ LieGroup <- R6::R6Class(
     #'
     #' @return A function computing the tangent map of the left/right
     #'   translation by `point`. It can be applied to tangent vectors.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$tangent_translation_map(rep(0, 3))
+    #' }
     tangent_translation_map = function(point, left_or_right = "left", inverse = FALSE) {
       tm <- super$get_python_class()$tangent_translation_map(
         point = point,
@@ -465,13 +536,22 @@ LieGroup <- R6::R6Class(
     #' @description Performs function composition corresponding to the Lie
     #'   group.
     #'
-    #' @param point_a A numeric array of shape `dim` or `c(n, n)` specifying the
-    #'   left factor in the product.
-    #' @param point_b A numeric array of shape `dim` or `c(n, n)` specifying the
-    #'   right factor in the product.
+    #' @param point_a A numeric array of shape \eqn{[\dots \times \{
+    #'   \mathrm{dim}, [n \times n] \}]} specifying one or more left factors in
+    #'   the product.
+    #' @param point_b A numeric array of shape \eqn{[\dots \times \{
+    #'   \mathrm{dim}, [n \times n] \}]} specifying one or more right factors in
+    #'   the product.
     #'
-    #' @return A numeric array of shape `dim` or `c(n, n)` storing the product
-    #'   of `point_a` and `point_b` along the first dimension.
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the product of `point_a` and `point_b` along the
+    #'   first dimension.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$compose(rep(0, 3), rep(0, 3))
+    #' }
     compose = function(point_a, point_b) {
       super$get_python_class()$compose(
         point_a = point_a,
@@ -481,8 +561,15 @@ LieGroup <- R6::R6Class(
 
     #' @description Computes the Jacobian of left/right translation by a point.
     #'
-    #' @return A numeric array of shape `c(dim, dim)` storing the Jacobian of
-    #'   the left/right translation by `point`.
+    #' @return A numeric array of shape \eqn{[\dots \times \mathrm{dim} \times
+    #'   \mathrm{dim}]} storing the Jacobian of the left/right translation by
+    #'   `point`.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$jacobian_translation(rep(0, 3))
+    #' }
     jacobian_translation = function(point, left_or_right = "left") {
       super$get_python_class()$jacobian_translation(
         point = point,
@@ -492,11 +579,17 @@ LieGroup <- R6::R6Class(
 
     #' @description Computes the inverse law of the Lie group.
     #'
-    #' @param point A numeric array of shape `dim` or `c(n, n)` specifying the
-    #'   point to be inverted.
+    #' @param point A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim},
+    #'   [n \times n] \}]} specifying one or more points to be inverted.
     #'
-    #' @return A numeric array of shape `dim` or `c(n, n)` storing the inverted
-    #'   point.
+    #' @return A numeric array of shape \eqn{[\dots \times \{ \mathrm{dim}, [n
+    #'   \times n] \}]} storing the inverted points.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so3 <- SpecialOrthogonal(n = 3, point_type = "vector")
+    #'   so3$inverse(rep(0, 3))
+    #' }
     inverse = function(point) {
       super$get_python_class()$inverse(point = point)
     },
@@ -518,7 +611,7 @@ LieGroup <- R6::R6Class(
       self$lie_algebra            <- super$get_python_class()$lie_algebra
       self$left_canonical_metric  <- super$get_python_class()$left_canonical_metric
       self$right_canonical_metric <- super$get_python_class()$right_canonical_metric
-      self$metrics                <- super$get_python_class()$metric
+      self$metrics                <- super$get_python_class()$metrics
     }
   )
 )

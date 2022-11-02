@@ -80,7 +80,7 @@ of the classical SPD metric.}
 \subsection{Method \code{new()}}{
 The \code{\link{SPDMetricAffine}} class constructor.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SPDMetricAffine$new(n, power_affine = 1)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SPDMetricAffine$new(n, power_affine = 1, py_cls = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -91,6 +91,10 @@ The \code{\link{SPDMetricAffine}} class constructor.
 
 \item{\code{power_affine}}{An integer value specifying the power transformation
 of the classical SPD metric. Defaults to \code{1L}.}
+
+\item{\code{py_cls}}{A Python object of class \code{SPDMetricAffine}. Defaults to
+\code{NULL} in which case it is instantiated on the fly using the other
+input arguments.}
 }
 \if{html}{\out{</div>}}
 }
