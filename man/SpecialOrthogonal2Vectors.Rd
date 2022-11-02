@@ -193,7 +193,7 @@ Samples in \eqn{\mathrm{SO}(2)} from a uniform distribution.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times 2} storing a sample of
+A numeric array of shape \eqn{... \times 1} storing a sample of
 2D rotations in axis-angle representation uniformly sampled in
 \eqn{\mathrm{SO}(2)}.
 }

@@ -104,3 +104,19 @@ test_that("SpecialOrthogonal2Vectors method matrix_from_rotation_vector() works"
   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
   expect_equal(so2$matrix_from_rotation_vector(array(0)), diag(1, 2))
 })
+
+test_that("SpecialOrthogonal2Vectors method random_uniform() works", {
+  reticulate::py_set_seed(1234)
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  expect_snapshot(so2$random_uniform())
+})
+
+test_that("SpecialOrthogonal2Vectors method projection() works", {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  expect_equal(so2$projection(diag(1, 2)), diag(1, 2))
+})
+
+test_that("SpecialOrthogonal2Vectors method skew_matrix_from_vector() works", {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  expect_equal(so2$skew_matrix_from_vector(array(0)), diag(0, 2))
+})

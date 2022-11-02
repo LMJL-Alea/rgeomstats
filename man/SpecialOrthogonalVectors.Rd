@@ -10,6 +10,26 @@ and 3D rotations. This class is specific to the vector representation of
 rotations. For the matrix representation, use the \code{\link{SpecialOrthogonal}}
 class and set \code{n = 2} or \code{n = 3}.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `SpecialOrthogonalVectors$projection`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$projection(diag(1, 2))
+}
+
+## ------------------------------------------------
+## Method `SpecialOrthogonalVectors$skew_matrix_from_vector`
+## ------------------------------------------------
+
+if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$skew_matrix_from_vector(array(0))
+}
+}
 \author{
 Nicolas Guigui and Nina Miolane
 }
@@ -106,15 +126,26 @@ Projects a matrix on \eqn{\mathrm{SO}(2)} or
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{point}}{A numeric array of shape \eqn{... \times n \times n}
+\item{\code{point}}{A numeric array of shape \eqn{[\dots \times n \times n]}
 specifying one or more matrices to be projected.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
 A numeric array of the same shape as the input point storing the
-projected matrices which are now rotation matrices.
+projected matrices.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$projection(diag(1, 2))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonalVectors-skew_matrix_from_vector"></a>}}
@@ -130,16 +161,27 @@ vector, associated to the vector \code{vec}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{vec}}{A numeric array of shape \eqn{... \times \mathrm{dim}}
+\item{\code{vec}}{A numeric array of shape \eqn{[\dots \times \mathrm{dim}]}
 specifying one or more vectors from which to compute corresponding skew
-matrices.}
+matrix representations.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric array of shape \eqn{... \times n \times n} storing the
-corresponding skew matrices.
+A numeric array of shape \eqn{[\dots \times n \times n]} storing the
+corresponding skew matrix representations.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{if (reticulate::py_module_available("geomstats")) {
+  so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+  so2$skew_matrix_from_vector(array(0))
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-SpecialOrthogonalVectors-vector_from_skew_matrix"></a>}}

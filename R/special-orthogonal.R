@@ -171,11 +171,17 @@ SpecialOrthogonalVectors <- R6::R6Class(
     #' @description Projects a matrix on \eqn{\mathrm{SO}(2)} or
     #'   \eqn{\mathrm{SO}(3)} using the Frobenius norm.
     #'
-    #' @param point A numeric array of shape \eqn{... \times n \times n}
+    #' @param point A numeric array of shape \eqn{[\dots \times n \times n]}
     #'   specifying one or more matrices to be projected.
     #'
     #' @return A numeric array of the same shape as the input point storing the
-    #'   projected matrices which are now rotation matrices.
+    #'   projected matrices.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+    #'   so2$projection(diag(1, 2))
+    #' }
     projection = function(point) {
       super$get_python_class()$projection(point = point)
     },
@@ -184,12 +190,18 @@ SpecialOrthogonalVectors <- R6::R6Class(
     #'   3D, computes the skew-symmetric matrix, known as the cross-product of a
     #'   vector, associated to the vector `vec`.
     #'
-    #' @param vec A numeric array of shape \eqn{... \times \mathrm{dim}}
+    #' @param vec A numeric array of shape \eqn{[\dots \times \mathrm{dim}]}
     #'   specifying one or more vectors from which to compute corresponding skew
-    #'   matrices.
+    #'   matrix representations.
     #'
-    #' @return A numeric array of shape \eqn{... \times n \times n} storing the
-    #'   corresponding skew matrices.
+    #' @return A numeric array of shape \eqn{[\dots \times n \times n]} storing the
+    #'   corresponding skew matrix representations.
+    #'
+    #' @examples
+    #' if (reticulate::py_module_available("geomstats")) {
+    #'   so2 <- SpecialOrthogonal(n = 2, point_type = "vector")
+    #'   so2$skew_matrix_from_vector(array(0))
+    #' }
     skew_matrix_from_vector = function(vec) {
       super$get_python_class()$skew_matrix_from_vector(vec = vec)
     },
@@ -327,7 +339,7 @@ SpecialOrthogonal2Vectors <- R6::R6Class(
     #' @param n_samples An integer value specifying the sample size. Defaults to
     #'   `1L`.
     #'
-    #' @return A numeric array of shape \eqn{... \times 2} storing a sample of
+    #' @return A numeric array of shape \eqn{... \times 1} storing a sample of
     #'   2D rotations in axis-angle representation uniformly sampled in
     #'   \eqn{\mathrm{SO}(2)}.
     random_uniform = function(n_samples = 1) {

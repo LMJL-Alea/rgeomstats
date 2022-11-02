@@ -12,3 +12,10 @@
     Error <Rcpp::exception>
       NotImplementedError: extrinsic_to_intrinsic_coords is not implemented.
 
+# SpecialOrthogonal2Vectors method random_uniform() works
+
+    Code
+      so2$random_uniform()
+    Output
+      [1] -1.93824
+
