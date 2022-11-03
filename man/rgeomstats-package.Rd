@@ -4,11 +4,11 @@
 \name{rgeomstats-package}
 \alias{rgeomstats}
 \alias{rgeomstats-package}
-\title{rgeomstats: An R Interface to Geomstats}
+\title{rgeomstats: Interface to 'Geomstats'}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides an R interface to the Python package Geomstats.
+Provides an interface to the Python package 'Geomstats' authored by Miolane et al. (2020) \href{https://arxiv.org/abs/2004.04667}{arXiv:2004.04667}.
 }
 \seealso{
 Useful links:

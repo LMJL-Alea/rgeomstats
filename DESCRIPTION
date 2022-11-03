@@ -1,5 +1,5 @@
 Package: rgeomstats
-Title: An R Interface to Geomstats
+Title: Interface to 'Geomstats'
 Version: 0.0.1
 Authors@R: c(
     person("Aymeric", "Stamm", 
@@ -27,7 +27,7 @@ Authors@R: c(
     person("Yann", "Thanwerdas", 
            role = "ctb", 
            comment = c("Author of the Geomstats Python package", ORCID = "0000-0002-9351-6318")))
-Description: Provides an R interface to the Python package 'Geomstats' authored by Miolane et 
+Description: Provides an interface to the Python package 'Geomstats' authored by Miolane et 
     al. (2020) <arXiv:2004.04667>.
 License: MIT + file LICENSE
 Encoding: UTF-8
