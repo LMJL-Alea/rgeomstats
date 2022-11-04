@@ -1,6 +1,6 @@
 Package: rgeomstats
 Title: Interface to 'Geomstats'
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: c(
     person("Aymeric", "Stamm", 
            email = "aymeric.stamm@math.cnrs.fr", 

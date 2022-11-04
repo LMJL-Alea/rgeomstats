@@ -1,3 +1,21 @@
+## Resubmission
+
+There is a resubmission. In this version, I have:
+
+- Updated the `DESCRIPTION` file according to CRAN request: I have omitted the
+redundant "An R" from title and description and single quoted Geomstats in the
+title.
+
+I was also asked to add a few more small executable examples in Rd-files to
+illustrate the use of the exported function but also enable automatic testing.
+
+All R6 class methods are actually documented and have unit tests implemented.
+However they all rely on the **geomstats** Python package to be found on the
+system or installed by the user, as the submitted R package is a wrapper around
+the python package. As such I always need to check if **geomstats** can be found
+before running any example or test. This results in examples and tests being all
+disabled upon CRAN checks.
+
 ## Test environments
 
 - local macOS R installation, R 4.2.2
