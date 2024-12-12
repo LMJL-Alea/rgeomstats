@@ -1,90 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/404.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/Connection.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/LevelSet.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/LieGroup.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/Manifold.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/MatrixLieAlgebra.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/MatrixLieGroup.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/NFoldManifold.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/OpenSet.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/RiemannianMetric.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMatrices.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMatrix.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricAffine.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricBuresWasserstein.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricEuclidean.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricLogEuclidean.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal2Vectors.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal3Vectors.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonalMatrices.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonalVectors.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/VectorSpace.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lmjl-alea.github.io/rgeomstats/reference/rgeomstats-package.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/404.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/LICENSE-text.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/LICENSE.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/authors.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/index.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/news/index.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/Connection.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/LevelSet.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/LieGroup.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/Manifold.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/MatrixLieAlgebra.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/MatrixLieGroup.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/NFoldManifold.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/OpenSet.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/RiemannianMetric.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMatrices.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMatrix.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricAffine.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricBuresWasserstein.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricEuclidean.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SPDMetricLogEuclidean.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal2Vectors.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonal3Vectors.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonalMatrices.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/SpecialOrthogonalVectors.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/VectorSpace.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/index.html</loc></url>
+<url><loc>https://lmjl-alea.github.io/rgeomstats/reference/rgeomstats-package.html</loc></url>
 </urlset>
+
