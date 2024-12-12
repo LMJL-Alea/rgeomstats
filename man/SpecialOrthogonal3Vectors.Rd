@@ -130,9 +130,9 @@ if (reticulate::py_module_available("geomstats")) {
 }
 \seealso{
 Other special orthogonal classes: 
+\code{\link{SpecialOrthogonal}()},
 \code{\link{SpecialOrthogonal2Vectors}},
-\code{\link{SpecialOrthogonalMatrices}},
-\code{\link{SpecialOrthogonal}()}
+\code{\link{SpecialOrthogonalMatrices}}
 }
 \author{
 Nicolas Guigui and Nina Miolane

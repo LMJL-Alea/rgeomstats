@@ -2,15 +2,19 @@
 
     Code
       so3$intrinsic_to_extrinsic_coords(Id)
-    Error <Rcpp::exception>
-      NotImplementedError: intrinsic_to_extrinsic_coords is not implemented.
+    Condition
+      Error in `py_call_impl()`:
+      ! NotImplementedError: intrinsic_to_extrinsic_coords is not implemented.
+      Run `reticulate::py_last_error()` for details.
 
 # SpecialOrthogonalMatrices method extrinsic_to_intrinsic_coords() works
 
     Code
       so3$extrinsic_to_intrinsic_coords(Id)
-    Error <Rcpp::exception>
-      NotImplementedError: extrinsic_to_intrinsic_coords is not implemented.
+    Condition
+      Error in `py_call_impl()`:
+      ! NotImplementedError: extrinsic_to_intrinsic_coords is not implemented.
+      Run `reticulate::py_last_error()` for details.
 
 # SpecialOrthogonal2Vectors method random_uniform() works
 

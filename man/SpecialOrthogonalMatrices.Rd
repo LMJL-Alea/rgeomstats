@@ -28,9 +28,9 @@ if (reticulate::py_module_available("geomstats")) {
 }
 \seealso{
 Other special orthogonal classes: 
+\code{\link{SpecialOrthogonal}()},
 \code{\link{SpecialOrthogonal2Vectors}},
-\code{\link{SpecialOrthogonal3Vectors}},
-\code{\link{SpecialOrthogonal}()}
+\code{\link{SpecialOrthogonal3Vectors}}
 }
 \author{
 Nicolas Guigui and Nina Miolane
