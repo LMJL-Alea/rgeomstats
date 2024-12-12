@@ -19,14 +19,16 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest  , r: 'release',  python: '3.9'}
-          - {os: windows-latest, r: 'release',  python: '3.9'}
-          - {os: ubuntu-latest , r: 'release',  python: '3.9'}
-          - {os: ubuntu-latest,  r: 'oldrel-1', python: '3.9'}
-          - {os: ubuntu-latest,  r: 'devel'   , python: '3.9', http-user-agent: 'release'}
-          - {os: ubuntu-latest,  r: 'release',  python: '3.7'}
-          - {os: ubuntu-latest,  r: 'release',  python: '3.8'}
+          - {os: macOS-latest  , r: 'release',  python: '3.11'}
+          - {os: windows-latest, r: 'release',  python: '3.11'}
+          - {os: ubuntu-latest , r: 'release',  python: '3.11'}
+          - {os: ubuntu-latest,  r: 'oldrel-1', python: '3.11'}
+          - {os: ubuntu-latest,  r: 'devel'   , python: '3.11', http-user-agent: 'release'}
+          - {os: ubuntu-latest,  r: 'release',  python: '3.9'}
           - {os: ubuntu-latest,  r: 'release',  python: '3.10'}
+          - {os: ubuntu-latest,  r: 'release',  python: '3.12'}
+          - {os: ubuntu-latest,  r: 'release',  python: '3.13'}
+          - {os: ubuntu-latest,  r: 'release',  python: '3.14'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -49,7 +51,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, any::reticulate
           needs: check
       
       - name: setup r-reticulate venv
