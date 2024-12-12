@@ -5,10 +5,10 @@
 
 <!-- badges: start -->
 
-[![check-standard](https://github.com/LMJL-Alea/rgeomstats/workflows/R-CMD-check/badge.svg)](https://github.com/LMJL-Alea/rgeomstats/actions)
+[![R-CMD-check](https://github.com/LMJL-Alea/rgeomstats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/LMJL-Alea/rgeomstats/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/LMJL-Alea/rgeomstats/workflows/test-coverage/badge.svg)](https://github.com/LMJL-Alea/rgeomstats/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/LMJL-Alea/rgeomstats/branch/master/graph/badge.svg)](https://app.codecov.io/gh/LMJL-Alea/rgeomstats?branch=master)
+coverage](https://codecov.io/gh/LMJL-Alea/rgeomstats/graph/badge.svg)](https://app.codecov.io/gh/LMJL-Alea/rgeomstats)
 [![pkgdown](https://github.com/LMJL-Alea/rgeomstats/workflows/pkgdown/badge.svg)](https://github.com/LMJL-Alea/rgeomstats/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rgeomstats)](https://CRAN.R-project.org/package=rgeomstats)
@@ -48,32 +48,32 @@ always possible to convert a sample into a list via:
 ``` r
 purrr::array_tree(spl, margin = 1)
 #> [[1]]
-#>             [,1]       [,2]      [,3]
-#> [1,] -0.03532813 -0.9154660 0.4008416
-#> [2,]  0.68066355  0.2716386 0.6803746
-#> [3,] -0.73174384  0.2968746 0.6135278
+#>            [,1]       [,2]      [,3]
+#> [1,] -0.7967935  0.3991562 0.4536457
+#> [2,] -0.2129792 -0.8880954 0.4073407
+#> [3,]  0.5654732  0.2279493 0.7926406
 #> 
 #> [[2]]
-#>            [,1]          [,2]      [,3]
-#> [1,] -0.3117327 -0.8280555376 0.4659901
-#> [2,]  0.8305219  0.0007836864 0.5569855
-#> [3,] -0.4615801  0.5606455319 0.6874739
+#>            [,1]       [,2]       [,3]
+#> [1,] -0.1324655 -0.6554600 0.74352205
+#> [2,]  0.9860750 -0.1632376 0.03177479
+#> [3,]  0.1005436  0.7373775 0.66795608
 #> 
 #> [[3]]
-#>            [,1]        [,2]       [,3]
-#> [1,] -0.7025064  0.66878384 -0.2433370
-#> [2,] -0.3513459 -0.02856766  0.9358098
-#> [3,]  0.6189029  0.74290785  0.2550434
+#>               [,1]       [,2]       [,3]
+#> [1,] -0.5261063800 -0.5436776 -0.6539318
+#> [2,]  0.8504182853 -0.3371599 -0.4038712
+#> [3,] -0.0009038893 -0.7685947  0.6397354
 #> 
 #> [[4]]
-#>            [,1]       [,2]       [,3]
-#> [1,] -0.8970871 -0.2258339  0.3797811
-#> [2,] -0.1157827 -0.7093377 -0.6952945
-#> [3,]  0.4264141 -0.6677119  0.6101900
+#>            [,1]       [,2]        [,3]
+#> [1,] -0.2365716  0.9667568  0.09703191
+#> [2,] -0.9494114 -0.2087826 -0.23457992
+#> [3,] -0.2065232 -0.1476181  0.96724199
 #> 
 #> [[5]]
 #>            [,1]       [,2]       [,3]
-#> [1,] -0.3877247 -0.3760100 -0.8415973
-#> [2,]  0.4484487 -0.8746292  0.1841673
-#> [3,] -0.8053343 -0.3060069  0.5077366
+#> [1,] -0.6202049 -0.4575861 -0.6371506
+#> [2,]  0.7467855 -0.5930449 -0.3010135
+#> [3,] -0.2401193 -0.6625049  0.7095280
 ```
